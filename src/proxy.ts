@@ -13,6 +13,11 @@ export async function proxy(request: NextRequest) {
         return NextResponse.next();
     }
 
+    // Redirecionar / para /dashboard
+    if (pathname === '/') {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+
     // Verificar token
     const token = request.cookies.get('auth-token')?.value;
 
@@ -62,13 +67,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
     matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         * - public folder
-         */
         '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
     ],
 };

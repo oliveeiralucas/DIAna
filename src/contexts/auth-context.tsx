@@ -62,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     setUser(data.data.user);
-    router.push("/");
+    router.push("/dashboard"); // MUDANÇA AQUI
   };
 
   const logout = async () => {

@@ -4718,8 +4718,18 @@ export namespace Prisma {
 
   export type AggregateTranscricao = {
     _count: TranscricaoCountAggregateOutputType | null
+    _avg: TranscricaoAvgAggregateOutputType | null
+    _sum: TranscricaoSumAggregateOutputType | null
     _min: TranscricaoMinAggregateOutputType | null
     _max: TranscricaoMaxAggregateOutputType | null
+  }
+
+  export type TranscricaoAvgAggregateOutputType = {
+    arquivoAudioTamanho: number | null
+  }
+
+  export type TranscricaoSumAggregateOutputType = {
+    arquivoAudioTamanho: number | null
   }
 
   export type TranscricaoMinAggregateOutputType = {
@@ -4727,6 +4737,10 @@ export namespace Prisma {
     reuniaoId: string | null
     conteudoTexto: string | null
     status: $Enums.StatusTranscricao | null
+    arquivoAudioBase64: string | null
+    arquivoAudioNome: string | null
+    arquivoAudioTipo: string | null
+    arquivoAudioTamanho: number | null
     arquivoAudioPath: string | null
     servicoUsado: string | null
     erroMensagem: string | null
@@ -4739,6 +4753,10 @@ export namespace Prisma {
     reuniaoId: string | null
     conteudoTexto: string | null
     status: $Enums.StatusTranscricao | null
+    arquivoAudioBase64: string | null
+    arquivoAudioNome: string | null
+    arquivoAudioTipo: string | null
+    arquivoAudioTamanho: number | null
     arquivoAudioPath: string | null
     servicoUsado: string | null
     erroMensagem: string | null
@@ -4751,6 +4769,10 @@ export namespace Prisma {
     reuniaoId: number
     conteudoTexto: number
     status: number
+    arquivoAudioBase64: number
+    arquivoAudioNome: number
+    arquivoAudioTipo: number
+    arquivoAudioTamanho: number
     arquivoAudioPath: number
     servicoUsado: number
     erroMensagem: number
@@ -4760,11 +4782,23 @@ export namespace Prisma {
   }
 
 
+  export type TranscricaoAvgAggregateInputType = {
+    arquivoAudioTamanho?: true
+  }
+
+  export type TranscricaoSumAggregateInputType = {
+    arquivoAudioTamanho?: true
+  }
+
   export type TranscricaoMinAggregateInputType = {
     id?: true
     reuniaoId?: true
     conteudoTexto?: true
     status?: true
+    arquivoAudioBase64?: true
+    arquivoAudioNome?: true
+    arquivoAudioTipo?: true
+    arquivoAudioTamanho?: true
     arquivoAudioPath?: true
     servicoUsado?: true
     erroMensagem?: true
@@ -4777,6 +4811,10 @@ export namespace Prisma {
     reuniaoId?: true
     conteudoTexto?: true
     status?: true
+    arquivoAudioBase64?: true
+    arquivoAudioNome?: true
+    arquivoAudioTipo?: true
+    arquivoAudioTamanho?: true
     arquivoAudioPath?: true
     servicoUsado?: true
     erroMensagem?: true
@@ -4789,6 +4827,10 @@ export namespace Prisma {
     reuniaoId?: true
     conteudoTexto?: true
     status?: true
+    arquivoAudioBase64?: true
+    arquivoAudioNome?: true
+    arquivoAudioTipo?: true
+    arquivoAudioTamanho?: true
     arquivoAudioPath?: true
     servicoUsado?: true
     erroMensagem?: true
@@ -4835,6 +4877,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: TranscricaoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TranscricaoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: TranscricaoMinAggregateInputType
@@ -4865,6 +4919,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: TranscricaoCountAggregateInputType | true
+    _avg?: TranscricaoAvgAggregateInputType
+    _sum?: TranscricaoSumAggregateInputType
     _min?: TranscricaoMinAggregateInputType
     _max?: TranscricaoMaxAggregateInputType
   }
@@ -4874,12 +4930,18 @@ export namespace Prisma {
     reuniaoId: string
     conteudoTexto: string
     status: $Enums.StatusTranscricao
+    arquivoAudioBase64: string | null
+    arquivoAudioNome: string | null
+    arquivoAudioTipo: string | null
+    arquivoAudioTamanho: number | null
     arquivoAudioPath: string | null
     servicoUsado: string | null
     erroMensagem: string | null
     createdAt: Date
     updatedAt: Date
     _count: TranscricaoCountAggregateOutputType | null
+    _avg: TranscricaoAvgAggregateOutputType | null
+    _sum: TranscricaoSumAggregateOutputType | null
     _min: TranscricaoMinAggregateOutputType | null
     _max: TranscricaoMaxAggregateOutputType | null
   }
@@ -4903,6 +4965,10 @@ export namespace Prisma {
     reuniaoId?: boolean
     conteudoTexto?: boolean
     status?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
     arquivoAudioPath?: boolean
     servicoUsado?: boolean
     erroMensagem?: boolean
@@ -4917,6 +4983,10 @@ export namespace Prisma {
     reuniaoId?: boolean
     conteudoTexto?: boolean
     status?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
     arquivoAudioPath?: boolean
     servicoUsado?: boolean
     erroMensagem?: boolean
@@ -4930,6 +5000,10 @@ export namespace Prisma {
     reuniaoId?: boolean
     conteudoTexto?: boolean
     status?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
     arquivoAudioPath?: boolean
     servicoUsado?: boolean
     erroMensagem?: boolean
@@ -4943,6 +5017,10 @@ export namespace Prisma {
     reuniaoId?: boolean
     conteudoTexto?: boolean
     status?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
     arquivoAudioPath?: boolean
     servicoUsado?: boolean
     erroMensagem?: boolean
@@ -4950,7 +5028,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TranscricaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reuniaoId" | "conteudoTexto" | "status" | "arquivoAudioPath" | "servicoUsado" | "erroMensagem" | "createdAt" | "updatedAt", ExtArgs["result"]["transcricao"]>
+  export type TranscricaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reuniaoId" | "conteudoTexto" | "status" | "arquivoAudioBase64" | "arquivoAudioNome" | "arquivoAudioTipo" | "arquivoAudioTamanho" | "arquivoAudioPath" | "servicoUsado" | "erroMensagem" | "createdAt" | "updatedAt", ExtArgs["result"]["transcricao"]>
   export type TranscricaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
     ata?: boolean | Transcricao$ataArgs<ExtArgs>
@@ -4973,6 +5051,10 @@ export namespace Prisma {
       reuniaoId: string
       conteudoTexto: string
       status: $Enums.StatusTranscricao
+      arquivoAudioBase64: string | null
+      arquivoAudioNome: string | null
+      arquivoAudioTipo: string | null
+      arquivoAudioTamanho: number | null
       arquivoAudioPath: string | null
       servicoUsado: string | null
       erroMensagem: string | null
@@ -5407,6 +5489,10 @@ export namespace Prisma {
     readonly reuniaoId: FieldRef<"Transcricao", 'String'>
     readonly conteudoTexto: FieldRef<"Transcricao", 'String'>
     readonly status: FieldRef<"Transcricao", 'StatusTranscricao'>
+    readonly arquivoAudioBase64: FieldRef<"Transcricao", 'String'>
+    readonly arquivoAudioNome: FieldRef<"Transcricao", 'String'>
+    readonly arquivoAudioTipo: FieldRef<"Transcricao", 'String'>
+    readonly arquivoAudioTamanho: FieldRef<"Transcricao", 'Int'>
     readonly arquivoAudioPath: FieldRef<"Transcricao", 'String'>
     readonly servicoUsado: FieldRef<"Transcricao", 'String'>
     readonly erroMensagem: FieldRef<"Transcricao", 'String'>
@@ -7078,6 +7164,10 @@ export namespace Prisma {
     reuniaoId: 'reuniaoId',
     conteudoTexto: 'conteudoTexto',
     status: 'status',
+    arquivoAudioBase64: 'arquivoAudioBase64',
+    arquivoAudioNome: 'arquivoAudioNome',
+    arquivoAudioTipo: 'arquivoAudioTipo',
+    arquivoAudioTamanho: 'arquivoAudioTamanho',
     arquivoAudioPath: 'arquivoAudioPath',
     servicoUsado: 'servicoUsado',
     erroMensagem: 'erroMensagem',
@@ -7480,6 +7570,10 @@ export namespace Prisma {
     reuniaoId?: UuidFilter<"Transcricao"> | string
     conteudoTexto?: StringFilter<"Transcricao"> | string
     status?: EnumStatusTranscricaoFilter<"Transcricao"> | $Enums.StatusTranscricao
+    arquivoAudioBase64?: StringNullableFilter<"Transcricao"> | string | null
+    arquivoAudioNome?: StringNullableFilter<"Transcricao"> | string | null
+    arquivoAudioTipo?: StringNullableFilter<"Transcricao"> | string | null
+    arquivoAudioTamanho?: IntNullableFilter<"Transcricao"> | number | null
     arquivoAudioPath?: StringNullableFilter<"Transcricao"> | string | null
     servicoUsado?: StringNullableFilter<"Transcricao"> | string | null
     erroMensagem?: StringNullableFilter<"Transcricao"> | string | null
@@ -7494,6 +7588,10 @@ export namespace Prisma {
     reuniaoId?: SortOrder
     conteudoTexto?: SortOrder
     status?: SortOrder
+    arquivoAudioBase64?: SortOrderInput | SortOrder
+    arquivoAudioNome?: SortOrderInput | SortOrder
+    arquivoAudioTipo?: SortOrderInput | SortOrder
+    arquivoAudioTamanho?: SortOrderInput | SortOrder
     arquivoAudioPath?: SortOrderInput | SortOrder
     servicoUsado?: SortOrderInput | SortOrder
     erroMensagem?: SortOrderInput | SortOrder
@@ -7511,6 +7609,10 @@ export namespace Prisma {
     NOT?: TranscricaoWhereInput | TranscricaoWhereInput[]
     conteudoTexto?: StringFilter<"Transcricao"> | string
     status?: EnumStatusTranscricaoFilter<"Transcricao"> | $Enums.StatusTranscricao
+    arquivoAudioBase64?: StringNullableFilter<"Transcricao"> | string | null
+    arquivoAudioNome?: StringNullableFilter<"Transcricao"> | string | null
+    arquivoAudioTipo?: StringNullableFilter<"Transcricao"> | string | null
+    arquivoAudioTamanho?: IntNullableFilter<"Transcricao"> | number | null
     arquivoAudioPath?: StringNullableFilter<"Transcricao"> | string | null
     servicoUsado?: StringNullableFilter<"Transcricao"> | string | null
     erroMensagem?: StringNullableFilter<"Transcricao"> | string | null
@@ -7525,14 +7627,20 @@ export namespace Prisma {
     reuniaoId?: SortOrder
     conteudoTexto?: SortOrder
     status?: SortOrder
+    arquivoAudioBase64?: SortOrderInput | SortOrder
+    arquivoAudioNome?: SortOrderInput | SortOrder
+    arquivoAudioTipo?: SortOrderInput | SortOrder
+    arquivoAudioTamanho?: SortOrderInput | SortOrder
     arquivoAudioPath?: SortOrderInput | SortOrder
     servicoUsado?: SortOrderInput | SortOrder
     erroMensagem?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TranscricaoCountOrderByAggregateInput
+    _avg?: TranscricaoAvgOrderByAggregateInput
     _max?: TranscricaoMaxOrderByAggregateInput
     _min?: TranscricaoMinOrderByAggregateInput
+    _sum?: TranscricaoSumOrderByAggregateInput
   }
 
   export type TranscricaoScalarWhereWithAggregatesInput = {
@@ -7543,6 +7651,10 @@ export namespace Prisma {
     reuniaoId?: UuidWithAggregatesFilter<"Transcricao"> | string
     conteudoTexto?: StringWithAggregatesFilter<"Transcricao"> | string
     status?: EnumStatusTranscricaoWithAggregatesFilter<"Transcricao"> | $Enums.StatusTranscricao
+    arquivoAudioBase64?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
+    arquivoAudioNome?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
+    arquivoAudioTipo?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
+    arquivoAudioTamanho?: IntNullableWithAggregatesFilter<"Transcricao"> | number | null
     arquivoAudioPath?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
     servicoUsado?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
     erroMensagem?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
@@ -7862,6 +7974,10 @@ export namespace Prisma {
     id?: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -7876,6 +7992,10 @@ export namespace Prisma {
     reuniaoId: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -7888,6 +8008,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7902,6 +8026,10 @@ export namespace Prisma {
     reuniaoId?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7915,6 +8043,10 @@ export namespace Prisma {
     reuniaoId: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -7926,6 +8058,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7938,6 +8074,10 @@ export namespace Prisma {
     reuniaoId?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8421,6 +8561,10 @@ export namespace Prisma {
     reuniaoId?: SortOrder
     conteudoTexto?: SortOrder
     status?: SortOrder
+    arquivoAudioBase64?: SortOrder
+    arquivoAudioNome?: SortOrder
+    arquivoAudioTipo?: SortOrder
+    arquivoAudioTamanho?: SortOrder
     arquivoAudioPath?: SortOrder
     servicoUsado?: SortOrder
     erroMensagem?: SortOrder
@@ -8428,11 +8572,19 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type TranscricaoAvgOrderByAggregateInput = {
+    arquivoAudioTamanho?: SortOrder
+  }
+
   export type TranscricaoMaxOrderByAggregateInput = {
     id?: SortOrder
     reuniaoId?: SortOrder
     conteudoTexto?: SortOrder
     status?: SortOrder
+    arquivoAudioBase64?: SortOrder
+    arquivoAudioNome?: SortOrder
+    arquivoAudioTipo?: SortOrder
+    arquivoAudioTamanho?: SortOrder
     arquivoAudioPath?: SortOrder
     servicoUsado?: SortOrder
     erroMensagem?: SortOrder
@@ -8445,11 +8597,19 @@ export namespace Prisma {
     reuniaoId?: SortOrder
     conteudoTexto?: SortOrder
     status?: SortOrder
+    arquivoAudioBase64?: SortOrder
+    arquivoAudioNome?: SortOrder
+    arquivoAudioTipo?: SortOrder
+    arquivoAudioTamanho?: SortOrder
     arquivoAudioPath?: SortOrder
     servicoUsado?: SortOrder
     erroMensagem?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type TranscricaoSumOrderByAggregateInput = {
+    arquivoAudioTamanho?: SortOrder
   }
 
   export type EnumStatusTranscricaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -9394,6 +9554,10 @@ export namespace Prisma {
     id?: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -9406,6 +9570,10 @@ export namespace Prisma {
     id?: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -9492,6 +9660,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9504,6 +9676,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9720,6 +9896,10 @@ export namespace Prisma {
     id?: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -9733,6 +9913,10 @@ export namespace Prisma {
     reuniaoId: string
     conteudoTexto: string
     status?: $Enums.StatusTranscricao
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
     arquivoAudioPath?: string | null
     servicoUsado?: string | null
     erroMensagem?: string | null
@@ -9785,6 +9969,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9798,6 +9986,10 @@ export namespace Prisma {
     reuniaoId?: StringFieldUpdateOperationsInput | string
     conteudoTexto?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
     arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
     servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
     erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null

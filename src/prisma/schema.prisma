@@ -88,6 +88,10 @@ model Transcricao {
   reuniaoId       String             @unique @map("reuniao_id") @db.Uuid
   conteudoTexto   String             @map("conteudo_texto") @db.Text
   status          StatusTranscricao  @default(PENDENTE)
+  arquivoAudioBase64 String?         @map("arquivo_audio_base64") @db.Text  // MUDANÇA: base64
+  arquivoAudioNome String?           @map("arquivo_audio_nome") @db.VarChar(255)
+  arquivoAudioTipo String?           @map("arquivo_audio_tipo") @db.VarChar(50)
+  arquivoAudioTamanho Int?           @map("arquivo_audio_tamanho")
   arquivoAudioPath String?           @map("arquivo_audio_path") @db.Text
   servicoUsado    String?            @map("servico_usado") @db.VarChar(100)
   erroMensagem    String?            @map("erro_mensagem") @db.Text
