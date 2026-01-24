@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../prisma/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ========================================
+// ENUMS
+// ========================================
+
+enum TipoReuniao {
+  VIRTUAL
+  PRESENCIAL
+}
+
+enum StatusTranscricao {
+  PENDENTE
+  PROCESSANDO
+  CONCLUIDA
+  ERRO
+}
+
+enum StatusAta {
+  PENDENTE
+  APROVADA
+  REJEITADA
+}
+
+// ========================================
+// MODELS
+// ========================================
+
+model Usuario {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique @db.VarChar(255)
+  nome      String   @db.VarChar(255)
+  senha     String   @db.VarChar(255) // NOVO CAMPO
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relações
+  reunioesCriadas Reuniao[] @relation("CriadorReuniao")
+  atasAprovadas   Ata[]     @relation("AprovadorAta")
+
+  @@map("usuario")
+}
+
+model Reuniao {
+  id             String      @id @default(uuid()) @db.Uuid
+  titulo         String      @db.VarChar(500)
+  tipo           TipoReuniao
+  dataReuniao    DateTime    @map("data_reuniao")
+  duracaoMinutos Int?        @map("duracao_minutos")
+  linkMeeting    String?     @map("link_meeting") @db.Text
+  criadoPorId    String?     @map("criado_por_id") @db.Uuid
+  createdAt      DateTime    @default(now()) @map("created_at")
+
+  // Relações
+  criador       Usuario?       @relation("CriadorReuniao", fields: [criadoPorId], references: [id])
+  participantes Participante[]
+  transcricao   Transcricao?
+
+  @@index([dataReuniao(sort: Desc)])
+  @@index([tipo])
+  @@map("reuniao")
+}
+
+model Participante {
+  id        String   @id @default(uuid()) @db.Uuid
+  reuniaoId String   @map("reuniao_id") @db.Uuid
+  nome      String   @db.VarChar(255)
+  email     String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relações
+  reuniao Reuniao @relation(fields: [reuniaoId], references: [id], onDelete: Cascade)
+
+  @@unique([reuniaoId, email])
+  @@index([reuniaoId])
+  @@map("participante")
+}
+
+model Transcricao {
+  id               String            @id @default(uuid()) @db.Uuid
+  reuniaoId        String            @unique @map("reuniao_id") @db.Uuid
+  conteudoTexto    String            @map("conteudo_texto") @db.Text
+  status           StatusTranscricao @default(PENDENTE)
+  arquivoAudioPath String?           @map("arquivo_audio_path") @db.Text
+  servicoUsado     String?           @map("servico_usado") @db.VarChar(100)
+  erroMensagem     String?           @map("erro_mensagem") @db.Text
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  // Relações
+  reuniao Reuniao @relation(fields: [reuniaoId], references: [id], onDelete: Cascade)
+  ata     Ata?
+
+  @@index([status])
+  @@map("transcricao")
+}
+
+model Ata {
+  id            String @id @default(uuid()) @db.Uuid
+  transcricaoId String @unique @map("transcricao_id") @db.Uuid
+
+  // Conteúdos da ata
+  resumo           String? @db.Text
+  topicos          Json?   @db.JsonB
+  decisoes         Json?   @db.JsonB
+  acoes            Json?   @db.JsonB
+  conteudoCompleto String  @map("conteudo_completo") @db.Text
+
+  // Aprovação
+  status        StatusAta @default(PENDENTE)
+  aprovadoPorId String?   @map("aprovado_por_id") @db.Uuid
+  dataAprovacao DateTime? @map("data_aprovacao")
+  comentarios   String?   @db.Text
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relações
+  transcricao Transcricao @relation(fields: [transcricaoId], references: [id], onDelete: Cascade)
+  aprovadoPor Usuario?    @relation("AprovadorAta", fields: [aprovadoPorId], references: [id])
+
+  @@index([status])
+  @@map("ata")
+}
