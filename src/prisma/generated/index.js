@@ -102,49 +102,24 @@ exports.Prisma.UsuarioScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.ReuniaoScalarFieldEnum = {
+exports.Prisma.AtaScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
   tipo: 'tipo',
   dataReuniao: 'dataReuniao',
   duracaoMinutos: 'duracaoMinutos',
-  linkMeeting: 'linkMeeting',
-  criadoPorId: 'criadoPorId',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.ParticipanteScalarFieldEnum = {
-  id: 'id',
-  reuniaoId: 'reuniaoId',
-  nome: 'nome',
-  email: 'email',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.TranscricaoScalarFieldEnum = {
-  id: 'id',
-  reuniaoId: 'reuniaoId',
-  conteudoTexto: 'conteudoTexto',
-  status: 'status',
   arquivoAudioBase64: 'arquivoAudioBase64',
   arquivoAudioNome: 'arquivoAudioNome',
   arquivoAudioTipo: 'arquivoAudioTipo',
   arquivoAudioTamanho: 'arquivoAudioTamanho',
-  arquivoAudioPath: 'arquivoAudioPath',
-  servicoUsado: 'servicoUsado',
-  erroMensagem: 'erroMensagem',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AtaScalarFieldEnum = {
-  id: 'id',
-  transcricaoId: 'transcricaoId',
-  resumo: 'resumo',
-  topicos: 'topicos',
+  participantes: 'participantes',
+  identificacao: 'identificacao',
+  objetivo: 'objetivo',
+  topicosDiscutidos: 'topicosDiscutidos',
   decisoes: 'decisoes',
   acoes: 'acoes',
-  conteudoCompleto: 'conteudoCompleto',
+  pendencias: 'pendencias',
+  proximosPassos: 'proximosPassos',
   status: 'status',
   aprovadoPorId: 'aprovadoPorId',
   dataAprovacao: 'dataAprovacao',
@@ -168,26 +143,19 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.TipoReuniao = exports.$Enums.TipoReuniao = {
   VIRTUAL: 'VIRTUAL',
   PRESENCIAL: 'PRESENCIAL'
-};
-
-exports.StatusTranscricao = exports.$Enums.StatusTranscricao = {
-  PENDENTE: 'PENDENTE',
-  PROCESSANDO: 'PROCESSANDO',
-  CONCLUIDA: 'CONCLUIDA',
-  ERRO: 'ERRO'
 };
 
 exports.StatusAta = exports.$Enums.StatusAta = {
@@ -198,9 +166,6 @@ exports.StatusAta = exports.$Enums.StatusAta = {
 
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
-  Reuniao: 'Reuniao',
-  Participante: 'Participante',
-  Transcricao: 'Transcricao',
   Ata: 'Ata'
 };
 /**
@@ -211,10 +176,10 @@ const config = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../prisma/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// ========================================\n// ENUMS\n// ========================================\n\nenum TipoReuniao {\n  VIRTUAL\n  PRESENCIAL\n}\n\nenum StatusTranscricao {\n  PENDENTE\n  PROCESSANDO\n  CONCLUIDA\n  ERRO\n}\n\nenum StatusAta {\n  PENDENTE\n  APROVADA\n  REJEITADA\n}\n\n// ========================================\n// MODELS\n// ========================================\n\nmodel Usuario {\n  id        String   @id @default(uuid()) @db.Uuid\n  email     String   @unique @db.VarChar(255)\n  nome      String   @db.VarChar(255)\n  senha     String   @db.VarChar(255) // NOVO CAMPO\n  ativo     Boolean  @default(true)\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  // Relações\n  reunioesCriadas Reuniao[] @relation(\"CriadorReuniao\")\n  atasAprovadas   Ata[]     @relation(\"AprovadorAta\")\n\n  @@map(\"usuario\")\n}\n\nmodel Reuniao {\n  id             String      @id @default(uuid()) @db.Uuid\n  titulo         String      @db.VarChar(500)\n  tipo           TipoReuniao\n  dataReuniao    DateTime    @map(\"data_reuniao\")\n  duracaoMinutos Int?        @map(\"duracao_minutos\")\n  linkMeeting    String?     @map(\"link_meeting\") @db.Text\n  criadoPorId    String?     @map(\"criado_por_id\") @db.Uuid\n  createdAt      DateTime    @default(now()) @map(\"created_at\")\n\n  // Relações\n  criador       Usuario?       @relation(\"CriadorReuniao\", fields: [criadoPorId], references: [id])\n  participantes Participante[]\n  transcricao   Transcricao?\n\n  @@index([dataReuniao(sort: Desc)])\n  @@index([tipo])\n  @@map(\"reuniao\")\n}\n\nmodel Participante {\n  id        String   @id @default(uuid()) @db.Uuid\n  reuniaoId String   @map(\"reuniao_id\") @db.Uuid\n  nome      String   @db.VarChar(255)\n  email     String?  @db.VarChar(255)\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  // Relações\n  reuniao Reuniao @relation(fields: [reuniaoId], references: [id], onDelete: Cascade)\n\n  @@unique([reuniaoId, email])\n  @@index([reuniaoId])\n  @@map(\"participante\")\n}\n\nmodel Transcricao {\n  id                  String            @id @default(uuid()) @db.Uuid\n  reuniaoId           String            @unique @map(\"reuniao_id\") @db.Uuid\n  conteudoTexto       String            @map(\"conteudo_texto\") @db.Text\n  status              StatusTranscricao @default(PENDENTE)\n  arquivoAudioBase64  String?           @map(\"arquivo_audio_base64\") @db.Text // MUDANÇA: base64\n  arquivoAudioNome    String?           @map(\"arquivo_audio_nome\") @db.VarChar(255)\n  arquivoAudioTipo    String?           @map(\"arquivo_audio_tipo\") @db.VarChar(50)\n  arquivoAudioTamanho Int?              @map(\"arquivo_audio_tamanho\")\n  arquivoAudioPath    String?           @map(\"arquivo_audio_path\") @db.Text\n  servicoUsado        String?           @map(\"servico_usado\") @db.VarChar(100)\n  erroMensagem        String?           @map(\"erro_mensagem\") @db.Text\n  createdAt           DateTime          @default(now()) @map(\"created_at\")\n  updatedAt           DateTime          @updatedAt @map(\"updated_at\")\n\n  // Relações\n  reuniao Reuniao @relation(fields: [reuniaoId], references: [id], onDelete: Cascade)\n  ata     Ata?\n\n  @@index([status])\n  @@map(\"transcricao\")\n}\n\nmodel Ata {\n  id            String @id @default(uuid()) @db.Uuid\n  transcricaoId String @unique @map(\"transcricao_id\") @db.Uuid\n\n  // Conteúdos da ata\n  resumo           String? @db.Text\n  topicos          Json?   @db.JsonB\n  decisoes         Json?   @db.JsonB\n  acoes            Json?   @db.JsonB\n  conteudoCompleto String  @map(\"conteudo_completo\") @db.Text\n\n  // Aprovação\n  status        StatusAta @default(PENDENTE)\n  aprovadoPorId String?   @map(\"aprovado_por_id\") @db.Uuid\n  dataAprovacao DateTime? @map(\"data_aprovacao\")\n  comentarios   String?   @db.Text\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  // Relações\n  transcricao Transcricao @relation(fields: [transcricaoId], references: [id], onDelete: Cascade)\n  aprovadoPor Usuario?    @relation(\"AprovadorAta\", fields: [aprovadoPorId], references: [id])\n\n  @@index([status])\n  @@map(\"ata\")\n}\n"
+  "inlineSchema": "// ========================================\n// CONFIGURAÇÃO DO PRISMA\n// ========================================\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// ========================================\n// ENUMS\n// ========================================\n\nenum TipoReuniao {\n  VIRTUAL\n  PRESENCIAL\n}\n\nenum StatusAta {\n  PENDENTE\n  APROVADA\n  REJEITADA\n}\n\n// ========================================\n// MODELS\n// ========================================\n\nmodel Usuario {\n  id        String   @id @default(uuid()) @db.Uuid\n  email     String   @unique @db.VarChar(255)\n  nome      String   @db.VarChar(255)\n  senha     String   @db.VarChar(255)\n  ativo     Boolean  @default(true)\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  // Relações\n  atasAprovadas Ata[] @relation(\"AprovadorAta\")\n\n  @@map(\"usuario\")\n}\n\nmodel Ata {\n  id String @id @default(uuid()) @db.Uuid\n\n  // Campos migrados de Reuniao\n  titulo         String      @db.VarChar(500)\n  tipo           TipoReuniao\n  dataReuniao    DateTime    @map(\"data_reuniao\")\n  duracaoMinutos Int?        @map(\"duracao_minutos\")\n\n  // Áudio (migrado de Reuniao)\n  arquivoAudioBase64  String? @map(\"arquivo_audio_base64\") @db.Text\n  arquivoAudioNome    String? @map(\"arquivo_audio_nome\") @db.VarChar(255)\n  arquivoAudioTipo    String? @map(\"arquivo_audio_tipo\") @db.VarChar(50)\n  arquivoAudioTamanho Int?    @map(\"arquivo_audio_tamanho\")\n\n  // Participantes (migrado de tabela Participante)\n  participantes Json? @db.JsonB // Array<{ nome: string, email?: string }>\n\n  // Estrutura JSON completa da ata (existente)\n  identificacao     Json?   @db.JsonB // { titulo, data, participantes }\n  objetivo          String? @db.Text\n  topicosDiscutidos Json?   @map(\"topicos_discutidos\") @db.JsonB // Array de tópicos\n  decisoes          Json?   @db.JsonB // Array de decisões\n  acoes             Json?   @db.JsonB // Array de ações\n  pendencias        Json?   @db.JsonB // Array de pendências\n  proximosPassos    Json?   @map(\"proximos_passos\") @db.JsonB // { atividades, proxima_reuniao }\n\n  // Aprovação (existente)\n  status        StatusAta @default(PENDENTE)\n  aprovadoPorId String?   @map(\"aprovado_por_id\") @db.Uuid\n  dataAprovacao DateTime? @map(\"data_aprovacao\")\n  comentarios   String?   @db.Text\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  // Relações\n  aprovadoPor Usuario? @relation(\"AprovadorAta\", fields: [aprovadoPorId], references: [id])\n\n  @@index([status])\n  @@index([dataReuniao(sort: Desc)])\n  @@index([tipo])\n  @@map(\"ata\")\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Usuario\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senha\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ativo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"reunioesCriadas\",\"kind\":\"object\",\"type\":\"Reuniao\",\"relationName\":\"CriadorReuniao\"},{\"name\":\"atasAprovadas\",\"kind\":\"object\",\"type\":\"Ata\",\"relationName\":\"AprovadorAta\"}],\"dbName\":\"usuario\"},\"Reuniao\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"titulo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"enum\",\"type\":\"TipoReuniao\"},{\"name\":\"dataReuniao\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"data_reuniao\"},{\"name\":\"duracaoMinutos\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"duracao_minutos\"},{\"name\":\"linkMeeting\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"link_meeting\"},{\"name\":\"criadoPorId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"criado_por_id\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"criador\",\"kind\":\"object\",\"type\":\"Usuario\",\"relationName\":\"CriadorReuniao\"},{\"name\":\"participantes\",\"kind\":\"object\",\"type\":\"Participante\",\"relationName\":\"ParticipanteToReuniao\"},{\"name\":\"transcricao\",\"kind\":\"object\",\"type\":\"Transcricao\",\"relationName\":\"ReuniaoToTranscricao\"}],\"dbName\":\"reuniao\"},\"Participante\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reuniaoId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"reuniao_id\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"reuniao\",\"kind\":\"object\",\"type\":\"Reuniao\",\"relationName\":\"ParticipanteToReuniao\"}],\"dbName\":\"participante\"},\"Transcricao\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reuniaoId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"reuniao_id\"},{\"name\":\"conteudoTexto\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"conteudo_texto\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"StatusTranscricao\"},{\"name\":\"arquivoAudioBase64\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_base64\"},{\"name\":\"arquivoAudioNome\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_nome\"},{\"name\":\"arquivoAudioTipo\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_tipo\"},{\"name\":\"arquivoAudioTamanho\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"arquivo_audio_tamanho\"},{\"name\":\"arquivoAudioPath\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_path\"},{\"name\":\"servicoUsado\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"servico_usado\"},{\"name\":\"erroMensagem\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"erro_mensagem\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"reuniao\",\"kind\":\"object\",\"type\":\"Reuniao\",\"relationName\":\"ReuniaoToTranscricao\"},{\"name\":\"ata\",\"kind\":\"object\",\"type\":\"Ata\",\"relationName\":\"AtaToTranscricao\"}],\"dbName\":\"transcricao\"},\"Ata\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"transcricaoId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"transcricao_id\"},{\"name\":\"resumo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"topicos\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"decisoes\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"acoes\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"conteudoCompleto\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"conteudo_completo\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"StatusAta\"},{\"name\":\"aprovadoPorId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"aprovado_por_id\"},{\"name\":\"dataAprovacao\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"data_aprovacao\"},{\"name\":\"comentarios\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"transcricao\",\"kind\":\"object\",\"type\":\"Transcricao\",\"relationName\":\"AtaToTranscricao\"},{\"name\":\"aprovadoPor\",\"kind\":\"object\",\"type\":\"Usuario\",\"relationName\":\"AprovadorAta\"}],\"dbName\":\"ata\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Usuario\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senha\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ativo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"atasAprovadas\",\"kind\":\"object\",\"type\":\"Ata\",\"relationName\":\"AprovadorAta\"}],\"dbName\":\"usuario\"},\"Ata\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"titulo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"enum\",\"type\":\"TipoReuniao\"},{\"name\":\"dataReuniao\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"data_reuniao\"},{\"name\":\"duracaoMinutos\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"duracao_minutos\"},{\"name\":\"arquivoAudioBase64\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_base64\"},{\"name\":\"arquivoAudioNome\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_nome\"},{\"name\":\"arquivoAudioTipo\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"arquivo_audio_tipo\"},{\"name\":\"arquivoAudioTamanho\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"arquivo_audio_tamanho\"},{\"name\":\"participantes\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"identificacao\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"objetivo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"topicosDiscutidos\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"topicos_discutidos\"},{\"name\":\"decisoes\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"acoes\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"pendencias\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"proximosPassos\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"proximos_passos\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"StatusAta\"},{\"name\":\"aprovadoPorId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"aprovado_por_id\"},{\"name\":\"dataAprovacao\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"data_aprovacao\"},{\"name\":\"comentarios\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"aprovadoPor\",\"kind\":\"object\",\"type\":\"Usuario\",\"relationName\":\"AprovadorAta\"}],\"dbName\":\"ata\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
       getRuntime: async () => require('./query_compiler_fast_bg.js'),

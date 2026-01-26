@@ -14,6 +14,10 @@ import {
 } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
+import { PasswordStrengthIndicator } from "@/components/ui/password-strength";
+import { getPasswordErrorMessage } from "@/lib/password-validation";
+import { EmailInput } from "@/components/ui/email-input";
+import { Logo } from "@/components/logo";
 
 export default function CadastroPage() {
   const [formData, setFormData] = useState({
@@ -40,17 +44,14 @@ export default function CadastroPage() {
       return;
     }
 
-    if (formData.senha.length < 6) {
-      toast.error("A senha deve ter no mínimo 6 caracteres");
+    const passwordError = getPasswordErrorMessage(formData.senha);
+    if (passwordError) {
+      toast.error(passwordError);
       setIsLoading(false);
       return;
     }
 
-    if (!formData.email.endsWith("@ogrupoegx.com")) {
-      toast.error("Apenas emails @ogrupoegx.com são permitidos");
-      setIsLoading(false);
-      return;
-    }
+    // Email domain validation removed - EmailInput component ensures @ogrupoegx.com domain
 
     try {
       const response = await fetch("/api/auth/register", {
@@ -86,8 +87,11 @@ export default function CadastroPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 p-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">
+        <CardHeader className="space-y-3">
+          <div className="flex justify-center">
+            <Logo size="md" variant="full" />
+          </div>
+          <CardTitle className="text-xl font-bold text-center">
             Criar Conta
           </CardTitle>
           <CardDescription className="text-center">
@@ -109,30 +113,26 @@ export default function CadastroPage() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Corporativo</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="joao.silva@ogrupoegx.com"
-                value={formData.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
+            <EmailInput
+              id="email"
+              value={formData.email}
+              onChange={(email) => handleChange("email", email)}
+              disabled={isLoading}
+              required
+            />
 
             <div className="space-y-2">
               <Label htmlFor="senha">Senha</Label>
               <Input
                 id="senha"
                 type="password"
-                placeholder="Mínimo 6 caracteres"
+                placeholder="Mínimo 8 caracteres"
                 value={formData.senha}
                 onChange={(e) => handleChange("senha", e.target.value)}
                 required
                 disabled={isLoading}
               />
+              <PasswordStrengthIndicator password={formData.senha} />
             </div>
 
             <div className="space-y-2">

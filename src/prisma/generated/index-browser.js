@@ -129,49 +129,24 @@ exports.Prisma.UsuarioScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.ReuniaoScalarFieldEnum = {
+exports.Prisma.AtaScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
   tipo: 'tipo',
   dataReuniao: 'dataReuniao',
   duracaoMinutos: 'duracaoMinutos',
-  linkMeeting: 'linkMeeting',
-  criadoPorId: 'criadoPorId',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.ParticipanteScalarFieldEnum = {
-  id: 'id',
-  reuniaoId: 'reuniaoId',
-  nome: 'nome',
-  email: 'email',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.TranscricaoScalarFieldEnum = {
-  id: 'id',
-  reuniaoId: 'reuniaoId',
-  conteudoTexto: 'conteudoTexto',
-  status: 'status',
   arquivoAudioBase64: 'arquivoAudioBase64',
   arquivoAudioNome: 'arquivoAudioNome',
   arquivoAudioTipo: 'arquivoAudioTipo',
   arquivoAudioTamanho: 'arquivoAudioTamanho',
-  arquivoAudioPath: 'arquivoAudioPath',
-  servicoUsado: 'servicoUsado',
-  erroMensagem: 'erroMensagem',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AtaScalarFieldEnum = {
-  id: 'id',
-  transcricaoId: 'transcricaoId',
-  resumo: 'resumo',
-  topicos: 'topicos',
+  participantes: 'participantes',
+  identificacao: 'identificacao',
+  objetivo: 'objetivo',
+  topicosDiscutidos: 'topicosDiscutidos',
   decisoes: 'decisoes',
   acoes: 'acoes',
-  conteudoCompleto: 'conteudoCompleto',
+  pendencias: 'pendencias',
+  proximosPassos: 'proximosPassos',
   status: 'status',
   aprovadoPorId: 'aprovadoPorId',
   dataAprovacao: 'dataAprovacao',
@@ -195,26 +170,19 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.TipoReuniao = exports.$Enums.TipoReuniao = {
   VIRTUAL: 'VIRTUAL',
   PRESENCIAL: 'PRESENCIAL'
-};
-
-exports.StatusTranscricao = exports.$Enums.StatusTranscricao = {
-  PENDENTE: 'PENDENTE',
-  PROCESSANDO: 'PROCESSANDO',
-  CONCLUIDA: 'CONCLUIDA',
-  ERRO: 'ERRO'
 };
 
 exports.StatusAta = exports.$Enums.StatusAta = {
@@ -225,9 +193,6 @@ exports.StatusAta = exports.$Enums.StatusAta = {
 
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
-  Reuniao: 'Reuniao',
-  Participante: 'Participante',
-  Transcricao: 'Transcricao',
   Ata: 'Ata'
 };
 

@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/contexts/auth-context";
 import { useRouter, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Home,
@@ -11,9 +11,12 @@ import {
   CheckSquare,
   Settings,
   LogOut,
+  Menu,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/logo";
 
 const menuItems = [
   {
@@ -27,12 +30,7 @@ const menuItems = [
     icon: Upload,
   },
   {
-    title: "Reuniões",
-    href: "/dashboard/reunioes",
-    icon: FileText,
-  },
-  {
-    title: "Atas Pendentes",
+    title: "Atas",
     href: "/dashboard/atas",
     icon: CheckSquare,
   },
@@ -46,6 +44,7 @@ export default function DashboardLayout({
   const { user, loading, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -70,17 +69,39 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r bg-white">
+      <aside
+        className={cn(
+          "fixed left-0 top-0 z-50 h-screen w-64 border-r bg-white transition-transform duration-300 lg:translate-x-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full",
+        )}
+      >
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex h-16 items-center border-b px-6">
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-white font-bold text-lg">D</span>
-              </div>
-              <span className="text-xl font-bold">DIAna</span>
+          <div className="flex h-16 items-center justify-between border-b px-6">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <Logo />
             </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <X className="h-5 w-5" />
+            </Button>
           </div>
 
           {/* Navigation */}
@@ -99,6 +120,7 @@ export default function DashboardLayout({
                       ? "bg-primary text-white"
                       : "text-gray-700 hover:bg-gray-100",
                   )}
+                  onClick={() => setSidebarOpen(false)}
                 >
                   <Icon className="h-5 w-5" />
                   {item.title}
@@ -136,11 +158,19 @@ export default function DashboardLayout({
       </aside>
 
       {/* Main Content */}
-      <div className="pl-64">
+      <div className="lg:pl-64">
         {/* Header */}
         <header className="sticky top-0 z-30 border-b bg-white">
-          <div className="flex h-16 items-center px-8">
-            <h1 className="text-2xl font-bold">
+          <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:px-8">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+            <h1 className="text-xl sm:text-2xl font-bold truncate">
               {menuItems.find((item) => item.href === pathname)?.title ||
                 "Dashboard"}
             </h1>
@@ -148,7 +178,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Content */}
-        <main className="p-8">{children}</main>
+        <main className="p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

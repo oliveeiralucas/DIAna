@@ -19,21 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
 /**
- * Model Reuniao
- * 
- */
-export type Reuniao = $Result.DefaultSelection<Prisma.$ReuniaoPayload>
-/**
- * Model Participante
- * 
- */
-export type Participante = $Result.DefaultSelection<Prisma.$ParticipantePayload>
-/**
- * Model Transcricao
- * 
- */
-export type Transcricao = $Result.DefaultSelection<Prisma.$TranscricaoPayload>
-/**
  * Model Ata
  * 
  */
@@ -51,16 +36,6 @@ export namespace $Enums {
 export type TipoReuniao = (typeof TipoReuniao)[keyof typeof TipoReuniao]
 
 
-export const StatusTranscricao: {
-  PENDENTE: 'PENDENTE',
-  PROCESSANDO: 'PROCESSANDO',
-  CONCLUIDA: 'CONCLUIDA',
-  ERRO: 'ERRO'
-};
-
-export type StatusTranscricao = (typeof StatusTranscricao)[keyof typeof StatusTranscricao]
-
-
 export const StatusAta: {
   PENDENTE: 'PENDENTE',
   APROVADA: 'APROVADA',
@@ -74,10 +49,6 @@ export type StatusAta = (typeof StatusAta)[keyof typeof StatusAta]
 export type TipoReuniao = $Enums.TipoReuniao
 
 export const TipoReuniao: typeof $Enums.TipoReuniao
-
-export type StatusTranscricao = $Enums.StatusTranscricao
-
-export const StatusTranscricao: typeof $Enums.StatusTranscricao
 
 export type StatusAta = $Enums.StatusAta
 
@@ -209,36 +180,6 @@ export class PrismaClient<
     * ```
     */
   get usuario(): Prisma.UsuarioDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.reuniao`: Exposes CRUD operations for the **Reuniao** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Reuniaos
-    * const reuniaos = await prisma.reuniao.findMany()
-    * ```
-    */
-  get reuniao(): Prisma.ReuniaoDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.participante`: Exposes CRUD operations for the **Participante** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Participantes
-    * const participantes = await prisma.participante.findMany()
-    * ```
-    */
-  get participante(): Prisma.ParticipanteDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.transcricao`: Exposes CRUD operations for the **Transcricao** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Transcricaos
-    * const transcricaos = await prisma.transcricao.findMany()
-    * ```
-    */
-  get transcricao(): Prisma.TranscricaoDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.ata`: Exposes CRUD operations for the **Ata** model.
@@ -684,9 +625,6 @@ export namespace Prisma {
 
   export const ModelName: {
     Usuario: 'Usuario',
-    Reuniao: 'Reuniao',
-    Participante: 'Participante',
-    Transcricao: 'Transcricao',
     Ata: 'Ata'
   };
 
@@ -703,7 +641,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "reuniao" | "participante" | "transcricao" | "ata"
+      modelProps: "usuario" | "ata"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -778,228 +716,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UsuarioCountArgs<ExtArgs>
             result: $Utils.Optional<UsuarioCountAggregateOutputType> | number
-          }
-        }
-      }
-      Reuniao: {
-        payload: Prisma.$ReuniaoPayload<ExtArgs>
-        fields: Prisma.ReuniaoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ReuniaoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ReuniaoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>
-          }
-          findFirst: {
-            args: Prisma.ReuniaoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ReuniaoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>
-          }
-          findMany: {
-            args: Prisma.ReuniaoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>[]
-          }
-          create: {
-            args: Prisma.ReuniaoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>
-          }
-          createMany: {
-            args: Prisma.ReuniaoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ReuniaoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>[]
-          }
-          delete: {
-            args: Prisma.ReuniaoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>
-          }
-          update: {
-            args: Prisma.ReuniaoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>
-          }
-          deleteMany: {
-            args: Prisma.ReuniaoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ReuniaoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ReuniaoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>[]
-          }
-          upsert: {
-            args: Prisma.ReuniaoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReuniaoPayload>
-          }
-          aggregate: {
-            args: Prisma.ReuniaoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReuniao>
-          }
-          groupBy: {
-            args: Prisma.ReuniaoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReuniaoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ReuniaoCountArgs<ExtArgs>
-            result: $Utils.Optional<ReuniaoCountAggregateOutputType> | number
-          }
-        }
-      }
-      Participante: {
-        payload: Prisma.$ParticipantePayload<ExtArgs>
-        fields: Prisma.ParticipanteFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ParticipanteFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ParticipanteFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>
-          }
-          findFirst: {
-            args: Prisma.ParticipanteFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ParticipanteFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>
-          }
-          findMany: {
-            args: Prisma.ParticipanteFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>[]
-          }
-          create: {
-            args: Prisma.ParticipanteCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>
-          }
-          createMany: {
-            args: Prisma.ParticipanteCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ParticipanteCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>[]
-          }
-          delete: {
-            args: Prisma.ParticipanteDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>
-          }
-          update: {
-            args: Prisma.ParticipanteUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>
-          }
-          deleteMany: {
-            args: Prisma.ParticipanteDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ParticipanteUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ParticipanteUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>[]
-          }
-          upsert: {
-            args: Prisma.ParticipanteUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParticipantePayload>
-          }
-          aggregate: {
-            args: Prisma.ParticipanteAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateParticipante>
-          }
-          groupBy: {
-            args: Prisma.ParticipanteGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ParticipanteGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ParticipanteCountArgs<ExtArgs>
-            result: $Utils.Optional<ParticipanteCountAggregateOutputType> | number
-          }
-        }
-      }
-      Transcricao: {
-        payload: Prisma.$TranscricaoPayload<ExtArgs>
-        fields: Prisma.TranscricaoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TranscricaoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TranscricaoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>
-          }
-          findFirst: {
-            args: Prisma.TranscricaoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TranscricaoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>
-          }
-          findMany: {
-            args: Prisma.TranscricaoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>[]
-          }
-          create: {
-            args: Prisma.TranscricaoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>
-          }
-          createMany: {
-            args: Prisma.TranscricaoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TranscricaoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>[]
-          }
-          delete: {
-            args: Prisma.TranscricaoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>
-          }
-          update: {
-            args: Prisma.TranscricaoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>
-          }
-          deleteMany: {
-            args: Prisma.TranscricaoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TranscricaoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TranscricaoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>[]
-          }
-          upsert: {
-            args: Prisma.TranscricaoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TranscricaoPayload>
-          }
-          aggregate: {
-            args: Prisma.TranscricaoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTranscricao>
-          }
-          groupBy: {
-            args: Prisma.TranscricaoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TranscricaoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TranscricaoCountArgs<ExtArgs>
-            result: $Utils.Optional<TranscricaoCountAggregateOutputType> | number
           }
         }
       }
@@ -1186,9 +902,6 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     usuario?: UsuarioOmit
-    reuniao?: ReuniaoOmit
-    participante?: ParticipanteOmit
-    transcricao?: TranscricaoOmit
     ata?: AtaOmit
   }
 
@@ -1270,12 +983,10 @@ export namespace Prisma {
    */
 
   export type UsuarioCountOutputType = {
-    reunioesCriadas: number
     atasAprovadas: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reunioesCriadas?: boolean | UsuarioCountOutputTypeCountReunioesCriadasArgs
     atasAprovadas?: boolean | UsuarioCountOutputTypeCountAtasAprovadasArgs
   }
 
@@ -1293,46 +1004,8 @@ export namespace Prisma {
   /**
    * UsuarioCountOutputType without action
    */
-  export type UsuarioCountOutputTypeCountReunioesCriadasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReuniaoWhereInput
-  }
-
-  /**
-   * UsuarioCountOutputType without action
-   */
   export type UsuarioCountOutputTypeCountAtasAprovadasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AtaWhereInput
-  }
-
-
-  /**
-   * Count Type ReuniaoCountOutputType
-   */
-
-  export type ReuniaoCountOutputType = {
-    participantes: number
-  }
-
-  export type ReuniaoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    participantes?: boolean | ReuniaoCountOutputTypeCountParticipantesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ReuniaoCountOutputType without action
-   */
-  export type ReuniaoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReuniaoCountOutputType
-     */
-    select?: ReuniaoCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ReuniaoCountOutputType without action
-   */
-  export type ReuniaoCountOutputTypeCountParticipantesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ParticipanteWhereInput
   }
 
 
@@ -1512,7 +1185,6 @@ export namespace Prisma {
     senha?: boolean
     ativo?: boolean
     createdAt?: boolean
-    reunioesCriadas?: boolean | Usuario$reunioesCriadasArgs<ExtArgs>
     atasAprovadas?: boolean | Usuario$atasAprovadasArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
@@ -1546,7 +1218,6 @@ export namespace Prisma {
 
   export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "nome" | "senha" | "ativo" | "createdAt", ExtArgs["result"]["usuario"]>
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reunioesCriadas?: boolean | Usuario$reunioesCriadasArgs<ExtArgs>
     atasAprovadas?: boolean | Usuario$atasAprovadasArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1556,7 +1227,6 @@ export namespace Prisma {
   export type $UsuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Usuario"
     objects: {
-      reunioesCriadas: Prisma.$ReuniaoPayload<ExtArgs>[]
       atasAprovadas: Prisma.$AtaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -1960,7 +1630,6 @@ export namespace Prisma {
    */
   export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    reunioesCriadas<T extends Usuario$reunioesCriadasArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$reunioesCriadasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     atasAprovadas<T extends Usuario$atasAprovadasArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$atasAprovadasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2385,30 +2054,6 @@ export namespace Prisma {
   }
 
   /**
-   * Usuario.reunioesCriadas
-   */
-  export type Usuario$reunioesCriadasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    where?: ReuniaoWhereInput
-    orderBy?: ReuniaoOrderByWithRelationInput | ReuniaoOrderByWithRelationInput[]
-    cursor?: ReuniaoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReuniaoScalarFieldEnum | ReuniaoScalarFieldEnum[]
-  }
-
-  /**
    * Usuario.atasAprovadas
    */
   export type Usuario$atasAprovadasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2452,3500 +2097,38 @@ export namespace Prisma {
 
 
   /**
-   * Model Reuniao
-   */
-
-  export type AggregateReuniao = {
-    _count: ReuniaoCountAggregateOutputType | null
-    _avg: ReuniaoAvgAggregateOutputType | null
-    _sum: ReuniaoSumAggregateOutputType | null
-    _min: ReuniaoMinAggregateOutputType | null
-    _max: ReuniaoMaxAggregateOutputType | null
-  }
-
-  export type ReuniaoAvgAggregateOutputType = {
-    duracaoMinutos: number | null
-  }
-
-  export type ReuniaoSumAggregateOutputType = {
-    duracaoMinutos: number | null
-  }
-
-  export type ReuniaoMinAggregateOutputType = {
-    id: string | null
-    titulo: string | null
-    tipo: $Enums.TipoReuniao | null
-    dataReuniao: Date | null
-    duracaoMinutos: number | null
-    linkMeeting: string | null
-    criadoPorId: string | null
-    createdAt: Date | null
-  }
-
-  export type ReuniaoMaxAggregateOutputType = {
-    id: string | null
-    titulo: string | null
-    tipo: $Enums.TipoReuniao | null
-    dataReuniao: Date | null
-    duracaoMinutos: number | null
-    linkMeeting: string | null
-    criadoPorId: string | null
-    createdAt: Date | null
-  }
-
-  export type ReuniaoCountAggregateOutputType = {
-    id: number
-    titulo: number
-    tipo: number
-    dataReuniao: number
-    duracaoMinutos: number
-    linkMeeting: number
-    criadoPorId: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type ReuniaoAvgAggregateInputType = {
-    duracaoMinutos?: true
-  }
-
-  export type ReuniaoSumAggregateInputType = {
-    duracaoMinutos?: true
-  }
-
-  export type ReuniaoMinAggregateInputType = {
-    id?: true
-    titulo?: true
-    tipo?: true
-    dataReuniao?: true
-    duracaoMinutos?: true
-    linkMeeting?: true
-    criadoPorId?: true
-    createdAt?: true
-  }
-
-  export type ReuniaoMaxAggregateInputType = {
-    id?: true
-    titulo?: true
-    tipo?: true
-    dataReuniao?: true
-    duracaoMinutos?: true
-    linkMeeting?: true
-    criadoPorId?: true
-    createdAt?: true
-  }
-
-  export type ReuniaoCountAggregateInputType = {
-    id?: true
-    titulo?: true
-    tipo?: true
-    dataReuniao?: true
-    duracaoMinutos?: true
-    linkMeeting?: true
-    criadoPorId?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type ReuniaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Reuniao to aggregate.
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reuniaos to fetch.
-     */
-    orderBy?: ReuniaoOrderByWithRelationInput | ReuniaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ReuniaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reuniaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reuniaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Reuniaos
-    **/
-    _count?: true | ReuniaoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ReuniaoAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ReuniaoSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ReuniaoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ReuniaoMaxAggregateInputType
-  }
-
-  export type GetReuniaoAggregateType<T extends ReuniaoAggregateArgs> = {
-        [P in keyof T & keyof AggregateReuniao]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateReuniao[P]>
-      : GetScalarType<T[P], AggregateReuniao[P]>
-  }
-
-
-
-
-  export type ReuniaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReuniaoWhereInput
-    orderBy?: ReuniaoOrderByWithAggregationInput | ReuniaoOrderByWithAggregationInput[]
-    by: ReuniaoScalarFieldEnum[] | ReuniaoScalarFieldEnum
-    having?: ReuniaoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ReuniaoCountAggregateInputType | true
-    _avg?: ReuniaoAvgAggregateInputType
-    _sum?: ReuniaoSumAggregateInputType
-    _min?: ReuniaoMinAggregateInputType
-    _max?: ReuniaoMaxAggregateInputType
-  }
-
-  export type ReuniaoGroupByOutputType = {
-    id: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date
-    duracaoMinutos: number | null
-    linkMeeting: string | null
-    criadoPorId: string | null
-    createdAt: Date
-    _count: ReuniaoCountAggregateOutputType | null
-    _avg: ReuniaoAvgAggregateOutputType | null
-    _sum: ReuniaoSumAggregateOutputType | null
-    _min: ReuniaoMinAggregateOutputType | null
-    _max: ReuniaoMaxAggregateOutputType | null
-  }
-
-  type GetReuniaoGroupByPayload<T extends ReuniaoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ReuniaoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ReuniaoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReuniaoGroupByOutputType[P]>
-            : GetScalarType<T[P], ReuniaoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ReuniaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    titulo?: boolean
-    tipo?: boolean
-    dataReuniao?: boolean
-    duracaoMinutos?: boolean
-    linkMeeting?: boolean
-    criadoPorId?: boolean
-    createdAt?: boolean
-    criador?: boolean | Reuniao$criadorArgs<ExtArgs>
-    participantes?: boolean | Reuniao$participantesArgs<ExtArgs>
-    transcricao?: boolean | Reuniao$transcricaoArgs<ExtArgs>
-    _count?: boolean | ReuniaoCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["reuniao"]>
-
-  export type ReuniaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    titulo?: boolean
-    tipo?: boolean
-    dataReuniao?: boolean
-    duracaoMinutos?: boolean
-    linkMeeting?: boolean
-    criadoPorId?: boolean
-    createdAt?: boolean
-    criador?: boolean | Reuniao$criadorArgs<ExtArgs>
-  }, ExtArgs["result"]["reuniao"]>
-
-  export type ReuniaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    titulo?: boolean
-    tipo?: boolean
-    dataReuniao?: boolean
-    duracaoMinutos?: boolean
-    linkMeeting?: boolean
-    criadoPorId?: boolean
-    createdAt?: boolean
-    criador?: boolean | Reuniao$criadorArgs<ExtArgs>
-  }, ExtArgs["result"]["reuniao"]>
-
-  export type ReuniaoSelectScalar = {
-    id?: boolean
-    titulo?: boolean
-    tipo?: boolean
-    dataReuniao?: boolean
-    duracaoMinutos?: boolean
-    linkMeeting?: boolean
-    criadoPorId?: boolean
-    createdAt?: boolean
-  }
-
-  export type ReuniaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "tipo" | "dataReuniao" | "duracaoMinutos" | "linkMeeting" | "criadoPorId" | "createdAt", ExtArgs["result"]["reuniao"]>
-  export type ReuniaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    criador?: boolean | Reuniao$criadorArgs<ExtArgs>
-    participantes?: boolean | Reuniao$participantesArgs<ExtArgs>
-    transcricao?: boolean | Reuniao$transcricaoArgs<ExtArgs>
-    _count?: boolean | ReuniaoCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type ReuniaoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    criador?: boolean | Reuniao$criadorArgs<ExtArgs>
-  }
-  export type ReuniaoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    criador?: boolean | Reuniao$criadorArgs<ExtArgs>
-  }
-
-  export type $ReuniaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Reuniao"
-    objects: {
-      criador: Prisma.$UsuarioPayload<ExtArgs> | null
-      participantes: Prisma.$ParticipantePayload<ExtArgs>[]
-      transcricao: Prisma.$TranscricaoPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      titulo: string
-      tipo: $Enums.TipoReuniao
-      dataReuniao: Date
-      duracaoMinutos: number | null
-      linkMeeting: string | null
-      criadoPorId: string | null
-      createdAt: Date
-    }, ExtArgs["result"]["reuniao"]>
-    composites: {}
-  }
-
-  type ReuniaoGetPayload<S extends boolean | null | undefined | ReuniaoDefaultArgs> = $Result.GetResult<Prisma.$ReuniaoPayload, S>
-
-  type ReuniaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ReuniaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ReuniaoCountAggregateInputType | true
-    }
-
-  export interface ReuniaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reuniao'], meta: { name: 'Reuniao' } }
-    /**
-     * Find zero or one Reuniao that matches the filter.
-     * @param {ReuniaoFindUniqueArgs} args - Arguments to find a Reuniao
-     * @example
-     * // Get one Reuniao
-     * const reuniao = await prisma.reuniao.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ReuniaoFindUniqueArgs>(args: SelectSubset<T, ReuniaoFindUniqueArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Reuniao that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ReuniaoFindUniqueOrThrowArgs} args - Arguments to find a Reuniao
-     * @example
-     * // Get one Reuniao
-     * const reuniao = await prisma.reuniao.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ReuniaoFindUniqueOrThrowArgs>(args: SelectSubset<T, ReuniaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Reuniao that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoFindFirstArgs} args - Arguments to find a Reuniao
-     * @example
-     * // Get one Reuniao
-     * const reuniao = await prisma.reuniao.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ReuniaoFindFirstArgs>(args?: SelectSubset<T, ReuniaoFindFirstArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Reuniao that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoFindFirstOrThrowArgs} args - Arguments to find a Reuniao
-     * @example
-     * // Get one Reuniao
-     * const reuniao = await prisma.reuniao.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ReuniaoFindFirstOrThrowArgs>(args?: SelectSubset<T, ReuniaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Reuniaos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Reuniaos
-     * const reuniaos = await prisma.reuniao.findMany()
-     * 
-     * // Get first 10 Reuniaos
-     * const reuniaos = await prisma.reuniao.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const reuniaoWithIdOnly = await prisma.reuniao.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ReuniaoFindManyArgs>(args?: SelectSubset<T, ReuniaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Reuniao.
-     * @param {ReuniaoCreateArgs} args - Arguments to create a Reuniao.
-     * @example
-     * // Create one Reuniao
-     * const Reuniao = await prisma.reuniao.create({
-     *   data: {
-     *     // ... data to create a Reuniao
-     *   }
-     * })
-     * 
-     */
-    create<T extends ReuniaoCreateArgs>(args: SelectSubset<T, ReuniaoCreateArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Reuniaos.
-     * @param {ReuniaoCreateManyArgs} args - Arguments to create many Reuniaos.
-     * @example
-     * // Create many Reuniaos
-     * const reuniao = await prisma.reuniao.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ReuniaoCreateManyArgs>(args?: SelectSubset<T, ReuniaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Reuniaos and returns the data saved in the database.
-     * @param {ReuniaoCreateManyAndReturnArgs} args - Arguments to create many Reuniaos.
-     * @example
-     * // Create many Reuniaos
-     * const reuniao = await prisma.reuniao.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Reuniaos and only return the `id`
-     * const reuniaoWithIdOnly = await prisma.reuniao.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ReuniaoCreateManyAndReturnArgs>(args?: SelectSubset<T, ReuniaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Reuniao.
-     * @param {ReuniaoDeleteArgs} args - Arguments to delete one Reuniao.
-     * @example
-     * // Delete one Reuniao
-     * const Reuniao = await prisma.reuniao.delete({
-     *   where: {
-     *     // ... filter to delete one Reuniao
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ReuniaoDeleteArgs>(args: SelectSubset<T, ReuniaoDeleteArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Reuniao.
-     * @param {ReuniaoUpdateArgs} args - Arguments to update one Reuniao.
-     * @example
-     * // Update one Reuniao
-     * const reuniao = await prisma.reuniao.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ReuniaoUpdateArgs>(args: SelectSubset<T, ReuniaoUpdateArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Reuniaos.
-     * @param {ReuniaoDeleteManyArgs} args - Arguments to filter Reuniaos to delete.
-     * @example
-     * // Delete a few Reuniaos
-     * const { count } = await prisma.reuniao.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ReuniaoDeleteManyArgs>(args?: SelectSubset<T, ReuniaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Reuniaos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Reuniaos
-     * const reuniao = await prisma.reuniao.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ReuniaoUpdateManyArgs>(args: SelectSubset<T, ReuniaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Reuniaos and returns the data updated in the database.
-     * @param {ReuniaoUpdateManyAndReturnArgs} args - Arguments to update many Reuniaos.
-     * @example
-     * // Update many Reuniaos
-     * const reuniao = await prisma.reuniao.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Reuniaos and only return the `id`
-     * const reuniaoWithIdOnly = await prisma.reuniao.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ReuniaoUpdateManyAndReturnArgs>(args: SelectSubset<T, ReuniaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Reuniao.
-     * @param {ReuniaoUpsertArgs} args - Arguments to update or create a Reuniao.
-     * @example
-     * // Update or create a Reuniao
-     * const reuniao = await prisma.reuniao.upsert({
-     *   create: {
-     *     // ... data to create a Reuniao
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Reuniao we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ReuniaoUpsertArgs>(args: SelectSubset<T, ReuniaoUpsertArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Reuniaos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoCountArgs} args - Arguments to filter Reuniaos to count.
-     * @example
-     * // Count the number of Reuniaos
-     * const count = await prisma.reuniao.count({
-     *   where: {
-     *     // ... the filter for the Reuniaos we want to count
-     *   }
-     * })
-    **/
-    count<T extends ReuniaoCountArgs>(
-      args?: Subset<T, ReuniaoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ReuniaoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Reuniao.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ReuniaoAggregateArgs>(args: Subset<T, ReuniaoAggregateArgs>): Prisma.PrismaPromise<GetReuniaoAggregateType<T>>
-
-    /**
-     * Group by Reuniao.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReuniaoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ReuniaoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ReuniaoGroupByArgs['orderBy'] }
-        : { orderBy?: ReuniaoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ReuniaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReuniaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Reuniao model
-   */
-  readonly fields: ReuniaoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Reuniao.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ReuniaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    criador<T extends Reuniao$criadorArgs<ExtArgs> = {}>(args?: Subset<T, Reuniao$criadorArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    participantes<T extends Reuniao$participantesArgs<ExtArgs> = {}>(args?: Subset<T, Reuniao$participantesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    transcricao<T extends Reuniao$transcricaoArgs<ExtArgs> = {}>(args?: Subset<T, Reuniao$transcricaoArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Reuniao model
-   */
-  interface ReuniaoFieldRefs {
-    readonly id: FieldRef<"Reuniao", 'String'>
-    readonly titulo: FieldRef<"Reuniao", 'String'>
-    readonly tipo: FieldRef<"Reuniao", 'TipoReuniao'>
-    readonly dataReuniao: FieldRef<"Reuniao", 'DateTime'>
-    readonly duracaoMinutos: FieldRef<"Reuniao", 'Int'>
-    readonly linkMeeting: FieldRef<"Reuniao", 'String'>
-    readonly criadoPorId: FieldRef<"Reuniao", 'String'>
-    readonly createdAt: FieldRef<"Reuniao", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Reuniao findUnique
-   */
-  export type ReuniaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Reuniao to fetch.
-     */
-    where: ReuniaoWhereUniqueInput
-  }
-
-  /**
-   * Reuniao findUniqueOrThrow
-   */
-  export type ReuniaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Reuniao to fetch.
-     */
-    where: ReuniaoWhereUniqueInput
-  }
-
-  /**
-   * Reuniao findFirst
-   */
-  export type ReuniaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Reuniao to fetch.
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reuniaos to fetch.
-     */
-    orderBy?: ReuniaoOrderByWithRelationInput | ReuniaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Reuniaos.
-     */
-    cursor?: ReuniaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reuniaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reuniaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Reuniaos.
-     */
-    distinct?: ReuniaoScalarFieldEnum | ReuniaoScalarFieldEnum[]
-  }
-
-  /**
-   * Reuniao findFirstOrThrow
-   */
-  export type ReuniaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Reuniao to fetch.
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reuniaos to fetch.
-     */
-    orderBy?: ReuniaoOrderByWithRelationInput | ReuniaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Reuniaos.
-     */
-    cursor?: ReuniaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reuniaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reuniaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Reuniaos.
-     */
-    distinct?: ReuniaoScalarFieldEnum | ReuniaoScalarFieldEnum[]
-  }
-
-  /**
-   * Reuniao findMany
-   */
-  export type ReuniaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Reuniaos to fetch.
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Reuniaos to fetch.
-     */
-    orderBy?: ReuniaoOrderByWithRelationInput | ReuniaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Reuniaos.
-     */
-    cursor?: ReuniaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Reuniaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Reuniaos.
-     */
-    skip?: number
-    distinct?: ReuniaoScalarFieldEnum | ReuniaoScalarFieldEnum[]
-  }
-
-  /**
-   * Reuniao create
-   */
-  export type ReuniaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Reuniao.
-     */
-    data: XOR<ReuniaoCreateInput, ReuniaoUncheckedCreateInput>
-  }
-
-  /**
-   * Reuniao createMany
-   */
-  export type ReuniaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Reuniaos.
-     */
-    data: ReuniaoCreateManyInput | ReuniaoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Reuniao createManyAndReturn
-   */
-  export type ReuniaoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * The data used to create many Reuniaos.
-     */
-    data: ReuniaoCreateManyInput | ReuniaoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Reuniao update
-   */
-  export type ReuniaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Reuniao.
-     */
-    data: XOR<ReuniaoUpdateInput, ReuniaoUncheckedUpdateInput>
-    /**
-     * Choose, which Reuniao to update.
-     */
-    where: ReuniaoWhereUniqueInput
-  }
-
-  /**
-   * Reuniao updateMany
-   */
-  export type ReuniaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Reuniaos.
-     */
-    data: XOR<ReuniaoUpdateManyMutationInput, ReuniaoUncheckedUpdateManyInput>
-    /**
-     * Filter which Reuniaos to update
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * Limit how many Reuniaos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Reuniao updateManyAndReturn
-   */
-  export type ReuniaoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * The data used to update Reuniaos.
-     */
-    data: XOR<ReuniaoUpdateManyMutationInput, ReuniaoUncheckedUpdateManyInput>
-    /**
-     * Filter which Reuniaos to update
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * Limit how many Reuniaos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Reuniao upsert
-   */
-  export type ReuniaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Reuniao to update in case it exists.
-     */
-    where: ReuniaoWhereUniqueInput
-    /**
-     * In case the Reuniao found by the `where` argument doesn't exist, create a new Reuniao with this data.
-     */
-    create: XOR<ReuniaoCreateInput, ReuniaoUncheckedCreateInput>
-    /**
-     * In case the Reuniao was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ReuniaoUpdateInput, ReuniaoUncheckedUpdateInput>
-  }
-
-  /**
-   * Reuniao delete
-   */
-  export type ReuniaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-    /**
-     * Filter which Reuniao to delete.
-     */
-    where: ReuniaoWhereUniqueInput
-  }
-
-  /**
-   * Reuniao deleteMany
-   */
-  export type ReuniaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Reuniaos to delete
-     */
-    where?: ReuniaoWhereInput
-    /**
-     * Limit how many Reuniaos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Reuniao.criador
-   */
-  export type Reuniao$criadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Usuario
-     */
-    select?: UsuarioSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Usuario
-     */
-    omit?: UsuarioOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioInclude<ExtArgs> | null
-    where?: UsuarioWhereInput
-  }
-
-  /**
-   * Reuniao.participantes
-   */
-  export type Reuniao$participantesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    where?: ParticipanteWhereInput
-    orderBy?: ParticipanteOrderByWithRelationInput | ParticipanteOrderByWithRelationInput[]
-    cursor?: ParticipanteWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ParticipanteScalarFieldEnum | ParticipanteScalarFieldEnum[]
-  }
-
-  /**
-   * Reuniao.transcricao
-   */
-  export type Reuniao$transcricaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    where?: TranscricaoWhereInput
-  }
-
-  /**
-   * Reuniao without action
-   */
-  export type ReuniaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reuniao
-     */
-    select?: ReuniaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Reuniao
-     */
-    omit?: ReuniaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReuniaoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Participante
-   */
-
-  export type AggregateParticipante = {
-    _count: ParticipanteCountAggregateOutputType | null
-    _min: ParticipanteMinAggregateOutputType | null
-    _max: ParticipanteMaxAggregateOutputType | null
-  }
-
-  export type ParticipanteMinAggregateOutputType = {
-    id: string | null
-    reuniaoId: string | null
-    nome: string | null
-    email: string | null
-    createdAt: Date | null
-  }
-
-  export type ParticipanteMaxAggregateOutputType = {
-    id: string | null
-    reuniaoId: string | null
-    nome: string | null
-    email: string | null
-    createdAt: Date | null
-  }
-
-  export type ParticipanteCountAggregateOutputType = {
-    id: number
-    reuniaoId: number
-    nome: number
-    email: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type ParticipanteMinAggregateInputType = {
-    id?: true
-    reuniaoId?: true
-    nome?: true
-    email?: true
-    createdAt?: true
-  }
-
-  export type ParticipanteMaxAggregateInputType = {
-    id?: true
-    reuniaoId?: true
-    nome?: true
-    email?: true
-    createdAt?: true
-  }
-
-  export type ParticipanteCountAggregateInputType = {
-    id?: true
-    reuniaoId?: true
-    nome?: true
-    email?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type ParticipanteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Participante to aggregate.
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Participantes to fetch.
-     */
-    orderBy?: ParticipanteOrderByWithRelationInput | ParticipanteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ParticipanteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Participantes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Participantes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Participantes
-    **/
-    _count?: true | ParticipanteCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ParticipanteMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ParticipanteMaxAggregateInputType
-  }
-
-  export type GetParticipanteAggregateType<T extends ParticipanteAggregateArgs> = {
-        [P in keyof T & keyof AggregateParticipante]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateParticipante[P]>
-      : GetScalarType<T[P], AggregateParticipante[P]>
-  }
-
-
-
-
-  export type ParticipanteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ParticipanteWhereInput
-    orderBy?: ParticipanteOrderByWithAggregationInput | ParticipanteOrderByWithAggregationInput[]
-    by: ParticipanteScalarFieldEnum[] | ParticipanteScalarFieldEnum
-    having?: ParticipanteScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ParticipanteCountAggregateInputType | true
-    _min?: ParticipanteMinAggregateInputType
-    _max?: ParticipanteMaxAggregateInputType
-  }
-
-  export type ParticipanteGroupByOutputType = {
-    id: string
-    reuniaoId: string
-    nome: string
-    email: string | null
-    createdAt: Date
-    _count: ParticipanteCountAggregateOutputType | null
-    _min: ParticipanteMinAggregateOutputType | null
-    _max: ParticipanteMaxAggregateOutputType | null
-  }
-
-  type GetParticipanteGroupByPayload<T extends ParticipanteGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ParticipanteGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ParticipanteGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ParticipanteGroupByOutputType[P]>
-            : GetScalarType<T[P], ParticipanteGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ParticipanteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    reuniaoId?: boolean
-    nome?: boolean
-    email?: boolean
-    createdAt?: boolean
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["participante"]>
-
-  export type ParticipanteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    reuniaoId?: boolean
-    nome?: boolean
-    email?: boolean
-    createdAt?: boolean
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["participante"]>
-
-  export type ParticipanteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    reuniaoId?: boolean
-    nome?: boolean
-    email?: boolean
-    createdAt?: boolean
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["participante"]>
-
-  export type ParticipanteSelectScalar = {
-    id?: boolean
-    reuniaoId?: boolean
-    nome?: boolean
-    email?: boolean
-    createdAt?: boolean
-  }
-
-  export type ParticipanteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reuniaoId" | "nome" | "email" | "createdAt", ExtArgs["result"]["participante"]>
-  export type ParticipanteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }
-  export type ParticipanteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }
-  export type ParticipanteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }
-
-  export type $ParticipantePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Participante"
-    objects: {
-      reuniao: Prisma.$ReuniaoPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      reuniaoId: string
-      nome: string
-      email: string | null
-      createdAt: Date
-    }, ExtArgs["result"]["participante"]>
-    composites: {}
-  }
-
-  type ParticipanteGetPayload<S extends boolean | null | undefined | ParticipanteDefaultArgs> = $Result.GetResult<Prisma.$ParticipantePayload, S>
-
-  type ParticipanteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ParticipanteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ParticipanteCountAggregateInputType | true
-    }
-
-  export interface ParticipanteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Participante'], meta: { name: 'Participante' } }
-    /**
-     * Find zero or one Participante that matches the filter.
-     * @param {ParticipanteFindUniqueArgs} args - Arguments to find a Participante
-     * @example
-     * // Get one Participante
-     * const participante = await prisma.participante.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ParticipanteFindUniqueArgs>(args: SelectSubset<T, ParticipanteFindUniqueArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Participante that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ParticipanteFindUniqueOrThrowArgs} args - Arguments to find a Participante
-     * @example
-     * // Get one Participante
-     * const participante = await prisma.participante.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ParticipanteFindUniqueOrThrowArgs>(args: SelectSubset<T, ParticipanteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Participante that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteFindFirstArgs} args - Arguments to find a Participante
-     * @example
-     * // Get one Participante
-     * const participante = await prisma.participante.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ParticipanteFindFirstArgs>(args?: SelectSubset<T, ParticipanteFindFirstArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Participante that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteFindFirstOrThrowArgs} args - Arguments to find a Participante
-     * @example
-     * // Get one Participante
-     * const participante = await prisma.participante.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ParticipanteFindFirstOrThrowArgs>(args?: SelectSubset<T, ParticipanteFindFirstOrThrowArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Participantes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Participantes
-     * const participantes = await prisma.participante.findMany()
-     * 
-     * // Get first 10 Participantes
-     * const participantes = await prisma.participante.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const participanteWithIdOnly = await prisma.participante.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ParticipanteFindManyArgs>(args?: SelectSubset<T, ParticipanteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Participante.
-     * @param {ParticipanteCreateArgs} args - Arguments to create a Participante.
-     * @example
-     * // Create one Participante
-     * const Participante = await prisma.participante.create({
-     *   data: {
-     *     // ... data to create a Participante
-     *   }
-     * })
-     * 
-     */
-    create<T extends ParticipanteCreateArgs>(args: SelectSubset<T, ParticipanteCreateArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Participantes.
-     * @param {ParticipanteCreateManyArgs} args - Arguments to create many Participantes.
-     * @example
-     * // Create many Participantes
-     * const participante = await prisma.participante.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ParticipanteCreateManyArgs>(args?: SelectSubset<T, ParticipanteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Participantes and returns the data saved in the database.
-     * @param {ParticipanteCreateManyAndReturnArgs} args - Arguments to create many Participantes.
-     * @example
-     * // Create many Participantes
-     * const participante = await prisma.participante.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Participantes and only return the `id`
-     * const participanteWithIdOnly = await prisma.participante.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ParticipanteCreateManyAndReturnArgs>(args?: SelectSubset<T, ParticipanteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Participante.
-     * @param {ParticipanteDeleteArgs} args - Arguments to delete one Participante.
-     * @example
-     * // Delete one Participante
-     * const Participante = await prisma.participante.delete({
-     *   where: {
-     *     // ... filter to delete one Participante
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ParticipanteDeleteArgs>(args: SelectSubset<T, ParticipanteDeleteArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Participante.
-     * @param {ParticipanteUpdateArgs} args - Arguments to update one Participante.
-     * @example
-     * // Update one Participante
-     * const participante = await prisma.participante.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ParticipanteUpdateArgs>(args: SelectSubset<T, ParticipanteUpdateArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Participantes.
-     * @param {ParticipanteDeleteManyArgs} args - Arguments to filter Participantes to delete.
-     * @example
-     * // Delete a few Participantes
-     * const { count } = await prisma.participante.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ParticipanteDeleteManyArgs>(args?: SelectSubset<T, ParticipanteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Participantes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Participantes
-     * const participante = await prisma.participante.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ParticipanteUpdateManyArgs>(args: SelectSubset<T, ParticipanteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Participantes and returns the data updated in the database.
-     * @param {ParticipanteUpdateManyAndReturnArgs} args - Arguments to update many Participantes.
-     * @example
-     * // Update many Participantes
-     * const participante = await prisma.participante.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Participantes and only return the `id`
-     * const participanteWithIdOnly = await prisma.participante.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ParticipanteUpdateManyAndReturnArgs>(args: SelectSubset<T, ParticipanteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Participante.
-     * @param {ParticipanteUpsertArgs} args - Arguments to update or create a Participante.
-     * @example
-     * // Update or create a Participante
-     * const participante = await prisma.participante.upsert({
-     *   create: {
-     *     // ... data to create a Participante
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Participante we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ParticipanteUpsertArgs>(args: SelectSubset<T, ParticipanteUpsertArgs<ExtArgs>>): Prisma__ParticipanteClient<$Result.GetResult<Prisma.$ParticipantePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Participantes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteCountArgs} args - Arguments to filter Participantes to count.
-     * @example
-     * // Count the number of Participantes
-     * const count = await prisma.participante.count({
-     *   where: {
-     *     // ... the filter for the Participantes we want to count
-     *   }
-     * })
-    **/
-    count<T extends ParticipanteCountArgs>(
-      args?: Subset<T, ParticipanteCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ParticipanteCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Participante.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ParticipanteAggregateArgs>(args: Subset<T, ParticipanteAggregateArgs>): Prisma.PrismaPromise<GetParticipanteAggregateType<T>>
-
-    /**
-     * Group by Participante.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParticipanteGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ParticipanteGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ParticipanteGroupByArgs['orderBy'] }
-        : { orderBy?: ParticipanteGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ParticipanteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetParticipanteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Participante model
-   */
-  readonly fields: ParticipanteFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Participante.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ParticipanteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    reuniao<T extends ReuniaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReuniaoDefaultArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Participante model
-   */
-  interface ParticipanteFieldRefs {
-    readonly id: FieldRef<"Participante", 'String'>
-    readonly reuniaoId: FieldRef<"Participante", 'String'>
-    readonly nome: FieldRef<"Participante", 'String'>
-    readonly email: FieldRef<"Participante", 'String'>
-    readonly createdAt: FieldRef<"Participante", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Participante findUnique
-   */
-  export type ParticipanteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * Filter, which Participante to fetch.
-     */
-    where: ParticipanteWhereUniqueInput
-  }
-
-  /**
-   * Participante findUniqueOrThrow
-   */
-  export type ParticipanteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * Filter, which Participante to fetch.
-     */
-    where: ParticipanteWhereUniqueInput
-  }
-
-  /**
-   * Participante findFirst
-   */
-  export type ParticipanteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * Filter, which Participante to fetch.
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Participantes to fetch.
-     */
-    orderBy?: ParticipanteOrderByWithRelationInput | ParticipanteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Participantes.
-     */
-    cursor?: ParticipanteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Participantes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Participantes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Participantes.
-     */
-    distinct?: ParticipanteScalarFieldEnum | ParticipanteScalarFieldEnum[]
-  }
-
-  /**
-   * Participante findFirstOrThrow
-   */
-  export type ParticipanteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * Filter, which Participante to fetch.
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Participantes to fetch.
-     */
-    orderBy?: ParticipanteOrderByWithRelationInput | ParticipanteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Participantes.
-     */
-    cursor?: ParticipanteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Participantes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Participantes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Participantes.
-     */
-    distinct?: ParticipanteScalarFieldEnum | ParticipanteScalarFieldEnum[]
-  }
-
-  /**
-   * Participante findMany
-   */
-  export type ParticipanteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * Filter, which Participantes to fetch.
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Participantes to fetch.
-     */
-    orderBy?: ParticipanteOrderByWithRelationInput | ParticipanteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Participantes.
-     */
-    cursor?: ParticipanteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Participantes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Participantes.
-     */
-    skip?: number
-    distinct?: ParticipanteScalarFieldEnum | ParticipanteScalarFieldEnum[]
-  }
-
-  /**
-   * Participante create
-   */
-  export type ParticipanteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Participante.
-     */
-    data: XOR<ParticipanteCreateInput, ParticipanteUncheckedCreateInput>
-  }
-
-  /**
-   * Participante createMany
-   */
-  export type ParticipanteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Participantes.
-     */
-    data: ParticipanteCreateManyInput | ParticipanteCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Participante createManyAndReturn
-   */
-  export type ParticipanteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * The data used to create many Participantes.
-     */
-    data: ParticipanteCreateManyInput | ParticipanteCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Participante update
-   */
-  export type ParticipanteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Participante.
-     */
-    data: XOR<ParticipanteUpdateInput, ParticipanteUncheckedUpdateInput>
-    /**
-     * Choose, which Participante to update.
-     */
-    where: ParticipanteWhereUniqueInput
-  }
-
-  /**
-   * Participante updateMany
-   */
-  export type ParticipanteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Participantes.
-     */
-    data: XOR<ParticipanteUpdateManyMutationInput, ParticipanteUncheckedUpdateManyInput>
-    /**
-     * Filter which Participantes to update
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * Limit how many Participantes to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Participante updateManyAndReturn
-   */
-  export type ParticipanteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * The data used to update Participantes.
-     */
-    data: XOR<ParticipanteUpdateManyMutationInput, ParticipanteUncheckedUpdateManyInput>
-    /**
-     * Filter which Participantes to update
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * Limit how many Participantes to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Participante upsert
-   */
-  export type ParticipanteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Participante to update in case it exists.
-     */
-    where: ParticipanteWhereUniqueInput
-    /**
-     * In case the Participante found by the `where` argument doesn't exist, create a new Participante with this data.
-     */
-    create: XOR<ParticipanteCreateInput, ParticipanteUncheckedCreateInput>
-    /**
-     * In case the Participante was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ParticipanteUpdateInput, ParticipanteUncheckedUpdateInput>
-  }
-
-  /**
-   * Participante delete
-   */
-  export type ParticipanteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-    /**
-     * Filter which Participante to delete.
-     */
-    where: ParticipanteWhereUniqueInput
-  }
-
-  /**
-   * Participante deleteMany
-   */
-  export type ParticipanteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Participantes to delete
-     */
-    where?: ParticipanteWhereInput
-    /**
-     * Limit how many Participantes to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Participante without action
-   */
-  export type ParticipanteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Participante
-     */
-    select?: ParticipanteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Participante
-     */
-    omit?: ParticipanteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParticipanteInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Transcricao
-   */
-
-  export type AggregateTranscricao = {
-    _count: TranscricaoCountAggregateOutputType | null
-    _avg: TranscricaoAvgAggregateOutputType | null
-    _sum: TranscricaoSumAggregateOutputType | null
-    _min: TranscricaoMinAggregateOutputType | null
-    _max: TranscricaoMaxAggregateOutputType | null
-  }
-
-  export type TranscricaoAvgAggregateOutputType = {
-    arquivoAudioTamanho: number | null
-  }
-
-  export type TranscricaoSumAggregateOutputType = {
-    arquivoAudioTamanho: number | null
-  }
-
-  export type TranscricaoMinAggregateOutputType = {
-    id: string | null
-    reuniaoId: string | null
-    conteudoTexto: string | null
-    status: $Enums.StatusTranscricao | null
-    arquivoAudioBase64: string | null
-    arquivoAudioNome: string | null
-    arquivoAudioTipo: string | null
-    arquivoAudioTamanho: number | null
-    arquivoAudioPath: string | null
-    servicoUsado: string | null
-    erroMensagem: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TranscricaoMaxAggregateOutputType = {
-    id: string | null
-    reuniaoId: string | null
-    conteudoTexto: string | null
-    status: $Enums.StatusTranscricao | null
-    arquivoAudioBase64: string | null
-    arquivoAudioNome: string | null
-    arquivoAudioTipo: string | null
-    arquivoAudioTamanho: number | null
-    arquivoAudioPath: string | null
-    servicoUsado: string | null
-    erroMensagem: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TranscricaoCountAggregateOutputType = {
-    id: number
-    reuniaoId: number
-    conteudoTexto: number
-    status: number
-    arquivoAudioBase64: number
-    arquivoAudioNome: number
-    arquivoAudioTipo: number
-    arquivoAudioTamanho: number
-    arquivoAudioPath: number
-    servicoUsado: number
-    erroMensagem: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type TranscricaoAvgAggregateInputType = {
-    arquivoAudioTamanho?: true
-  }
-
-  export type TranscricaoSumAggregateInputType = {
-    arquivoAudioTamanho?: true
-  }
-
-  export type TranscricaoMinAggregateInputType = {
-    id?: true
-    reuniaoId?: true
-    conteudoTexto?: true
-    status?: true
-    arquivoAudioBase64?: true
-    arquivoAudioNome?: true
-    arquivoAudioTipo?: true
-    arquivoAudioTamanho?: true
-    arquivoAudioPath?: true
-    servicoUsado?: true
-    erroMensagem?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TranscricaoMaxAggregateInputType = {
-    id?: true
-    reuniaoId?: true
-    conteudoTexto?: true
-    status?: true
-    arquivoAudioBase64?: true
-    arquivoAudioNome?: true
-    arquivoAudioTipo?: true
-    arquivoAudioTamanho?: true
-    arquivoAudioPath?: true
-    servicoUsado?: true
-    erroMensagem?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TranscricaoCountAggregateInputType = {
-    id?: true
-    reuniaoId?: true
-    conteudoTexto?: true
-    status?: true
-    arquivoAudioBase64?: true
-    arquivoAudioNome?: true
-    arquivoAudioTipo?: true
-    arquivoAudioTamanho?: true
-    arquivoAudioPath?: true
-    servicoUsado?: true
-    erroMensagem?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type TranscricaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Transcricao to aggregate.
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Transcricaos to fetch.
-     */
-    orderBy?: TranscricaoOrderByWithRelationInput | TranscricaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TranscricaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Transcricaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Transcricaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Transcricaos
-    **/
-    _count?: true | TranscricaoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TranscricaoAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TranscricaoSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TranscricaoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TranscricaoMaxAggregateInputType
-  }
-
-  export type GetTranscricaoAggregateType<T extends TranscricaoAggregateArgs> = {
-        [P in keyof T & keyof AggregateTranscricao]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTranscricao[P]>
-      : GetScalarType<T[P], AggregateTranscricao[P]>
-  }
-
-
-
-
-  export type TranscricaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TranscricaoWhereInput
-    orderBy?: TranscricaoOrderByWithAggregationInput | TranscricaoOrderByWithAggregationInput[]
-    by: TranscricaoScalarFieldEnum[] | TranscricaoScalarFieldEnum
-    having?: TranscricaoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TranscricaoCountAggregateInputType | true
-    _avg?: TranscricaoAvgAggregateInputType
-    _sum?: TranscricaoSumAggregateInputType
-    _min?: TranscricaoMinAggregateInputType
-    _max?: TranscricaoMaxAggregateInputType
-  }
-
-  export type TranscricaoGroupByOutputType = {
-    id: string
-    reuniaoId: string
-    conteudoTexto: string
-    status: $Enums.StatusTranscricao
-    arquivoAudioBase64: string | null
-    arquivoAudioNome: string | null
-    arquivoAudioTipo: string | null
-    arquivoAudioTamanho: number | null
-    arquivoAudioPath: string | null
-    servicoUsado: string | null
-    erroMensagem: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: TranscricaoCountAggregateOutputType | null
-    _avg: TranscricaoAvgAggregateOutputType | null
-    _sum: TranscricaoSumAggregateOutputType | null
-    _min: TranscricaoMinAggregateOutputType | null
-    _max: TranscricaoMaxAggregateOutputType | null
-  }
-
-  type GetTranscricaoGroupByPayload<T extends TranscricaoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TranscricaoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TranscricaoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TranscricaoGroupByOutputType[P]>
-            : GetScalarType<T[P], TranscricaoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TranscricaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    reuniaoId?: boolean
-    conteudoTexto?: boolean
-    status?: boolean
-    arquivoAudioBase64?: boolean
-    arquivoAudioNome?: boolean
-    arquivoAudioTipo?: boolean
-    arquivoAudioTamanho?: boolean
-    arquivoAudioPath?: boolean
-    servicoUsado?: boolean
-    erroMensagem?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-    ata?: boolean | Transcricao$ataArgs<ExtArgs>
-  }, ExtArgs["result"]["transcricao"]>
-
-  export type TranscricaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    reuniaoId?: boolean
-    conteudoTexto?: boolean
-    status?: boolean
-    arquivoAudioBase64?: boolean
-    arquivoAudioNome?: boolean
-    arquivoAudioTipo?: boolean
-    arquivoAudioTamanho?: boolean
-    arquivoAudioPath?: boolean
-    servicoUsado?: boolean
-    erroMensagem?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["transcricao"]>
-
-  export type TranscricaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    reuniaoId?: boolean
-    conteudoTexto?: boolean
-    status?: boolean
-    arquivoAudioBase64?: boolean
-    arquivoAudioNome?: boolean
-    arquivoAudioTipo?: boolean
-    arquivoAudioTamanho?: boolean
-    arquivoAudioPath?: boolean
-    servicoUsado?: boolean
-    erroMensagem?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["transcricao"]>
-
-  export type TranscricaoSelectScalar = {
-    id?: boolean
-    reuniaoId?: boolean
-    conteudoTexto?: boolean
-    status?: boolean
-    arquivoAudioBase64?: boolean
-    arquivoAudioNome?: boolean
-    arquivoAudioTipo?: boolean
-    arquivoAudioTamanho?: boolean
-    arquivoAudioPath?: boolean
-    servicoUsado?: boolean
-    erroMensagem?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type TranscricaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reuniaoId" | "conteudoTexto" | "status" | "arquivoAudioBase64" | "arquivoAudioNome" | "arquivoAudioTipo" | "arquivoAudioTamanho" | "arquivoAudioPath" | "servicoUsado" | "erroMensagem" | "createdAt" | "updatedAt", ExtArgs["result"]["transcricao"]>
-  export type TranscricaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-    ata?: boolean | Transcricao$ataArgs<ExtArgs>
-  }
-  export type TranscricaoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }
-  export type TranscricaoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    reuniao?: boolean | ReuniaoDefaultArgs<ExtArgs>
-  }
-
-  export type $TranscricaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Transcricao"
-    objects: {
-      reuniao: Prisma.$ReuniaoPayload<ExtArgs>
-      ata: Prisma.$AtaPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      reuniaoId: string
-      conteudoTexto: string
-      status: $Enums.StatusTranscricao
-      arquivoAudioBase64: string | null
-      arquivoAudioNome: string | null
-      arquivoAudioTipo: string | null
-      arquivoAudioTamanho: number | null
-      arquivoAudioPath: string | null
-      servicoUsado: string | null
-      erroMensagem: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["transcricao"]>
-    composites: {}
-  }
-
-  type TranscricaoGetPayload<S extends boolean | null | undefined | TranscricaoDefaultArgs> = $Result.GetResult<Prisma.$TranscricaoPayload, S>
-
-  type TranscricaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TranscricaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TranscricaoCountAggregateInputType | true
-    }
-
-  export interface TranscricaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Transcricao'], meta: { name: 'Transcricao' } }
-    /**
-     * Find zero or one Transcricao that matches the filter.
-     * @param {TranscricaoFindUniqueArgs} args - Arguments to find a Transcricao
-     * @example
-     * // Get one Transcricao
-     * const transcricao = await prisma.transcricao.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TranscricaoFindUniqueArgs>(args: SelectSubset<T, TranscricaoFindUniqueArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Transcricao that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TranscricaoFindUniqueOrThrowArgs} args - Arguments to find a Transcricao
-     * @example
-     * // Get one Transcricao
-     * const transcricao = await prisma.transcricao.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TranscricaoFindUniqueOrThrowArgs>(args: SelectSubset<T, TranscricaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Transcricao that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoFindFirstArgs} args - Arguments to find a Transcricao
-     * @example
-     * // Get one Transcricao
-     * const transcricao = await prisma.transcricao.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TranscricaoFindFirstArgs>(args?: SelectSubset<T, TranscricaoFindFirstArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Transcricao that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoFindFirstOrThrowArgs} args - Arguments to find a Transcricao
-     * @example
-     * // Get one Transcricao
-     * const transcricao = await prisma.transcricao.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TranscricaoFindFirstOrThrowArgs>(args?: SelectSubset<T, TranscricaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Transcricaos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Transcricaos
-     * const transcricaos = await prisma.transcricao.findMany()
-     * 
-     * // Get first 10 Transcricaos
-     * const transcricaos = await prisma.transcricao.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const transcricaoWithIdOnly = await prisma.transcricao.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TranscricaoFindManyArgs>(args?: SelectSubset<T, TranscricaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Transcricao.
-     * @param {TranscricaoCreateArgs} args - Arguments to create a Transcricao.
-     * @example
-     * // Create one Transcricao
-     * const Transcricao = await prisma.transcricao.create({
-     *   data: {
-     *     // ... data to create a Transcricao
-     *   }
-     * })
-     * 
-     */
-    create<T extends TranscricaoCreateArgs>(args: SelectSubset<T, TranscricaoCreateArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Transcricaos.
-     * @param {TranscricaoCreateManyArgs} args - Arguments to create many Transcricaos.
-     * @example
-     * // Create many Transcricaos
-     * const transcricao = await prisma.transcricao.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TranscricaoCreateManyArgs>(args?: SelectSubset<T, TranscricaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Transcricaos and returns the data saved in the database.
-     * @param {TranscricaoCreateManyAndReturnArgs} args - Arguments to create many Transcricaos.
-     * @example
-     * // Create many Transcricaos
-     * const transcricao = await prisma.transcricao.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Transcricaos and only return the `id`
-     * const transcricaoWithIdOnly = await prisma.transcricao.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TranscricaoCreateManyAndReturnArgs>(args?: SelectSubset<T, TranscricaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Transcricao.
-     * @param {TranscricaoDeleteArgs} args - Arguments to delete one Transcricao.
-     * @example
-     * // Delete one Transcricao
-     * const Transcricao = await prisma.transcricao.delete({
-     *   where: {
-     *     // ... filter to delete one Transcricao
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TranscricaoDeleteArgs>(args: SelectSubset<T, TranscricaoDeleteArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Transcricao.
-     * @param {TranscricaoUpdateArgs} args - Arguments to update one Transcricao.
-     * @example
-     * // Update one Transcricao
-     * const transcricao = await prisma.transcricao.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TranscricaoUpdateArgs>(args: SelectSubset<T, TranscricaoUpdateArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Transcricaos.
-     * @param {TranscricaoDeleteManyArgs} args - Arguments to filter Transcricaos to delete.
-     * @example
-     * // Delete a few Transcricaos
-     * const { count } = await prisma.transcricao.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TranscricaoDeleteManyArgs>(args?: SelectSubset<T, TranscricaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Transcricaos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Transcricaos
-     * const transcricao = await prisma.transcricao.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TranscricaoUpdateManyArgs>(args: SelectSubset<T, TranscricaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Transcricaos and returns the data updated in the database.
-     * @param {TranscricaoUpdateManyAndReturnArgs} args - Arguments to update many Transcricaos.
-     * @example
-     * // Update many Transcricaos
-     * const transcricao = await prisma.transcricao.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Transcricaos and only return the `id`
-     * const transcricaoWithIdOnly = await prisma.transcricao.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TranscricaoUpdateManyAndReturnArgs>(args: SelectSubset<T, TranscricaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Transcricao.
-     * @param {TranscricaoUpsertArgs} args - Arguments to update or create a Transcricao.
-     * @example
-     * // Update or create a Transcricao
-     * const transcricao = await prisma.transcricao.upsert({
-     *   create: {
-     *     // ... data to create a Transcricao
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Transcricao we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TranscricaoUpsertArgs>(args: SelectSubset<T, TranscricaoUpsertArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Transcricaos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoCountArgs} args - Arguments to filter Transcricaos to count.
-     * @example
-     * // Count the number of Transcricaos
-     * const count = await prisma.transcricao.count({
-     *   where: {
-     *     // ... the filter for the Transcricaos we want to count
-     *   }
-     * })
-    **/
-    count<T extends TranscricaoCountArgs>(
-      args?: Subset<T, TranscricaoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TranscricaoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Transcricao.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TranscricaoAggregateArgs>(args: Subset<T, TranscricaoAggregateArgs>): Prisma.PrismaPromise<GetTranscricaoAggregateType<T>>
-
-    /**
-     * Group by Transcricao.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TranscricaoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TranscricaoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TranscricaoGroupByArgs['orderBy'] }
-        : { orderBy?: TranscricaoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TranscricaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTranscricaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Transcricao model
-   */
-  readonly fields: TranscricaoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Transcricao.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TranscricaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    reuniao<T extends ReuniaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReuniaoDefaultArgs<ExtArgs>>): Prisma__ReuniaoClient<$Result.GetResult<Prisma.$ReuniaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    ata<T extends Transcricao$ataArgs<ExtArgs> = {}>(args?: Subset<T, Transcricao$ataArgs<ExtArgs>>): Prisma__AtaClient<$Result.GetResult<Prisma.$AtaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Transcricao model
-   */
-  interface TranscricaoFieldRefs {
-    readonly id: FieldRef<"Transcricao", 'String'>
-    readonly reuniaoId: FieldRef<"Transcricao", 'String'>
-    readonly conteudoTexto: FieldRef<"Transcricao", 'String'>
-    readonly status: FieldRef<"Transcricao", 'StatusTranscricao'>
-    readonly arquivoAudioBase64: FieldRef<"Transcricao", 'String'>
-    readonly arquivoAudioNome: FieldRef<"Transcricao", 'String'>
-    readonly arquivoAudioTipo: FieldRef<"Transcricao", 'String'>
-    readonly arquivoAudioTamanho: FieldRef<"Transcricao", 'Int'>
-    readonly arquivoAudioPath: FieldRef<"Transcricao", 'String'>
-    readonly servicoUsado: FieldRef<"Transcricao", 'String'>
-    readonly erroMensagem: FieldRef<"Transcricao", 'String'>
-    readonly createdAt: FieldRef<"Transcricao", 'DateTime'>
-    readonly updatedAt: FieldRef<"Transcricao", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Transcricao findUnique
-   */
-  export type TranscricaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Transcricao to fetch.
-     */
-    where: TranscricaoWhereUniqueInput
-  }
-
-  /**
-   * Transcricao findUniqueOrThrow
-   */
-  export type TranscricaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Transcricao to fetch.
-     */
-    where: TranscricaoWhereUniqueInput
-  }
-
-  /**
-   * Transcricao findFirst
-   */
-  export type TranscricaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Transcricao to fetch.
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Transcricaos to fetch.
-     */
-    orderBy?: TranscricaoOrderByWithRelationInput | TranscricaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Transcricaos.
-     */
-    cursor?: TranscricaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Transcricaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Transcricaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Transcricaos.
-     */
-    distinct?: TranscricaoScalarFieldEnum | TranscricaoScalarFieldEnum[]
-  }
-
-  /**
-   * Transcricao findFirstOrThrow
-   */
-  export type TranscricaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Transcricao to fetch.
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Transcricaos to fetch.
-     */
-    orderBy?: TranscricaoOrderByWithRelationInput | TranscricaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Transcricaos.
-     */
-    cursor?: TranscricaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Transcricaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Transcricaos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Transcricaos.
-     */
-    distinct?: TranscricaoScalarFieldEnum | TranscricaoScalarFieldEnum[]
-  }
-
-  /**
-   * Transcricao findMany
-   */
-  export type TranscricaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * Filter, which Transcricaos to fetch.
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Transcricaos to fetch.
-     */
-    orderBy?: TranscricaoOrderByWithRelationInput | TranscricaoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Transcricaos.
-     */
-    cursor?: TranscricaoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Transcricaos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Transcricaos.
-     */
-    skip?: number
-    distinct?: TranscricaoScalarFieldEnum | TranscricaoScalarFieldEnum[]
-  }
-
-  /**
-   * Transcricao create
-   */
-  export type TranscricaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Transcricao.
-     */
-    data: XOR<TranscricaoCreateInput, TranscricaoUncheckedCreateInput>
-  }
-
-  /**
-   * Transcricao createMany
-   */
-  export type TranscricaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Transcricaos.
-     */
-    data: TranscricaoCreateManyInput | TranscricaoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Transcricao createManyAndReturn
-   */
-  export type TranscricaoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * The data used to create many Transcricaos.
-     */
-    data: TranscricaoCreateManyInput | TranscricaoCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Transcricao update
-   */
-  export type TranscricaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Transcricao.
-     */
-    data: XOR<TranscricaoUpdateInput, TranscricaoUncheckedUpdateInput>
-    /**
-     * Choose, which Transcricao to update.
-     */
-    where: TranscricaoWhereUniqueInput
-  }
-
-  /**
-   * Transcricao updateMany
-   */
-  export type TranscricaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Transcricaos.
-     */
-    data: XOR<TranscricaoUpdateManyMutationInput, TranscricaoUncheckedUpdateManyInput>
-    /**
-     * Filter which Transcricaos to update
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * Limit how many Transcricaos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Transcricao updateManyAndReturn
-   */
-  export type TranscricaoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * The data used to update Transcricaos.
-     */
-    data: XOR<TranscricaoUpdateManyMutationInput, TranscricaoUncheckedUpdateManyInput>
-    /**
-     * Filter which Transcricaos to update
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * Limit how many Transcricaos to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Transcricao upsert
-   */
-  export type TranscricaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Transcricao to update in case it exists.
-     */
-    where: TranscricaoWhereUniqueInput
-    /**
-     * In case the Transcricao found by the `where` argument doesn't exist, create a new Transcricao with this data.
-     */
-    create: XOR<TranscricaoCreateInput, TranscricaoUncheckedCreateInput>
-    /**
-     * In case the Transcricao was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TranscricaoUpdateInput, TranscricaoUncheckedUpdateInput>
-  }
-
-  /**
-   * Transcricao delete
-   */
-  export type TranscricaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-    /**
-     * Filter which Transcricao to delete.
-     */
-    where: TranscricaoWhereUniqueInput
-  }
-
-  /**
-   * Transcricao deleteMany
-   */
-  export type TranscricaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Transcricaos to delete
-     */
-    where?: TranscricaoWhereInput
-    /**
-     * Limit how many Transcricaos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Transcricao.ata
-   */
-  export type Transcricao$ataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ata
-     */
-    select?: AtaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ata
-     */
-    omit?: AtaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AtaInclude<ExtArgs> | null
-    where?: AtaWhereInput
-  }
-
-  /**
-   * Transcricao without action
-   */
-  export type TranscricaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Transcricao
-     */
-    select?: TranscricaoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Transcricao
-     */
-    omit?: TranscricaoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TranscricaoInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Ata
    */
 
   export type AggregateAta = {
     _count: AtaCountAggregateOutputType | null
+    _avg: AtaAvgAggregateOutputType | null
+    _sum: AtaSumAggregateOutputType | null
     _min: AtaMinAggregateOutputType | null
     _max: AtaMaxAggregateOutputType | null
   }
 
+  export type AtaAvgAggregateOutputType = {
+    duracaoMinutos: number | null
+    arquivoAudioTamanho: number | null
+  }
+
+  export type AtaSumAggregateOutputType = {
+    duracaoMinutos: number | null
+    arquivoAudioTamanho: number | null
+  }
+
   export type AtaMinAggregateOutputType = {
     id: string | null
-    transcricaoId: string | null
-    resumo: string | null
-    conteudoCompleto: string | null
+    titulo: string | null
+    tipo: $Enums.TipoReuniao | null
+    dataReuniao: Date | null
+    duracaoMinutos: number | null
+    arquivoAudioBase64: string | null
+    arquivoAudioNome: string | null
+    arquivoAudioTipo: string | null
+    arquivoAudioTamanho: number | null
+    objetivo: string | null
     status: $Enums.StatusAta | null
     aprovadoPorId: string | null
     dataAprovacao: Date | null
@@ -5956,9 +2139,15 @@ export namespace Prisma {
 
   export type AtaMaxAggregateOutputType = {
     id: string | null
-    transcricaoId: string | null
-    resumo: string | null
-    conteudoCompleto: string | null
+    titulo: string | null
+    tipo: $Enums.TipoReuniao | null
+    dataReuniao: Date | null
+    duracaoMinutos: number | null
+    arquivoAudioBase64: string | null
+    arquivoAudioNome: string | null
+    arquivoAudioTipo: string | null
+    arquivoAudioTamanho: number | null
+    objetivo: string | null
     status: $Enums.StatusAta | null
     aprovadoPorId: string | null
     dataAprovacao: Date | null
@@ -5969,12 +2158,22 @@ export namespace Prisma {
 
   export type AtaCountAggregateOutputType = {
     id: number
-    transcricaoId: number
-    resumo: number
-    topicos: number
+    titulo: number
+    tipo: number
+    dataReuniao: number
+    duracaoMinutos: number
+    arquivoAudioBase64: number
+    arquivoAudioNome: number
+    arquivoAudioTipo: number
+    arquivoAudioTamanho: number
+    participantes: number
+    identificacao: number
+    objetivo: number
+    topicosDiscutidos: number
     decisoes: number
     acoes: number
-    conteudoCompleto: number
+    pendencias: number
+    proximosPassos: number
     status: number
     aprovadoPorId: number
     dataAprovacao: number
@@ -5985,11 +2184,27 @@ export namespace Prisma {
   }
 
 
+  export type AtaAvgAggregateInputType = {
+    duracaoMinutos?: true
+    arquivoAudioTamanho?: true
+  }
+
+  export type AtaSumAggregateInputType = {
+    duracaoMinutos?: true
+    arquivoAudioTamanho?: true
+  }
+
   export type AtaMinAggregateInputType = {
     id?: true
-    transcricaoId?: true
-    resumo?: true
-    conteudoCompleto?: true
+    titulo?: true
+    tipo?: true
+    dataReuniao?: true
+    duracaoMinutos?: true
+    arquivoAudioBase64?: true
+    arquivoAudioNome?: true
+    arquivoAudioTipo?: true
+    arquivoAudioTamanho?: true
+    objetivo?: true
     status?: true
     aprovadoPorId?: true
     dataAprovacao?: true
@@ -6000,9 +2215,15 @@ export namespace Prisma {
 
   export type AtaMaxAggregateInputType = {
     id?: true
-    transcricaoId?: true
-    resumo?: true
-    conteudoCompleto?: true
+    titulo?: true
+    tipo?: true
+    dataReuniao?: true
+    duracaoMinutos?: true
+    arquivoAudioBase64?: true
+    arquivoAudioNome?: true
+    arquivoAudioTipo?: true
+    arquivoAudioTamanho?: true
+    objetivo?: true
     status?: true
     aprovadoPorId?: true
     dataAprovacao?: true
@@ -6013,12 +2234,22 @@ export namespace Prisma {
 
   export type AtaCountAggregateInputType = {
     id?: true
-    transcricaoId?: true
-    resumo?: true
-    topicos?: true
+    titulo?: true
+    tipo?: true
+    dataReuniao?: true
+    duracaoMinutos?: true
+    arquivoAudioBase64?: true
+    arquivoAudioNome?: true
+    arquivoAudioTipo?: true
+    arquivoAudioTamanho?: true
+    participantes?: true
+    identificacao?: true
+    objetivo?: true
+    topicosDiscutidos?: true
     decisoes?: true
     acoes?: true
-    conteudoCompleto?: true
+    pendencias?: true
+    proximosPassos?: true
     status?: true
     aprovadoPorId?: true
     dataAprovacao?: true
@@ -6066,6 +2297,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: AtaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AtaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: AtaMinAggregateInputType
@@ -6096,18 +2339,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: AtaCountAggregateInputType | true
+    _avg?: AtaAvgAggregateInputType
+    _sum?: AtaSumAggregateInputType
     _min?: AtaMinAggregateInputType
     _max?: AtaMaxAggregateInputType
   }
 
   export type AtaGroupByOutputType = {
     id: string
-    transcricaoId: string
-    resumo: string | null
-    topicos: JsonValue | null
+    titulo: string
+    tipo: $Enums.TipoReuniao
+    dataReuniao: Date
+    duracaoMinutos: number | null
+    arquivoAudioBase64: string | null
+    arquivoAudioNome: string | null
+    arquivoAudioTipo: string | null
+    arquivoAudioTamanho: number | null
+    participantes: JsonValue | null
+    identificacao: JsonValue | null
+    objetivo: string | null
+    topicosDiscutidos: JsonValue | null
     decisoes: JsonValue | null
     acoes: JsonValue | null
-    conteudoCompleto: string
+    pendencias: JsonValue | null
+    proximosPassos: JsonValue | null
     status: $Enums.StatusAta
     aprovadoPorId: string | null
     dataAprovacao: Date | null
@@ -6115,6 +2370,8 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     _count: AtaCountAggregateOutputType | null
+    _avg: AtaAvgAggregateOutputType | null
+    _sum: AtaSumAggregateOutputType | null
     _min: AtaMinAggregateOutputType | null
     _max: AtaMaxAggregateOutputType | null
   }
@@ -6135,66 +2392,103 @@ export namespace Prisma {
 
   export type AtaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    transcricaoId?: boolean
-    resumo?: boolean
-    topicos?: boolean
+    titulo?: boolean
+    tipo?: boolean
+    dataReuniao?: boolean
+    duracaoMinutos?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
+    participantes?: boolean
+    identificacao?: boolean
+    objetivo?: boolean
+    topicosDiscutidos?: boolean
     decisoes?: boolean
     acoes?: boolean
-    conteudoCompleto?: boolean
+    pendencias?: boolean
+    proximosPassos?: boolean
     status?: boolean
     aprovadoPorId?: boolean
     dataAprovacao?: boolean
     comentarios?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    transcricao?: boolean | TranscricaoDefaultArgs<ExtArgs>
     aprovadoPor?: boolean | Ata$aprovadoPorArgs<ExtArgs>
   }, ExtArgs["result"]["ata"]>
 
   export type AtaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    transcricaoId?: boolean
-    resumo?: boolean
-    topicos?: boolean
+    titulo?: boolean
+    tipo?: boolean
+    dataReuniao?: boolean
+    duracaoMinutos?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
+    participantes?: boolean
+    identificacao?: boolean
+    objetivo?: boolean
+    topicosDiscutidos?: boolean
     decisoes?: boolean
     acoes?: boolean
-    conteudoCompleto?: boolean
+    pendencias?: boolean
+    proximosPassos?: boolean
     status?: boolean
     aprovadoPorId?: boolean
     dataAprovacao?: boolean
     comentarios?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    transcricao?: boolean | TranscricaoDefaultArgs<ExtArgs>
     aprovadoPor?: boolean | Ata$aprovadoPorArgs<ExtArgs>
   }, ExtArgs["result"]["ata"]>
 
   export type AtaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    transcricaoId?: boolean
-    resumo?: boolean
-    topicos?: boolean
+    titulo?: boolean
+    tipo?: boolean
+    dataReuniao?: boolean
+    duracaoMinutos?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
+    participantes?: boolean
+    identificacao?: boolean
+    objetivo?: boolean
+    topicosDiscutidos?: boolean
     decisoes?: boolean
     acoes?: boolean
-    conteudoCompleto?: boolean
+    pendencias?: boolean
+    proximosPassos?: boolean
     status?: boolean
     aprovadoPorId?: boolean
     dataAprovacao?: boolean
     comentarios?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    transcricao?: boolean | TranscricaoDefaultArgs<ExtArgs>
     aprovadoPor?: boolean | Ata$aprovadoPorArgs<ExtArgs>
   }, ExtArgs["result"]["ata"]>
 
   export type AtaSelectScalar = {
     id?: boolean
-    transcricaoId?: boolean
-    resumo?: boolean
-    topicos?: boolean
+    titulo?: boolean
+    tipo?: boolean
+    dataReuniao?: boolean
+    duracaoMinutos?: boolean
+    arquivoAudioBase64?: boolean
+    arquivoAudioNome?: boolean
+    arquivoAudioTipo?: boolean
+    arquivoAudioTamanho?: boolean
+    participantes?: boolean
+    identificacao?: boolean
+    objetivo?: boolean
+    topicosDiscutidos?: boolean
     decisoes?: boolean
     acoes?: boolean
-    conteudoCompleto?: boolean
+    pendencias?: boolean
+    proximosPassos?: boolean
     status?: boolean
     aprovadoPorId?: boolean
     dataAprovacao?: boolean
@@ -6203,34 +2497,40 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AtaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transcricaoId" | "resumo" | "topicos" | "decisoes" | "acoes" | "conteudoCompleto" | "status" | "aprovadoPorId" | "dataAprovacao" | "comentarios" | "createdAt" | "updatedAt", ExtArgs["result"]["ata"]>
+  export type AtaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "tipo" | "dataReuniao" | "duracaoMinutos" | "arquivoAudioBase64" | "arquivoAudioNome" | "arquivoAudioTipo" | "arquivoAudioTamanho" | "participantes" | "identificacao" | "objetivo" | "topicosDiscutidos" | "decisoes" | "acoes" | "pendencias" | "proximosPassos" | "status" | "aprovadoPorId" | "dataAprovacao" | "comentarios" | "createdAt" | "updatedAt", ExtArgs["result"]["ata"]>
   export type AtaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    transcricao?: boolean | TranscricaoDefaultArgs<ExtArgs>
     aprovadoPor?: boolean | Ata$aprovadoPorArgs<ExtArgs>
   }
   export type AtaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    transcricao?: boolean | TranscricaoDefaultArgs<ExtArgs>
     aprovadoPor?: boolean | Ata$aprovadoPorArgs<ExtArgs>
   }
   export type AtaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    transcricao?: boolean | TranscricaoDefaultArgs<ExtArgs>
     aprovadoPor?: boolean | Ata$aprovadoPorArgs<ExtArgs>
   }
 
   export type $AtaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ata"
     objects: {
-      transcricao: Prisma.$TranscricaoPayload<ExtArgs>
       aprovadoPor: Prisma.$UsuarioPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      transcricaoId: string
-      resumo: string | null
-      topicos: Prisma.JsonValue | null
+      titulo: string
+      tipo: $Enums.TipoReuniao
+      dataReuniao: Date
+      duracaoMinutos: number | null
+      arquivoAudioBase64: string | null
+      arquivoAudioNome: string | null
+      arquivoAudioTipo: string | null
+      arquivoAudioTamanho: number | null
+      participantes: Prisma.JsonValue | null
+      identificacao: Prisma.JsonValue | null
+      objetivo: string | null
+      topicosDiscutidos: Prisma.JsonValue | null
       decisoes: Prisma.JsonValue | null
       acoes: Prisma.JsonValue | null
-      conteudoCompleto: string
+      pendencias: Prisma.JsonValue | null
+      proximosPassos: Prisma.JsonValue | null
       status: $Enums.StatusAta
       aprovadoPorId: string | null
       dataAprovacao: Date | null
@@ -6631,7 +2931,6 @@ export namespace Prisma {
    */
   export interface Prisma__AtaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    transcricao<T extends TranscricaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TranscricaoDefaultArgs<ExtArgs>>): Prisma__TranscricaoClient<$Result.GetResult<Prisma.$TranscricaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     aprovadoPor<T extends Ata$aprovadoPorArgs<ExtArgs> = {}>(args?: Subset<T, Ata$aprovadoPorArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6663,12 +2962,22 @@ export namespace Prisma {
    */
   interface AtaFieldRefs {
     readonly id: FieldRef<"Ata", 'String'>
-    readonly transcricaoId: FieldRef<"Ata", 'String'>
-    readonly resumo: FieldRef<"Ata", 'String'>
-    readonly topicos: FieldRef<"Ata", 'Json'>
+    readonly titulo: FieldRef<"Ata", 'String'>
+    readonly tipo: FieldRef<"Ata", 'TipoReuniao'>
+    readonly dataReuniao: FieldRef<"Ata", 'DateTime'>
+    readonly duracaoMinutos: FieldRef<"Ata", 'Int'>
+    readonly arquivoAudioBase64: FieldRef<"Ata", 'String'>
+    readonly arquivoAudioNome: FieldRef<"Ata", 'String'>
+    readonly arquivoAudioTipo: FieldRef<"Ata", 'String'>
+    readonly arquivoAudioTamanho: FieldRef<"Ata", 'Int'>
+    readonly participantes: FieldRef<"Ata", 'Json'>
+    readonly identificacao: FieldRef<"Ata", 'Json'>
+    readonly objetivo: FieldRef<"Ata", 'String'>
+    readonly topicosDiscutidos: FieldRef<"Ata", 'Json'>
     readonly decisoes: FieldRef<"Ata", 'Json'>
     readonly acoes: FieldRef<"Ata", 'Json'>
-    readonly conteudoCompleto: FieldRef<"Ata", 'String'>
+    readonly pendencias: FieldRef<"Ata", 'Json'>
+    readonly proximosPassos: FieldRef<"Ata", 'Json'>
     readonly status: FieldRef<"Ata", 'StatusAta'>
     readonly aprovadoPorId: FieldRef<"Ata", 'String'>
     readonly dataAprovacao: FieldRef<"Ata", 'DateTime'>
@@ -7134,58 +3443,24 @@ export namespace Prisma {
   export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
 
 
-  export const ReuniaoScalarFieldEnum: {
+  export const AtaScalarFieldEnum: {
     id: 'id',
     titulo: 'titulo',
     tipo: 'tipo',
     dataReuniao: 'dataReuniao',
     duracaoMinutos: 'duracaoMinutos',
-    linkMeeting: 'linkMeeting',
-    criadoPorId: 'criadoPorId',
-    createdAt: 'createdAt'
-  };
-
-  export type ReuniaoScalarFieldEnum = (typeof ReuniaoScalarFieldEnum)[keyof typeof ReuniaoScalarFieldEnum]
-
-
-  export const ParticipanteScalarFieldEnum: {
-    id: 'id',
-    reuniaoId: 'reuniaoId',
-    nome: 'nome',
-    email: 'email',
-    createdAt: 'createdAt'
-  };
-
-  export type ParticipanteScalarFieldEnum = (typeof ParticipanteScalarFieldEnum)[keyof typeof ParticipanteScalarFieldEnum]
-
-
-  export const TranscricaoScalarFieldEnum: {
-    id: 'id',
-    reuniaoId: 'reuniaoId',
-    conteudoTexto: 'conteudoTexto',
-    status: 'status',
     arquivoAudioBase64: 'arquivoAudioBase64',
     arquivoAudioNome: 'arquivoAudioNome',
     arquivoAudioTipo: 'arquivoAudioTipo',
     arquivoAudioTamanho: 'arquivoAudioTamanho',
-    arquivoAudioPath: 'arquivoAudioPath',
-    servicoUsado: 'servicoUsado',
-    erroMensagem: 'erroMensagem',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type TranscricaoScalarFieldEnum = (typeof TranscricaoScalarFieldEnum)[keyof typeof TranscricaoScalarFieldEnum]
-
-
-  export const AtaScalarFieldEnum: {
-    id: 'id',
-    transcricaoId: 'transcricaoId',
-    resumo: 'resumo',
-    topicos: 'topicos',
+    participantes: 'participantes',
+    identificacao: 'identificacao',
+    objetivo: 'objetivo',
+    topicosDiscutidos: 'topicosDiscutidos',
     decisoes: 'decisoes',
     acoes: 'acoes',
-    conteudoCompleto: 'conteudoCompleto',
+    pendencias: 'pendencias',
+    proximosPassos: 'proximosPassos',
     status: 'status',
     aprovadoPorId: 'aprovadoPorId',
     dataAprovacao: 'dataAprovacao',
@@ -7221,14 +3496,6 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -7236,6 +3503,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -7307,20 +3582,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'StatusTranscricao'
-   */
-  export type EnumStatusTranscricaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusTranscricao'>
-    
-
-
-  /**
-   * Reference to a field of type 'StatusTranscricao[]'
-   */
-  export type ListEnumStatusTranscricaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusTranscricao[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -7375,7 +3636,6 @@ export namespace Prisma {
     senha?: StringFilter<"Usuario"> | string
     ativo?: BoolFilter<"Usuario"> | boolean
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
-    reunioesCriadas?: ReuniaoListRelationFilter
     atasAprovadas?: AtaListRelationFilter
   }
 
@@ -7386,7 +3646,6 @@ export namespace Prisma {
     senha?: SortOrder
     ativo?: SortOrder
     createdAt?: SortOrder
-    reunioesCriadas?: ReuniaoOrderByRelationAggregateInput
     atasAprovadas?: AtaOrderByRelationAggregateInput
   }
 
@@ -7400,7 +3659,6 @@ export namespace Prisma {
     senha?: StringFilter<"Usuario"> | string
     ativo?: BoolFilter<"Usuario"> | boolean
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
-    reunioesCriadas?: ReuniaoListRelationFilter
     atasAprovadas?: AtaListRelationFilter
   }, "id" | "email">
 
@@ -7428,308 +3686,111 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
   }
 
-  export type ReuniaoWhereInput = {
-    AND?: ReuniaoWhereInput | ReuniaoWhereInput[]
-    OR?: ReuniaoWhereInput[]
-    NOT?: ReuniaoWhereInput | ReuniaoWhereInput[]
-    id?: UuidFilter<"Reuniao"> | string
-    titulo?: StringFilter<"Reuniao"> | string
-    tipo?: EnumTipoReuniaoFilter<"Reuniao"> | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFilter<"Reuniao"> | Date | string
-    duracaoMinutos?: IntNullableFilter<"Reuniao"> | number | null
-    linkMeeting?: StringNullableFilter<"Reuniao"> | string | null
-    criadoPorId?: UuidNullableFilter<"Reuniao"> | string | null
-    createdAt?: DateTimeFilter<"Reuniao"> | Date | string
-    criador?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
-    participantes?: ParticipanteListRelationFilter
-    transcricao?: XOR<TranscricaoNullableScalarRelationFilter, TranscricaoWhereInput> | null
-  }
-
-  export type ReuniaoOrderByWithRelationInput = {
-    id?: SortOrder
-    titulo?: SortOrder
-    tipo?: SortOrder
-    dataReuniao?: SortOrder
-    duracaoMinutos?: SortOrderInput | SortOrder
-    linkMeeting?: SortOrderInput | SortOrder
-    criadoPorId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    criador?: UsuarioOrderByWithRelationInput
-    participantes?: ParticipanteOrderByRelationAggregateInput
-    transcricao?: TranscricaoOrderByWithRelationInput
-  }
-
-  export type ReuniaoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ReuniaoWhereInput | ReuniaoWhereInput[]
-    OR?: ReuniaoWhereInput[]
-    NOT?: ReuniaoWhereInput | ReuniaoWhereInput[]
-    titulo?: StringFilter<"Reuniao"> | string
-    tipo?: EnumTipoReuniaoFilter<"Reuniao"> | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFilter<"Reuniao"> | Date | string
-    duracaoMinutos?: IntNullableFilter<"Reuniao"> | number | null
-    linkMeeting?: StringNullableFilter<"Reuniao"> | string | null
-    criadoPorId?: UuidNullableFilter<"Reuniao"> | string | null
-    createdAt?: DateTimeFilter<"Reuniao"> | Date | string
-    criador?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
-    participantes?: ParticipanteListRelationFilter
-    transcricao?: XOR<TranscricaoNullableScalarRelationFilter, TranscricaoWhereInput> | null
-  }, "id">
-
-  export type ReuniaoOrderByWithAggregationInput = {
-    id?: SortOrder
-    titulo?: SortOrder
-    tipo?: SortOrder
-    dataReuniao?: SortOrder
-    duracaoMinutos?: SortOrderInput | SortOrder
-    linkMeeting?: SortOrderInput | SortOrder
-    criadoPorId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    _count?: ReuniaoCountOrderByAggregateInput
-    _avg?: ReuniaoAvgOrderByAggregateInput
-    _max?: ReuniaoMaxOrderByAggregateInput
-    _min?: ReuniaoMinOrderByAggregateInput
-    _sum?: ReuniaoSumOrderByAggregateInput
-  }
-
-  export type ReuniaoScalarWhereWithAggregatesInput = {
-    AND?: ReuniaoScalarWhereWithAggregatesInput | ReuniaoScalarWhereWithAggregatesInput[]
-    OR?: ReuniaoScalarWhereWithAggregatesInput[]
-    NOT?: ReuniaoScalarWhereWithAggregatesInput | ReuniaoScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Reuniao"> | string
-    titulo?: StringWithAggregatesFilter<"Reuniao"> | string
-    tipo?: EnumTipoReuniaoWithAggregatesFilter<"Reuniao"> | $Enums.TipoReuniao
-    dataReuniao?: DateTimeWithAggregatesFilter<"Reuniao"> | Date | string
-    duracaoMinutos?: IntNullableWithAggregatesFilter<"Reuniao"> | number | null
-    linkMeeting?: StringNullableWithAggregatesFilter<"Reuniao"> | string | null
-    criadoPorId?: UuidNullableWithAggregatesFilter<"Reuniao"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Reuniao"> | Date | string
-  }
-
-  export type ParticipanteWhereInput = {
-    AND?: ParticipanteWhereInput | ParticipanteWhereInput[]
-    OR?: ParticipanteWhereInput[]
-    NOT?: ParticipanteWhereInput | ParticipanteWhereInput[]
-    id?: UuidFilter<"Participante"> | string
-    reuniaoId?: UuidFilter<"Participante"> | string
-    nome?: StringFilter<"Participante"> | string
-    email?: StringNullableFilter<"Participante"> | string | null
-    createdAt?: DateTimeFilter<"Participante"> | Date | string
-    reuniao?: XOR<ReuniaoScalarRelationFilter, ReuniaoWhereInput>
-  }
-
-  export type ParticipanteOrderByWithRelationInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    nome?: SortOrder
-    email?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    reuniao?: ReuniaoOrderByWithRelationInput
-  }
-
-  export type ParticipanteWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    reuniaoId_email?: ParticipanteReuniaoIdEmailCompoundUniqueInput
-    AND?: ParticipanteWhereInput | ParticipanteWhereInput[]
-    OR?: ParticipanteWhereInput[]
-    NOT?: ParticipanteWhereInput | ParticipanteWhereInput[]
-    reuniaoId?: UuidFilter<"Participante"> | string
-    nome?: StringFilter<"Participante"> | string
-    email?: StringNullableFilter<"Participante"> | string | null
-    createdAt?: DateTimeFilter<"Participante"> | Date | string
-    reuniao?: XOR<ReuniaoScalarRelationFilter, ReuniaoWhereInput>
-  }, "id" | "reuniaoId_email">
-
-  export type ParticipanteOrderByWithAggregationInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    nome?: SortOrder
-    email?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    _count?: ParticipanteCountOrderByAggregateInput
-    _max?: ParticipanteMaxOrderByAggregateInput
-    _min?: ParticipanteMinOrderByAggregateInput
-  }
-
-  export type ParticipanteScalarWhereWithAggregatesInput = {
-    AND?: ParticipanteScalarWhereWithAggregatesInput | ParticipanteScalarWhereWithAggregatesInput[]
-    OR?: ParticipanteScalarWhereWithAggregatesInput[]
-    NOT?: ParticipanteScalarWhereWithAggregatesInput | ParticipanteScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Participante"> | string
-    reuniaoId?: UuidWithAggregatesFilter<"Participante"> | string
-    nome?: StringWithAggregatesFilter<"Participante"> | string
-    email?: StringNullableWithAggregatesFilter<"Participante"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Participante"> | Date | string
-  }
-
-  export type TranscricaoWhereInput = {
-    AND?: TranscricaoWhereInput | TranscricaoWhereInput[]
-    OR?: TranscricaoWhereInput[]
-    NOT?: TranscricaoWhereInput | TranscricaoWhereInput[]
-    id?: UuidFilter<"Transcricao"> | string
-    reuniaoId?: UuidFilter<"Transcricao"> | string
-    conteudoTexto?: StringFilter<"Transcricao"> | string
-    status?: EnumStatusTranscricaoFilter<"Transcricao"> | $Enums.StatusTranscricao
-    arquivoAudioBase64?: StringNullableFilter<"Transcricao"> | string | null
-    arquivoAudioNome?: StringNullableFilter<"Transcricao"> | string | null
-    arquivoAudioTipo?: StringNullableFilter<"Transcricao"> | string | null
-    arquivoAudioTamanho?: IntNullableFilter<"Transcricao"> | number | null
-    arquivoAudioPath?: StringNullableFilter<"Transcricao"> | string | null
-    servicoUsado?: StringNullableFilter<"Transcricao"> | string | null
-    erroMensagem?: StringNullableFilter<"Transcricao"> | string | null
-    createdAt?: DateTimeFilter<"Transcricao"> | Date | string
-    updatedAt?: DateTimeFilter<"Transcricao"> | Date | string
-    reuniao?: XOR<ReuniaoScalarRelationFilter, ReuniaoWhereInput>
-    ata?: XOR<AtaNullableScalarRelationFilter, AtaWhereInput> | null
-  }
-
-  export type TranscricaoOrderByWithRelationInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    conteudoTexto?: SortOrder
-    status?: SortOrder
-    arquivoAudioBase64?: SortOrderInput | SortOrder
-    arquivoAudioNome?: SortOrderInput | SortOrder
-    arquivoAudioTipo?: SortOrderInput | SortOrder
-    arquivoAudioTamanho?: SortOrderInput | SortOrder
-    arquivoAudioPath?: SortOrderInput | SortOrder
-    servicoUsado?: SortOrderInput | SortOrder
-    erroMensagem?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    reuniao?: ReuniaoOrderByWithRelationInput
-    ata?: AtaOrderByWithRelationInput
-  }
-
-  export type TranscricaoWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    reuniaoId?: string
-    AND?: TranscricaoWhereInput | TranscricaoWhereInput[]
-    OR?: TranscricaoWhereInput[]
-    NOT?: TranscricaoWhereInput | TranscricaoWhereInput[]
-    conteudoTexto?: StringFilter<"Transcricao"> | string
-    status?: EnumStatusTranscricaoFilter<"Transcricao"> | $Enums.StatusTranscricao
-    arquivoAudioBase64?: StringNullableFilter<"Transcricao"> | string | null
-    arquivoAudioNome?: StringNullableFilter<"Transcricao"> | string | null
-    arquivoAudioTipo?: StringNullableFilter<"Transcricao"> | string | null
-    arquivoAudioTamanho?: IntNullableFilter<"Transcricao"> | number | null
-    arquivoAudioPath?: StringNullableFilter<"Transcricao"> | string | null
-    servicoUsado?: StringNullableFilter<"Transcricao"> | string | null
-    erroMensagem?: StringNullableFilter<"Transcricao"> | string | null
-    createdAt?: DateTimeFilter<"Transcricao"> | Date | string
-    updatedAt?: DateTimeFilter<"Transcricao"> | Date | string
-    reuniao?: XOR<ReuniaoScalarRelationFilter, ReuniaoWhereInput>
-    ata?: XOR<AtaNullableScalarRelationFilter, AtaWhereInput> | null
-  }, "id" | "reuniaoId">
-
-  export type TranscricaoOrderByWithAggregationInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    conteudoTexto?: SortOrder
-    status?: SortOrder
-    arquivoAudioBase64?: SortOrderInput | SortOrder
-    arquivoAudioNome?: SortOrderInput | SortOrder
-    arquivoAudioTipo?: SortOrderInput | SortOrder
-    arquivoAudioTamanho?: SortOrderInput | SortOrder
-    arquivoAudioPath?: SortOrderInput | SortOrder
-    servicoUsado?: SortOrderInput | SortOrder
-    erroMensagem?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: TranscricaoCountOrderByAggregateInput
-    _avg?: TranscricaoAvgOrderByAggregateInput
-    _max?: TranscricaoMaxOrderByAggregateInput
-    _min?: TranscricaoMinOrderByAggregateInput
-    _sum?: TranscricaoSumOrderByAggregateInput
-  }
-
-  export type TranscricaoScalarWhereWithAggregatesInput = {
-    AND?: TranscricaoScalarWhereWithAggregatesInput | TranscricaoScalarWhereWithAggregatesInput[]
-    OR?: TranscricaoScalarWhereWithAggregatesInput[]
-    NOT?: TranscricaoScalarWhereWithAggregatesInput | TranscricaoScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Transcricao"> | string
-    reuniaoId?: UuidWithAggregatesFilter<"Transcricao"> | string
-    conteudoTexto?: StringWithAggregatesFilter<"Transcricao"> | string
-    status?: EnumStatusTranscricaoWithAggregatesFilter<"Transcricao"> | $Enums.StatusTranscricao
-    arquivoAudioBase64?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
-    arquivoAudioNome?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
-    arquivoAudioTipo?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
-    arquivoAudioTamanho?: IntNullableWithAggregatesFilter<"Transcricao"> | number | null
-    arquivoAudioPath?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
-    servicoUsado?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
-    erroMensagem?: StringNullableWithAggregatesFilter<"Transcricao"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Transcricao"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Transcricao"> | Date | string
-  }
-
   export type AtaWhereInput = {
     AND?: AtaWhereInput | AtaWhereInput[]
     OR?: AtaWhereInput[]
     NOT?: AtaWhereInput | AtaWhereInput[]
     id?: UuidFilter<"Ata"> | string
-    transcricaoId?: UuidFilter<"Ata"> | string
-    resumo?: StringNullableFilter<"Ata"> | string | null
-    topicos?: JsonNullableFilter<"Ata">
+    titulo?: StringFilter<"Ata"> | string
+    tipo?: EnumTipoReuniaoFilter<"Ata"> | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFilter<"Ata"> | Date | string
+    duracaoMinutos?: IntNullableFilter<"Ata"> | number | null
+    arquivoAudioBase64?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioNome?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioTipo?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioTamanho?: IntNullableFilter<"Ata"> | number | null
+    participantes?: JsonNullableFilter<"Ata">
+    identificacao?: JsonNullableFilter<"Ata">
+    objetivo?: StringNullableFilter<"Ata"> | string | null
+    topicosDiscutidos?: JsonNullableFilter<"Ata">
     decisoes?: JsonNullableFilter<"Ata">
     acoes?: JsonNullableFilter<"Ata">
-    conteudoCompleto?: StringFilter<"Ata"> | string
+    pendencias?: JsonNullableFilter<"Ata">
+    proximosPassos?: JsonNullableFilter<"Ata">
     status?: EnumStatusAtaFilter<"Ata"> | $Enums.StatusAta
     aprovadoPorId?: UuidNullableFilter<"Ata"> | string | null
     dataAprovacao?: DateTimeNullableFilter<"Ata"> | Date | string | null
     comentarios?: StringNullableFilter<"Ata"> | string | null
     createdAt?: DateTimeFilter<"Ata"> | Date | string
     updatedAt?: DateTimeFilter<"Ata"> | Date | string
-    transcricao?: XOR<TranscricaoScalarRelationFilter, TranscricaoWhereInput>
     aprovadoPor?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
   }
 
   export type AtaOrderByWithRelationInput = {
     id?: SortOrder
-    transcricaoId?: SortOrder
-    resumo?: SortOrderInput | SortOrder
-    topicos?: SortOrderInput | SortOrder
+    titulo?: SortOrder
+    tipo?: SortOrder
+    dataReuniao?: SortOrder
+    duracaoMinutos?: SortOrderInput | SortOrder
+    arquivoAudioBase64?: SortOrderInput | SortOrder
+    arquivoAudioNome?: SortOrderInput | SortOrder
+    arquivoAudioTipo?: SortOrderInput | SortOrder
+    arquivoAudioTamanho?: SortOrderInput | SortOrder
+    participantes?: SortOrderInput | SortOrder
+    identificacao?: SortOrderInput | SortOrder
+    objetivo?: SortOrderInput | SortOrder
+    topicosDiscutidos?: SortOrderInput | SortOrder
     decisoes?: SortOrderInput | SortOrder
     acoes?: SortOrderInput | SortOrder
-    conteudoCompleto?: SortOrder
+    pendencias?: SortOrderInput | SortOrder
+    proximosPassos?: SortOrderInput | SortOrder
     status?: SortOrder
     aprovadoPorId?: SortOrderInput | SortOrder
     dataAprovacao?: SortOrderInput | SortOrder
     comentarios?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    transcricao?: TranscricaoOrderByWithRelationInput
     aprovadoPor?: UsuarioOrderByWithRelationInput
   }
 
   export type AtaWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    transcricaoId?: string
     AND?: AtaWhereInput | AtaWhereInput[]
     OR?: AtaWhereInput[]
     NOT?: AtaWhereInput | AtaWhereInput[]
-    resumo?: StringNullableFilter<"Ata"> | string | null
-    topicos?: JsonNullableFilter<"Ata">
+    titulo?: StringFilter<"Ata"> | string
+    tipo?: EnumTipoReuniaoFilter<"Ata"> | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFilter<"Ata"> | Date | string
+    duracaoMinutos?: IntNullableFilter<"Ata"> | number | null
+    arquivoAudioBase64?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioNome?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioTipo?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioTamanho?: IntNullableFilter<"Ata"> | number | null
+    participantes?: JsonNullableFilter<"Ata">
+    identificacao?: JsonNullableFilter<"Ata">
+    objetivo?: StringNullableFilter<"Ata"> | string | null
+    topicosDiscutidos?: JsonNullableFilter<"Ata">
     decisoes?: JsonNullableFilter<"Ata">
     acoes?: JsonNullableFilter<"Ata">
-    conteudoCompleto?: StringFilter<"Ata"> | string
+    pendencias?: JsonNullableFilter<"Ata">
+    proximosPassos?: JsonNullableFilter<"Ata">
     status?: EnumStatusAtaFilter<"Ata"> | $Enums.StatusAta
     aprovadoPorId?: UuidNullableFilter<"Ata"> | string | null
     dataAprovacao?: DateTimeNullableFilter<"Ata"> | Date | string | null
     comentarios?: StringNullableFilter<"Ata"> | string | null
     createdAt?: DateTimeFilter<"Ata"> | Date | string
     updatedAt?: DateTimeFilter<"Ata"> | Date | string
-    transcricao?: XOR<TranscricaoScalarRelationFilter, TranscricaoWhereInput>
     aprovadoPor?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
-  }, "id" | "transcricaoId">
+  }, "id">
 
   export type AtaOrderByWithAggregationInput = {
     id?: SortOrder
-    transcricaoId?: SortOrder
-    resumo?: SortOrderInput | SortOrder
-    topicos?: SortOrderInput | SortOrder
+    titulo?: SortOrder
+    tipo?: SortOrder
+    dataReuniao?: SortOrder
+    duracaoMinutos?: SortOrderInput | SortOrder
+    arquivoAudioBase64?: SortOrderInput | SortOrder
+    arquivoAudioNome?: SortOrderInput | SortOrder
+    arquivoAudioTipo?: SortOrderInput | SortOrder
+    arquivoAudioTamanho?: SortOrderInput | SortOrder
+    participantes?: SortOrderInput | SortOrder
+    identificacao?: SortOrderInput | SortOrder
+    objetivo?: SortOrderInput | SortOrder
+    topicosDiscutidos?: SortOrderInput | SortOrder
     decisoes?: SortOrderInput | SortOrder
     acoes?: SortOrderInput | SortOrder
-    conteudoCompleto?: SortOrder
+    pendencias?: SortOrderInput | SortOrder
+    proximosPassos?: SortOrderInput | SortOrder
     status?: SortOrder
     aprovadoPorId?: SortOrderInput | SortOrder
     dataAprovacao?: SortOrderInput | SortOrder
@@ -7737,8 +3798,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AtaCountOrderByAggregateInput
+    _avg?: AtaAvgOrderByAggregateInput
     _max?: AtaMaxOrderByAggregateInput
     _min?: AtaMinOrderByAggregateInput
+    _sum?: AtaSumOrderByAggregateInput
   }
 
   export type AtaScalarWhereWithAggregatesInput = {
@@ -7746,12 +3809,22 @@ export namespace Prisma {
     OR?: AtaScalarWhereWithAggregatesInput[]
     NOT?: AtaScalarWhereWithAggregatesInput | AtaScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Ata"> | string
-    transcricaoId?: UuidWithAggregatesFilter<"Ata"> | string
-    resumo?: StringNullableWithAggregatesFilter<"Ata"> | string | null
-    topicos?: JsonNullableWithAggregatesFilter<"Ata">
+    titulo?: StringWithAggregatesFilter<"Ata"> | string
+    tipo?: EnumTipoReuniaoWithAggregatesFilter<"Ata"> | $Enums.TipoReuniao
+    dataReuniao?: DateTimeWithAggregatesFilter<"Ata"> | Date | string
+    duracaoMinutos?: IntNullableWithAggregatesFilter<"Ata"> | number | null
+    arquivoAudioBase64?: StringNullableWithAggregatesFilter<"Ata"> | string | null
+    arquivoAudioNome?: StringNullableWithAggregatesFilter<"Ata"> | string | null
+    arquivoAudioTipo?: StringNullableWithAggregatesFilter<"Ata"> | string | null
+    arquivoAudioTamanho?: IntNullableWithAggregatesFilter<"Ata"> | number | null
+    participantes?: JsonNullableWithAggregatesFilter<"Ata">
+    identificacao?: JsonNullableWithAggregatesFilter<"Ata">
+    objetivo?: StringNullableWithAggregatesFilter<"Ata"> | string | null
+    topicosDiscutidos?: JsonNullableWithAggregatesFilter<"Ata">
     decisoes?: JsonNullableWithAggregatesFilter<"Ata">
     acoes?: JsonNullableWithAggregatesFilter<"Ata">
-    conteudoCompleto?: StringWithAggregatesFilter<"Ata"> | string
+    pendencias?: JsonNullableWithAggregatesFilter<"Ata">
+    proximosPassos?: JsonNullableWithAggregatesFilter<"Ata">
     status?: EnumStatusAtaWithAggregatesFilter<"Ata"> | $Enums.StatusAta
     aprovadoPorId?: UuidNullableWithAggregatesFilter<"Ata"> | string | null
     dataAprovacao?: DateTimeNullableWithAggregatesFilter<"Ata"> | Date | string | null
@@ -7767,7 +3840,6 @@ export namespace Prisma {
     senha: string
     ativo?: boolean
     createdAt?: Date | string
-    reunioesCriadas?: ReuniaoCreateNestedManyWithoutCriadorInput
     atasAprovadas?: AtaCreateNestedManyWithoutAprovadoPorInput
   }
 
@@ -7778,7 +3850,6 @@ export namespace Prisma {
     senha: string
     ativo?: boolean
     createdAt?: Date | string
-    reunioesCriadas?: ReuniaoUncheckedCreateNestedManyWithoutCriadorInput
     atasAprovadas?: AtaUncheckedCreateNestedManyWithoutAprovadoPorInput
   }
 
@@ -7789,7 +3860,6 @@ export namespace Prisma {
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reunioesCriadas?: ReuniaoUpdateManyWithoutCriadorNestedInput
     atasAprovadas?: AtaUpdateManyWithoutAprovadoPorNestedInput
   }
 
@@ -7800,7 +3870,6 @@ export namespace Prisma {
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reunioesCriadas?: ReuniaoUncheckedUpdateManyWithoutCriadorNestedInput
     atasAprovadas?: AtaUncheckedUpdateManyWithoutAprovadoPorNestedInput
   }
 
@@ -7831,284 +3900,50 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReuniaoCreateInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    createdAt?: Date | string
-    criador?: UsuarioCreateNestedOneWithoutReunioesCriadasInput
-    participantes?: ParticipanteCreateNestedManyWithoutReuniaoInput
-    transcricao?: TranscricaoCreateNestedOneWithoutReuniaoInput
-  }
-
-  export type ReuniaoUncheckedCreateInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    criadoPorId?: string | null
-    createdAt?: Date | string
-    participantes?: ParticipanteUncheckedCreateNestedManyWithoutReuniaoInput
-    transcricao?: TranscricaoUncheckedCreateNestedOneWithoutReuniaoInput
-  }
-
-  export type ReuniaoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    criador?: UsuarioUpdateOneWithoutReunioesCriadasNestedInput
-    participantes?: ParticipanteUpdateManyWithoutReuniaoNestedInput
-    transcricao?: TranscricaoUpdateOneWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    criadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    participantes?: ParticipanteUncheckedUpdateManyWithoutReuniaoNestedInput
-    transcricao?: TranscricaoUncheckedUpdateOneWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoCreateManyInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    criadoPorId?: string | null
-    createdAt?: Date | string
-  }
-
-  export type ReuniaoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReuniaoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    criadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParticipanteCreateInput = {
-    id?: string
-    nome: string
-    email?: string | null
-    createdAt?: Date | string
-    reuniao: ReuniaoCreateNestedOneWithoutParticipantesInput
-  }
-
-  export type ParticipanteUncheckedCreateInput = {
-    id?: string
-    reuniaoId: string
-    nome: string
-    email?: string | null
-    createdAt?: Date | string
-  }
-
-  export type ParticipanteUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reuniao?: ReuniaoUpdateOneRequiredWithoutParticipantesNestedInput
-  }
-
-  export type ParticipanteUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    reuniaoId?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParticipanteCreateManyInput = {
-    id?: string
-    reuniaoId: string
-    nome: string
-    email?: string | null
-    createdAt?: Date | string
-  }
-
-  export type ParticipanteUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParticipanteUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    reuniaoId?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TranscricaoCreateInput = {
-    id?: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    reuniao: ReuniaoCreateNestedOneWithoutTranscricaoInput
-    ata?: AtaCreateNestedOneWithoutTranscricaoInput
-  }
-
-  export type TranscricaoUncheckedCreateInput = {
-    id?: string
-    reuniaoId: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ata?: AtaUncheckedCreateNestedOneWithoutTranscricaoInput
-  }
-
-  export type TranscricaoUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reuniao?: ReuniaoUpdateOneRequiredWithoutTranscricaoNestedInput
-    ata?: AtaUpdateOneWithoutTranscricaoNestedInput
-  }
-
-  export type TranscricaoUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    reuniaoId?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ata?: AtaUncheckedUpdateOneWithoutTranscricaoNestedInput
-  }
-
-  export type TranscricaoCreateManyInput = {
-    id?: string
-    reuniaoId: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TranscricaoUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TranscricaoUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    reuniaoId?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type AtaCreateInput = {
     id?: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo: string
+    tipo: $Enums.TipoReuniao
+    dataReuniao: Date | string
+    duracaoMinutos?: number | null
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.StatusAta
     dataAprovacao?: Date | string | null
     comentarios?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    transcricao: TranscricaoCreateNestedOneWithoutAtaInput
     aprovadoPor?: UsuarioCreateNestedOneWithoutAtasAprovadasInput
   }
 
   export type AtaUncheckedCreateInput = {
     id?: string
-    transcricaoId: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo: string
+    tipo: $Enums.TipoReuniao
+    dataReuniao: Date | string
+    duracaoMinutos?: number | null
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.StatusAta
     aprovadoPorId?: string | null
     dataAprovacao?: Date | string | null
@@ -8119,28 +3954,48 @@ export namespace Prisma {
 
   export type AtaUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comentarios?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transcricao?: TranscricaoUpdateOneRequiredWithoutAtaNestedInput
     aprovadoPor?: UsuarioUpdateOneWithoutAtasAprovadasNestedInput
   }
 
   export type AtaUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    transcricaoId?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     aprovadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8151,12 +4006,22 @@ export namespace Prisma {
 
   export type AtaCreateManyInput = {
     id?: string
-    transcricaoId: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo: string
+    tipo: $Enums.TipoReuniao
+    dataReuniao: Date | string
+    duracaoMinutos?: number | null
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.StatusAta
     aprovadoPorId?: string | null
     dataAprovacao?: Date | string | null
@@ -8167,11 +4032,22 @@ export namespace Prisma {
 
   export type AtaUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comentarios?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8181,12 +4057,22 @@ export namespace Prisma {
 
   export type AtaUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    transcricaoId?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     aprovadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8238,20 +4124,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type ReuniaoListRelationFilter = {
-    every?: ReuniaoWhereInput
-    some?: ReuniaoWhereInput
-    none?: ReuniaoWhereInput
-  }
-
   export type AtaListRelationFilter = {
     every?: AtaWhereInput
     some?: AtaWhereInput
     none?: AtaWhereInput
-  }
-
-  export type ReuniaoOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type AtaOrderByRelationAggregateInput = {
@@ -8372,6 +4248,36 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EnumStatusAtaFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusAta | EnumStatusAtaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusAtaFilter<$PrismaModel> | $Enums.StatusAta
+  }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
@@ -8385,20 +4291,20 @@ export namespace Prisma {
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type UsuarioNullableScalarRelationFilter = {
     is?: UsuarioWhereInput | null
     isNot?: UsuarioWhereInput | null
-  }
-
-  export type ParticipanteListRelationFilter = {
-    every?: ParticipanteWhereInput
-    some?: ParticipanteWhereInput
-    none?: ParticipanteWhereInput
-  }
-
-  export type TranscricaoNullableScalarRelationFilter = {
-    is?: TranscricaoWhereInput | null
-    isNot?: TranscricaoWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -8406,49 +4312,78 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type ParticipanteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ReuniaoCountOrderByAggregateInput = {
+  export type AtaCountOrderByAggregateInput = {
     id?: SortOrder
     titulo?: SortOrder
     tipo?: SortOrder
     dataReuniao?: SortOrder
     duracaoMinutos?: SortOrder
-    linkMeeting?: SortOrder
-    criadoPorId?: SortOrder
+    arquivoAudioBase64?: SortOrder
+    arquivoAudioNome?: SortOrder
+    arquivoAudioTipo?: SortOrder
+    arquivoAudioTamanho?: SortOrder
+    participantes?: SortOrder
+    identificacao?: SortOrder
+    objetivo?: SortOrder
+    topicosDiscutidos?: SortOrder
+    decisoes?: SortOrder
+    acoes?: SortOrder
+    pendencias?: SortOrder
+    proximosPassos?: SortOrder
+    status?: SortOrder
+    aprovadoPorId?: SortOrder
+    dataAprovacao?: SortOrder
+    comentarios?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type ReuniaoAvgOrderByAggregateInput = {
+  export type AtaAvgOrderByAggregateInput = {
     duracaoMinutos?: SortOrder
+    arquivoAudioTamanho?: SortOrder
   }
 
-  export type ReuniaoMaxOrderByAggregateInput = {
+  export type AtaMaxOrderByAggregateInput = {
     id?: SortOrder
     titulo?: SortOrder
     tipo?: SortOrder
     dataReuniao?: SortOrder
     duracaoMinutos?: SortOrder
-    linkMeeting?: SortOrder
-    criadoPorId?: SortOrder
+    arquivoAudioBase64?: SortOrder
+    arquivoAudioNome?: SortOrder
+    arquivoAudioTipo?: SortOrder
+    arquivoAudioTamanho?: SortOrder
+    objetivo?: SortOrder
+    status?: SortOrder
+    aprovadoPorId?: SortOrder
+    dataAprovacao?: SortOrder
+    comentarios?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type ReuniaoMinOrderByAggregateInput = {
+  export type AtaMinOrderByAggregateInput = {
     id?: SortOrder
     titulo?: SortOrder
     tipo?: SortOrder
     dataReuniao?: SortOrder
     duracaoMinutos?: SortOrder
-    linkMeeting?: SortOrder
-    criadoPorId?: SortOrder
+    arquivoAudioBase64?: SortOrder
+    arquivoAudioNome?: SortOrder
+    arquivoAudioTipo?: SortOrder
+    arquivoAudioTamanho?: SortOrder
+    objetivo?: SortOrder
+    status?: SortOrder
+    aprovadoPorId?: SortOrder
+    dataAprovacao?: SortOrder
+    comentarios?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type ReuniaoSumOrderByAggregateInput = {
+  export type AtaSumOrderByAggregateInput = {
     duracaoMinutos?: SortOrder
+    arquivoAudioTamanho?: SortOrder
   }
 
   export type EnumTipoReuniaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -8494,221 +4429,6 @@ export namespace Prisma {
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
-
-  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type ReuniaoScalarRelationFilter = {
-    is?: ReuniaoWhereInput
-    isNot?: ReuniaoWhereInput
-  }
-
-  export type ParticipanteReuniaoIdEmailCompoundUniqueInput = {
-    reuniaoId: string
-    email: string
-  }
-
-  export type ParticipanteCountOrderByAggregateInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    nome?: SortOrder
-    email?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type ParticipanteMaxOrderByAggregateInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    nome?: SortOrder
-    email?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type ParticipanteMinOrderByAggregateInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    nome?: SortOrder
-    email?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type EnumStatusTranscricaoFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTranscricao | EnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusTranscricaoFilter<$PrismaModel> | $Enums.StatusTranscricao
-  }
-
-  export type AtaNullableScalarRelationFilter = {
-    is?: AtaWhereInput | null
-    isNot?: AtaWhereInput | null
-  }
-
-  export type TranscricaoCountOrderByAggregateInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    conteudoTexto?: SortOrder
-    status?: SortOrder
-    arquivoAudioBase64?: SortOrder
-    arquivoAudioNome?: SortOrder
-    arquivoAudioTipo?: SortOrder
-    arquivoAudioTamanho?: SortOrder
-    arquivoAudioPath?: SortOrder
-    servicoUsado?: SortOrder
-    erroMensagem?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TranscricaoAvgOrderByAggregateInput = {
-    arquivoAudioTamanho?: SortOrder
-  }
-
-  export type TranscricaoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    conteudoTexto?: SortOrder
-    status?: SortOrder
-    arquivoAudioBase64?: SortOrder
-    arquivoAudioNome?: SortOrder
-    arquivoAudioTipo?: SortOrder
-    arquivoAudioTamanho?: SortOrder
-    arquivoAudioPath?: SortOrder
-    servicoUsado?: SortOrder
-    erroMensagem?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TranscricaoMinOrderByAggregateInput = {
-    id?: SortOrder
-    reuniaoId?: SortOrder
-    conteudoTexto?: SortOrder
-    status?: SortOrder
-    arquivoAudioBase64?: SortOrder
-    arquivoAudioNome?: SortOrder
-    arquivoAudioTipo?: SortOrder
-    arquivoAudioTamanho?: SortOrder
-    arquivoAudioPath?: SortOrder
-    servicoUsado?: SortOrder
-    erroMensagem?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TranscricaoSumOrderByAggregateInput = {
-    arquivoAudioTamanho?: SortOrder
-  }
-
-  export type EnumStatusTranscricaoWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTranscricao | EnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusTranscricaoWithAggregatesFilter<$PrismaModel> | $Enums.StatusTranscricao
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusTranscricaoFilter<$PrismaModel>
-    _max?: NestedEnumStatusTranscricaoFilter<$PrismaModel>
-  }
-  export type JsonNullableFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type EnumStatusAtaFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusAta | EnumStatusAtaFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusAtaFilter<$PrismaModel> | $Enums.StatusAta
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type TranscricaoScalarRelationFilter = {
-    is?: TranscricaoWhereInput
-    isNot?: TranscricaoWhereInput
-  }
-
-  export type AtaCountOrderByAggregateInput = {
-    id?: SortOrder
-    transcricaoId?: SortOrder
-    resumo?: SortOrder
-    topicos?: SortOrder
-    decisoes?: SortOrder
-    acoes?: SortOrder
-    conteudoCompleto?: SortOrder
-    status?: SortOrder
-    aprovadoPorId?: SortOrder
-    dataAprovacao?: SortOrder
-    comentarios?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type AtaMaxOrderByAggregateInput = {
-    id?: SortOrder
-    transcricaoId?: SortOrder
-    resumo?: SortOrder
-    conteudoCompleto?: SortOrder
-    status?: SortOrder
-    aprovadoPorId?: SortOrder
-    dataAprovacao?: SortOrder
-    comentarios?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type AtaMinOrderByAggregateInput = {
-    id?: SortOrder
-    transcricaoId?: SortOrder
-    resumo?: SortOrder
-    conteudoCompleto?: SortOrder
-    status?: SortOrder
-    aprovadoPorId?: SortOrder
-    dataAprovacao?: SortOrder
-    comentarios?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -8746,6 +4466,21 @@ export namespace Prisma {
     _max?: NestedEnumStatusAtaFilter<$PrismaModel>
   }
 
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -8760,25 +4495,11 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type ReuniaoCreateNestedManyWithoutCriadorInput = {
-    create?: XOR<ReuniaoCreateWithoutCriadorInput, ReuniaoUncheckedCreateWithoutCriadorInput> | ReuniaoCreateWithoutCriadorInput[] | ReuniaoUncheckedCreateWithoutCriadorInput[]
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutCriadorInput | ReuniaoCreateOrConnectWithoutCriadorInput[]
-    createMany?: ReuniaoCreateManyCriadorInputEnvelope
-    connect?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-  }
-
   export type AtaCreateNestedManyWithoutAprovadoPorInput = {
     create?: XOR<AtaCreateWithoutAprovadoPorInput, AtaUncheckedCreateWithoutAprovadoPorInput> | AtaCreateWithoutAprovadoPorInput[] | AtaUncheckedCreateWithoutAprovadoPorInput[]
     connectOrCreate?: AtaCreateOrConnectWithoutAprovadoPorInput | AtaCreateOrConnectWithoutAprovadoPorInput[]
     createMany?: AtaCreateManyAprovadoPorInputEnvelope
     connect?: AtaWhereUniqueInput | AtaWhereUniqueInput[]
-  }
-
-  export type ReuniaoUncheckedCreateNestedManyWithoutCriadorInput = {
-    create?: XOR<ReuniaoCreateWithoutCriadorInput, ReuniaoUncheckedCreateWithoutCriadorInput> | ReuniaoCreateWithoutCriadorInput[] | ReuniaoUncheckedCreateWithoutCriadorInput[]
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutCriadorInput | ReuniaoCreateOrConnectWithoutCriadorInput[]
-    createMany?: ReuniaoCreateManyCriadorInputEnvelope
-    connect?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
   }
 
   export type AtaUncheckedCreateNestedManyWithoutAprovadoPorInput = {
@@ -8800,20 +4521,6 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type ReuniaoUpdateManyWithoutCriadorNestedInput = {
-    create?: XOR<ReuniaoCreateWithoutCriadorInput, ReuniaoUncheckedCreateWithoutCriadorInput> | ReuniaoCreateWithoutCriadorInput[] | ReuniaoUncheckedCreateWithoutCriadorInput[]
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutCriadorInput | ReuniaoCreateOrConnectWithoutCriadorInput[]
-    upsert?: ReuniaoUpsertWithWhereUniqueWithoutCriadorInput | ReuniaoUpsertWithWhereUniqueWithoutCriadorInput[]
-    createMany?: ReuniaoCreateManyCriadorInputEnvelope
-    set?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    disconnect?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    delete?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    connect?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    update?: ReuniaoUpdateWithWhereUniqueWithoutCriadorInput | ReuniaoUpdateWithWhereUniqueWithoutCriadorInput[]
-    updateMany?: ReuniaoUpdateManyWithWhereWithoutCriadorInput | ReuniaoUpdateManyWithWhereWithoutCriadorInput[]
-    deleteMany?: ReuniaoScalarWhereInput | ReuniaoScalarWhereInput[]
-  }
-
   export type AtaUpdateManyWithoutAprovadoPorNestedInput = {
     create?: XOR<AtaCreateWithoutAprovadoPorInput, AtaUncheckedCreateWithoutAprovadoPorInput> | AtaCreateWithoutAprovadoPorInput[] | AtaUncheckedCreateWithoutAprovadoPorInput[]
     connectOrCreate?: AtaCreateOrConnectWithoutAprovadoPorInput | AtaCreateOrConnectWithoutAprovadoPorInput[]
@@ -8826,20 +4533,6 @@ export namespace Prisma {
     update?: AtaUpdateWithWhereUniqueWithoutAprovadoPorInput | AtaUpdateWithWhereUniqueWithoutAprovadoPorInput[]
     updateMany?: AtaUpdateManyWithWhereWithoutAprovadoPorInput | AtaUpdateManyWithWhereWithoutAprovadoPorInput[]
     deleteMany?: AtaScalarWhereInput | AtaScalarWhereInput[]
-  }
-
-  export type ReuniaoUncheckedUpdateManyWithoutCriadorNestedInput = {
-    create?: XOR<ReuniaoCreateWithoutCriadorInput, ReuniaoUncheckedCreateWithoutCriadorInput> | ReuniaoCreateWithoutCriadorInput[] | ReuniaoUncheckedCreateWithoutCriadorInput[]
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutCriadorInput | ReuniaoCreateOrConnectWithoutCriadorInput[]
-    upsert?: ReuniaoUpsertWithWhereUniqueWithoutCriadorInput | ReuniaoUpsertWithWhereUniqueWithoutCriadorInput[]
-    createMany?: ReuniaoCreateManyCriadorInputEnvelope
-    set?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    disconnect?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    delete?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    connect?: ReuniaoWhereUniqueInput | ReuniaoWhereUniqueInput[]
-    update?: ReuniaoUpdateWithWhereUniqueWithoutCriadorInput | ReuniaoUpdateWithWhereUniqueWithoutCriadorInput[]
-    updateMany?: ReuniaoUpdateManyWithWhereWithoutCriadorInput | ReuniaoUpdateManyWithWhereWithoutCriadorInput[]
-    deleteMany?: ReuniaoScalarWhereInput | ReuniaoScalarWhereInput[]
   }
 
   export type AtaUncheckedUpdateManyWithoutAprovadoPorNestedInput = {
@@ -8856,36 +4549,10 @@ export namespace Prisma {
     deleteMany?: AtaScalarWhereInput | AtaScalarWhereInput[]
   }
 
-  export type UsuarioCreateNestedOneWithoutReunioesCriadasInput = {
-    create?: XOR<UsuarioCreateWithoutReunioesCriadasInput, UsuarioUncheckedCreateWithoutReunioesCriadasInput>
-    connectOrCreate?: UsuarioCreateOrConnectWithoutReunioesCriadasInput
+  export type UsuarioCreateNestedOneWithoutAtasAprovadasInput = {
+    create?: XOR<UsuarioCreateWithoutAtasAprovadasInput, UsuarioUncheckedCreateWithoutAtasAprovadasInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutAtasAprovadasInput
     connect?: UsuarioWhereUniqueInput
-  }
-
-  export type ParticipanteCreateNestedManyWithoutReuniaoInput = {
-    create?: XOR<ParticipanteCreateWithoutReuniaoInput, ParticipanteUncheckedCreateWithoutReuniaoInput> | ParticipanteCreateWithoutReuniaoInput[] | ParticipanteUncheckedCreateWithoutReuniaoInput[]
-    connectOrCreate?: ParticipanteCreateOrConnectWithoutReuniaoInput | ParticipanteCreateOrConnectWithoutReuniaoInput[]
-    createMany?: ParticipanteCreateManyReuniaoInputEnvelope
-    connect?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-  }
-
-  export type TranscricaoCreateNestedOneWithoutReuniaoInput = {
-    create?: XOR<TranscricaoCreateWithoutReuniaoInput, TranscricaoUncheckedCreateWithoutReuniaoInput>
-    connectOrCreate?: TranscricaoCreateOrConnectWithoutReuniaoInput
-    connect?: TranscricaoWhereUniqueInput
-  }
-
-  export type ParticipanteUncheckedCreateNestedManyWithoutReuniaoInput = {
-    create?: XOR<ParticipanteCreateWithoutReuniaoInput, ParticipanteUncheckedCreateWithoutReuniaoInput> | ParticipanteCreateWithoutReuniaoInput[] | ParticipanteUncheckedCreateWithoutReuniaoInput[]
-    connectOrCreate?: ParticipanteCreateOrConnectWithoutReuniaoInput | ParticipanteCreateOrConnectWithoutReuniaoInput[]
-    createMany?: ParticipanteCreateManyReuniaoInputEnvelope
-    connect?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-  }
-
-  export type TranscricaoUncheckedCreateNestedOneWithoutReuniaoInput = {
-    create?: XOR<TranscricaoCreateWithoutReuniaoInput, TranscricaoUncheckedCreateWithoutReuniaoInput>
-    connectOrCreate?: TranscricaoCreateOrConnectWithoutReuniaoInput
-    connect?: TranscricaoWhereUniqueInput
   }
 
   export type EnumTipoReuniaoFieldUpdateOperationsInput = {
@@ -8904,154 +4571,12 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type UsuarioUpdateOneWithoutReunioesCriadasNestedInput = {
-    create?: XOR<UsuarioCreateWithoutReunioesCriadasInput, UsuarioUncheckedCreateWithoutReunioesCriadasInput>
-    connectOrCreate?: UsuarioCreateOrConnectWithoutReunioesCriadasInput
-    upsert?: UsuarioUpsertWithoutReunioesCriadasInput
-    disconnect?: UsuarioWhereInput | boolean
-    delete?: UsuarioWhereInput | boolean
-    connect?: UsuarioWhereUniqueInput
-    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutReunioesCriadasInput, UsuarioUpdateWithoutReunioesCriadasInput>, UsuarioUncheckedUpdateWithoutReunioesCriadasInput>
-  }
-
-  export type ParticipanteUpdateManyWithoutReuniaoNestedInput = {
-    create?: XOR<ParticipanteCreateWithoutReuniaoInput, ParticipanteUncheckedCreateWithoutReuniaoInput> | ParticipanteCreateWithoutReuniaoInput[] | ParticipanteUncheckedCreateWithoutReuniaoInput[]
-    connectOrCreate?: ParticipanteCreateOrConnectWithoutReuniaoInput | ParticipanteCreateOrConnectWithoutReuniaoInput[]
-    upsert?: ParticipanteUpsertWithWhereUniqueWithoutReuniaoInput | ParticipanteUpsertWithWhereUniqueWithoutReuniaoInput[]
-    createMany?: ParticipanteCreateManyReuniaoInputEnvelope
-    set?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    disconnect?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    delete?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    connect?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    update?: ParticipanteUpdateWithWhereUniqueWithoutReuniaoInput | ParticipanteUpdateWithWhereUniqueWithoutReuniaoInput[]
-    updateMany?: ParticipanteUpdateManyWithWhereWithoutReuniaoInput | ParticipanteUpdateManyWithWhereWithoutReuniaoInput[]
-    deleteMany?: ParticipanteScalarWhereInput | ParticipanteScalarWhereInput[]
-  }
-
-  export type TranscricaoUpdateOneWithoutReuniaoNestedInput = {
-    create?: XOR<TranscricaoCreateWithoutReuniaoInput, TranscricaoUncheckedCreateWithoutReuniaoInput>
-    connectOrCreate?: TranscricaoCreateOrConnectWithoutReuniaoInput
-    upsert?: TranscricaoUpsertWithoutReuniaoInput
-    disconnect?: TranscricaoWhereInput | boolean
-    delete?: TranscricaoWhereInput | boolean
-    connect?: TranscricaoWhereUniqueInput
-    update?: XOR<XOR<TranscricaoUpdateToOneWithWhereWithoutReuniaoInput, TranscricaoUpdateWithoutReuniaoInput>, TranscricaoUncheckedUpdateWithoutReuniaoInput>
-  }
-
-  export type ParticipanteUncheckedUpdateManyWithoutReuniaoNestedInput = {
-    create?: XOR<ParticipanteCreateWithoutReuniaoInput, ParticipanteUncheckedCreateWithoutReuniaoInput> | ParticipanteCreateWithoutReuniaoInput[] | ParticipanteUncheckedCreateWithoutReuniaoInput[]
-    connectOrCreate?: ParticipanteCreateOrConnectWithoutReuniaoInput | ParticipanteCreateOrConnectWithoutReuniaoInput[]
-    upsert?: ParticipanteUpsertWithWhereUniqueWithoutReuniaoInput | ParticipanteUpsertWithWhereUniqueWithoutReuniaoInput[]
-    createMany?: ParticipanteCreateManyReuniaoInputEnvelope
-    set?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    disconnect?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    delete?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    connect?: ParticipanteWhereUniqueInput | ParticipanteWhereUniqueInput[]
-    update?: ParticipanteUpdateWithWhereUniqueWithoutReuniaoInput | ParticipanteUpdateWithWhereUniqueWithoutReuniaoInput[]
-    updateMany?: ParticipanteUpdateManyWithWhereWithoutReuniaoInput | ParticipanteUpdateManyWithWhereWithoutReuniaoInput[]
-    deleteMany?: ParticipanteScalarWhereInput | ParticipanteScalarWhereInput[]
-  }
-
-  export type TranscricaoUncheckedUpdateOneWithoutReuniaoNestedInput = {
-    create?: XOR<TranscricaoCreateWithoutReuniaoInput, TranscricaoUncheckedCreateWithoutReuniaoInput>
-    connectOrCreate?: TranscricaoCreateOrConnectWithoutReuniaoInput
-    upsert?: TranscricaoUpsertWithoutReuniaoInput
-    disconnect?: TranscricaoWhereInput | boolean
-    delete?: TranscricaoWhereInput | boolean
-    connect?: TranscricaoWhereUniqueInput
-    update?: XOR<XOR<TranscricaoUpdateToOneWithWhereWithoutReuniaoInput, TranscricaoUpdateWithoutReuniaoInput>, TranscricaoUncheckedUpdateWithoutReuniaoInput>
-  }
-
-  export type ReuniaoCreateNestedOneWithoutParticipantesInput = {
-    create?: XOR<ReuniaoCreateWithoutParticipantesInput, ReuniaoUncheckedCreateWithoutParticipantesInput>
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutParticipantesInput
-    connect?: ReuniaoWhereUniqueInput
-  }
-
-  export type ReuniaoUpdateOneRequiredWithoutParticipantesNestedInput = {
-    create?: XOR<ReuniaoCreateWithoutParticipantesInput, ReuniaoUncheckedCreateWithoutParticipantesInput>
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutParticipantesInput
-    upsert?: ReuniaoUpsertWithoutParticipantesInput
-    connect?: ReuniaoWhereUniqueInput
-    update?: XOR<XOR<ReuniaoUpdateToOneWithWhereWithoutParticipantesInput, ReuniaoUpdateWithoutParticipantesInput>, ReuniaoUncheckedUpdateWithoutParticipantesInput>
-  }
-
-  export type ReuniaoCreateNestedOneWithoutTranscricaoInput = {
-    create?: XOR<ReuniaoCreateWithoutTranscricaoInput, ReuniaoUncheckedCreateWithoutTranscricaoInput>
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutTranscricaoInput
-    connect?: ReuniaoWhereUniqueInput
-  }
-
-  export type AtaCreateNestedOneWithoutTranscricaoInput = {
-    create?: XOR<AtaCreateWithoutTranscricaoInput, AtaUncheckedCreateWithoutTranscricaoInput>
-    connectOrCreate?: AtaCreateOrConnectWithoutTranscricaoInput
-    connect?: AtaWhereUniqueInput
-  }
-
-  export type AtaUncheckedCreateNestedOneWithoutTranscricaoInput = {
-    create?: XOR<AtaCreateWithoutTranscricaoInput, AtaUncheckedCreateWithoutTranscricaoInput>
-    connectOrCreate?: AtaCreateOrConnectWithoutTranscricaoInput
-    connect?: AtaWhereUniqueInput
-  }
-
-  export type EnumStatusTranscricaoFieldUpdateOperationsInput = {
-    set?: $Enums.StatusTranscricao
-  }
-
-  export type ReuniaoUpdateOneRequiredWithoutTranscricaoNestedInput = {
-    create?: XOR<ReuniaoCreateWithoutTranscricaoInput, ReuniaoUncheckedCreateWithoutTranscricaoInput>
-    connectOrCreate?: ReuniaoCreateOrConnectWithoutTranscricaoInput
-    upsert?: ReuniaoUpsertWithoutTranscricaoInput
-    connect?: ReuniaoWhereUniqueInput
-    update?: XOR<XOR<ReuniaoUpdateToOneWithWhereWithoutTranscricaoInput, ReuniaoUpdateWithoutTranscricaoInput>, ReuniaoUncheckedUpdateWithoutTranscricaoInput>
-  }
-
-  export type AtaUpdateOneWithoutTranscricaoNestedInput = {
-    create?: XOR<AtaCreateWithoutTranscricaoInput, AtaUncheckedCreateWithoutTranscricaoInput>
-    connectOrCreate?: AtaCreateOrConnectWithoutTranscricaoInput
-    upsert?: AtaUpsertWithoutTranscricaoInput
-    disconnect?: AtaWhereInput | boolean
-    delete?: AtaWhereInput | boolean
-    connect?: AtaWhereUniqueInput
-    update?: XOR<XOR<AtaUpdateToOneWithWhereWithoutTranscricaoInput, AtaUpdateWithoutTranscricaoInput>, AtaUncheckedUpdateWithoutTranscricaoInput>
-  }
-
-  export type AtaUncheckedUpdateOneWithoutTranscricaoNestedInput = {
-    create?: XOR<AtaCreateWithoutTranscricaoInput, AtaUncheckedCreateWithoutTranscricaoInput>
-    connectOrCreate?: AtaCreateOrConnectWithoutTranscricaoInput
-    upsert?: AtaUpsertWithoutTranscricaoInput
-    disconnect?: AtaWhereInput | boolean
-    delete?: AtaWhereInput | boolean
-    connect?: AtaWhereUniqueInput
-    update?: XOR<XOR<AtaUpdateToOneWithWhereWithoutTranscricaoInput, AtaUpdateWithoutTranscricaoInput>, AtaUncheckedUpdateWithoutTranscricaoInput>
-  }
-
-  export type TranscricaoCreateNestedOneWithoutAtaInput = {
-    create?: XOR<TranscricaoCreateWithoutAtaInput, TranscricaoUncheckedCreateWithoutAtaInput>
-    connectOrCreate?: TranscricaoCreateOrConnectWithoutAtaInput
-    connect?: TranscricaoWhereUniqueInput
-  }
-
-  export type UsuarioCreateNestedOneWithoutAtasAprovadasInput = {
-    create?: XOR<UsuarioCreateWithoutAtasAprovadasInput, UsuarioUncheckedCreateWithoutAtasAprovadasInput>
-    connectOrCreate?: UsuarioCreateOrConnectWithoutAtasAprovadasInput
-    connect?: UsuarioWhereUniqueInput
-  }
-
   export type EnumStatusAtaFieldUpdateOperationsInput = {
     set?: $Enums.StatusAta
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
-  }
-
-  export type TranscricaoUpdateOneRequiredWithoutAtaNestedInput = {
-    create?: XOR<TranscricaoCreateWithoutAtaInput, TranscricaoUncheckedCreateWithoutAtaInput>
-    connectOrCreate?: TranscricaoCreateOrConnectWithoutAtaInput
-    upsert?: TranscricaoUpsertWithoutAtaInput
-    connect?: TranscricaoWhereUniqueInput
-    update?: XOR<XOR<TranscricaoUpdateToOneWithWhereWithoutAtaInput, TranscricaoUpdateWithoutAtaInput>, TranscricaoUncheckedUpdateWithoutAtaInput>
   }
 
   export type UsuarioUpdateOneWithoutAtasAprovadasNestedInput = {
@@ -9201,6 +4726,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumStatusAtaFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusAta | EnumStatusAtaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusAtaFilter<$PrismaModel> | $Enums.StatusAta
+  }
+
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9210,6 +4742,17 @@ export namespace Prisma {
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedEnumTipoReuniaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -9265,55 +4808,6 @@ export namespace Prisma {
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
-
-  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumStatusTranscricaoFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTranscricao | EnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusTranscricaoFilter<$PrismaModel> | $Enums.StatusTranscricao
-  }
-
-  export type NestedEnumStatusTranscricaoWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusTranscricao | EnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusTranscricao[] | ListEnumStatusTranscricaoFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusTranscricaoWithAggregatesFilter<$PrismaModel> | $Enums.StatusTranscricao
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusTranscricaoFilter<$PrismaModel>
-    _max?: NestedEnumStatusTranscricaoFilter<$PrismaModel>
-  }
-
-  export type NestedEnumStatusAtaFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusAta | EnumStatusAtaFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusAta[] | ListEnumStatusAtaFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusAtaFilter<$PrismaModel> | $Enums.StatusAta
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -9348,6 +4842,20 @@ export namespace Prisma {
     _max?: NestedEnumStatusAtaFilter<$PrismaModel>
   }
 
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -9362,63 +4870,49 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type ReuniaoCreateWithoutCriadorInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    createdAt?: Date | string
-    participantes?: ParticipanteCreateNestedManyWithoutReuniaoInput
-    transcricao?: TranscricaoCreateNestedOneWithoutReuniaoInput
-  }
-
-  export type ReuniaoUncheckedCreateWithoutCriadorInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    createdAt?: Date | string
-    participantes?: ParticipanteUncheckedCreateNestedManyWithoutReuniaoInput
-    transcricao?: TranscricaoUncheckedCreateNestedOneWithoutReuniaoInput
-  }
-
-  export type ReuniaoCreateOrConnectWithoutCriadorInput = {
-    where: ReuniaoWhereUniqueInput
-    create: XOR<ReuniaoCreateWithoutCriadorInput, ReuniaoUncheckedCreateWithoutCriadorInput>
-  }
-
-  export type ReuniaoCreateManyCriadorInputEnvelope = {
-    data: ReuniaoCreateManyCriadorInput | ReuniaoCreateManyCriadorInput[]
-    skipDuplicates?: boolean
-  }
-
   export type AtaCreateWithoutAprovadoPorInput = {
     id?: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo: string
+    tipo: $Enums.TipoReuniao
+    dataReuniao: Date | string
+    duracaoMinutos?: number | null
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.StatusAta
     dataAprovacao?: Date | string | null
     comentarios?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    transcricao: TranscricaoCreateNestedOneWithoutAtaInput
   }
 
   export type AtaUncheckedCreateWithoutAprovadoPorInput = {
     id?: string
-    transcricaoId: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo: string
+    tipo: $Enums.TipoReuniao
+    dataReuniao: Date | string
+    duracaoMinutos?: number | null
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.StatusAta
     dataAprovacao?: Date | string | null
     comentarios?: string | null
@@ -9434,36 +4928,6 @@ export namespace Prisma {
   export type AtaCreateManyAprovadoPorInputEnvelope = {
     data: AtaCreateManyAprovadoPorInput | AtaCreateManyAprovadoPorInput[]
     skipDuplicates?: boolean
-  }
-
-  export type ReuniaoUpsertWithWhereUniqueWithoutCriadorInput = {
-    where: ReuniaoWhereUniqueInput
-    update: XOR<ReuniaoUpdateWithoutCriadorInput, ReuniaoUncheckedUpdateWithoutCriadorInput>
-    create: XOR<ReuniaoCreateWithoutCriadorInput, ReuniaoUncheckedCreateWithoutCriadorInput>
-  }
-
-  export type ReuniaoUpdateWithWhereUniqueWithoutCriadorInput = {
-    where: ReuniaoWhereUniqueInput
-    data: XOR<ReuniaoUpdateWithoutCriadorInput, ReuniaoUncheckedUpdateWithoutCriadorInput>
-  }
-
-  export type ReuniaoUpdateManyWithWhereWithoutCriadorInput = {
-    where: ReuniaoScalarWhereInput
-    data: XOR<ReuniaoUpdateManyMutationInput, ReuniaoUncheckedUpdateManyWithoutCriadorInput>
-  }
-
-  export type ReuniaoScalarWhereInput = {
-    AND?: ReuniaoScalarWhereInput | ReuniaoScalarWhereInput[]
-    OR?: ReuniaoScalarWhereInput[]
-    NOT?: ReuniaoScalarWhereInput | ReuniaoScalarWhereInput[]
-    id?: UuidFilter<"Reuniao"> | string
-    titulo?: StringFilter<"Reuniao"> | string
-    tipo?: EnumTipoReuniaoFilter<"Reuniao"> | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFilter<"Reuniao"> | Date | string
-    duracaoMinutos?: IntNullableFilter<"Reuniao"> | number | null
-    linkMeeting?: StringNullableFilter<"Reuniao"> | string | null
-    criadoPorId?: UuidNullableFilter<"Reuniao"> | string | null
-    createdAt?: DateTimeFilter<"Reuniao"> | Date | string
   }
 
   export type AtaUpsertWithWhereUniqueWithoutAprovadoPorInput = {
@@ -9487,446 +4951,28 @@ export namespace Prisma {
     OR?: AtaScalarWhereInput[]
     NOT?: AtaScalarWhereInput | AtaScalarWhereInput[]
     id?: UuidFilter<"Ata"> | string
-    transcricaoId?: UuidFilter<"Ata"> | string
-    resumo?: StringNullableFilter<"Ata"> | string | null
-    topicos?: JsonNullableFilter<"Ata">
+    titulo?: StringFilter<"Ata"> | string
+    tipo?: EnumTipoReuniaoFilter<"Ata"> | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFilter<"Ata"> | Date | string
+    duracaoMinutos?: IntNullableFilter<"Ata"> | number | null
+    arquivoAudioBase64?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioNome?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioTipo?: StringNullableFilter<"Ata"> | string | null
+    arquivoAudioTamanho?: IntNullableFilter<"Ata"> | number | null
+    participantes?: JsonNullableFilter<"Ata">
+    identificacao?: JsonNullableFilter<"Ata">
+    objetivo?: StringNullableFilter<"Ata"> | string | null
+    topicosDiscutidos?: JsonNullableFilter<"Ata">
     decisoes?: JsonNullableFilter<"Ata">
     acoes?: JsonNullableFilter<"Ata">
-    conteudoCompleto?: StringFilter<"Ata"> | string
+    pendencias?: JsonNullableFilter<"Ata">
+    proximosPassos?: JsonNullableFilter<"Ata">
     status?: EnumStatusAtaFilter<"Ata"> | $Enums.StatusAta
     aprovadoPorId?: UuidNullableFilter<"Ata"> | string | null
     dataAprovacao?: DateTimeNullableFilter<"Ata"> | Date | string | null
     comentarios?: StringNullableFilter<"Ata"> | string | null
     createdAt?: DateTimeFilter<"Ata"> | Date | string
     updatedAt?: DateTimeFilter<"Ata"> | Date | string
-  }
-
-  export type UsuarioCreateWithoutReunioesCriadasInput = {
-    id?: string
-    email: string
-    nome: string
-    senha: string
-    ativo?: boolean
-    createdAt?: Date | string
-    atasAprovadas?: AtaCreateNestedManyWithoutAprovadoPorInput
-  }
-
-  export type UsuarioUncheckedCreateWithoutReunioesCriadasInput = {
-    id?: string
-    email: string
-    nome: string
-    senha: string
-    ativo?: boolean
-    createdAt?: Date | string
-    atasAprovadas?: AtaUncheckedCreateNestedManyWithoutAprovadoPorInput
-  }
-
-  export type UsuarioCreateOrConnectWithoutReunioesCriadasInput = {
-    where: UsuarioWhereUniqueInput
-    create: XOR<UsuarioCreateWithoutReunioesCriadasInput, UsuarioUncheckedCreateWithoutReunioesCriadasInput>
-  }
-
-  export type ParticipanteCreateWithoutReuniaoInput = {
-    id?: string
-    nome: string
-    email?: string | null
-    createdAt?: Date | string
-  }
-
-  export type ParticipanteUncheckedCreateWithoutReuniaoInput = {
-    id?: string
-    nome: string
-    email?: string | null
-    createdAt?: Date | string
-  }
-
-  export type ParticipanteCreateOrConnectWithoutReuniaoInput = {
-    where: ParticipanteWhereUniqueInput
-    create: XOR<ParticipanteCreateWithoutReuniaoInput, ParticipanteUncheckedCreateWithoutReuniaoInput>
-  }
-
-  export type ParticipanteCreateManyReuniaoInputEnvelope = {
-    data: ParticipanteCreateManyReuniaoInput | ParticipanteCreateManyReuniaoInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TranscricaoCreateWithoutReuniaoInput = {
-    id?: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ata?: AtaCreateNestedOneWithoutTranscricaoInput
-  }
-
-  export type TranscricaoUncheckedCreateWithoutReuniaoInput = {
-    id?: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ata?: AtaUncheckedCreateNestedOneWithoutTranscricaoInput
-  }
-
-  export type TranscricaoCreateOrConnectWithoutReuniaoInput = {
-    where: TranscricaoWhereUniqueInput
-    create: XOR<TranscricaoCreateWithoutReuniaoInput, TranscricaoUncheckedCreateWithoutReuniaoInput>
-  }
-
-  export type UsuarioUpsertWithoutReunioesCriadasInput = {
-    update: XOR<UsuarioUpdateWithoutReunioesCriadasInput, UsuarioUncheckedUpdateWithoutReunioesCriadasInput>
-    create: XOR<UsuarioCreateWithoutReunioesCriadasInput, UsuarioUncheckedCreateWithoutReunioesCriadasInput>
-    where?: UsuarioWhereInput
-  }
-
-  export type UsuarioUpdateToOneWithWhereWithoutReunioesCriadasInput = {
-    where?: UsuarioWhereInput
-    data: XOR<UsuarioUpdateWithoutReunioesCriadasInput, UsuarioUncheckedUpdateWithoutReunioesCriadasInput>
-  }
-
-  export type UsuarioUpdateWithoutReunioesCriadasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    senha?: StringFieldUpdateOperationsInput | string
-    ativo?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    atasAprovadas?: AtaUpdateManyWithoutAprovadoPorNestedInput
-  }
-
-  export type UsuarioUncheckedUpdateWithoutReunioesCriadasInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    senha?: StringFieldUpdateOperationsInput | string
-    ativo?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    atasAprovadas?: AtaUncheckedUpdateManyWithoutAprovadoPorNestedInput
-  }
-
-  export type ParticipanteUpsertWithWhereUniqueWithoutReuniaoInput = {
-    where: ParticipanteWhereUniqueInput
-    update: XOR<ParticipanteUpdateWithoutReuniaoInput, ParticipanteUncheckedUpdateWithoutReuniaoInput>
-    create: XOR<ParticipanteCreateWithoutReuniaoInput, ParticipanteUncheckedCreateWithoutReuniaoInput>
-  }
-
-  export type ParticipanteUpdateWithWhereUniqueWithoutReuniaoInput = {
-    where: ParticipanteWhereUniqueInput
-    data: XOR<ParticipanteUpdateWithoutReuniaoInput, ParticipanteUncheckedUpdateWithoutReuniaoInput>
-  }
-
-  export type ParticipanteUpdateManyWithWhereWithoutReuniaoInput = {
-    where: ParticipanteScalarWhereInput
-    data: XOR<ParticipanteUpdateManyMutationInput, ParticipanteUncheckedUpdateManyWithoutReuniaoInput>
-  }
-
-  export type ParticipanteScalarWhereInput = {
-    AND?: ParticipanteScalarWhereInput | ParticipanteScalarWhereInput[]
-    OR?: ParticipanteScalarWhereInput[]
-    NOT?: ParticipanteScalarWhereInput | ParticipanteScalarWhereInput[]
-    id?: UuidFilter<"Participante"> | string
-    reuniaoId?: UuidFilter<"Participante"> | string
-    nome?: StringFilter<"Participante"> | string
-    email?: StringNullableFilter<"Participante"> | string | null
-    createdAt?: DateTimeFilter<"Participante"> | Date | string
-  }
-
-  export type TranscricaoUpsertWithoutReuniaoInput = {
-    update: XOR<TranscricaoUpdateWithoutReuniaoInput, TranscricaoUncheckedUpdateWithoutReuniaoInput>
-    create: XOR<TranscricaoCreateWithoutReuniaoInput, TranscricaoUncheckedCreateWithoutReuniaoInput>
-    where?: TranscricaoWhereInput
-  }
-
-  export type TranscricaoUpdateToOneWithWhereWithoutReuniaoInput = {
-    where?: TranscricaoWhereInput
-    data: XOR<TranscricaoUpdateWithoutReuniaoInput, TranscricaoUncheckedUpdateWithoutReuniaoInput>
-  }
-
-  export type TranscricaoUpdateWithoutReuniaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ata?: AtaUpdateOneWithoutTranscricaoNestedInput
-  }
-
-  export type TranscricaoUncheckedUpdateWithoutReuniaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ata?: AtaUncheckedUpdateOneWithoutTranscricaoNestedInput
-  }
-
-  export type ReuniaoCreateWithoutParticipantesInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    createdAt?: Date | string
-    criador?: UsuarioCreateNestedOneWithoutReunioesCriadasInput
-    transcricao?: TranscricaoCreateNestedOneWithoutReuniaoInput
-  }
-
-  export type ReuniaoUncheckedCreateWithoutParticipantesInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    criadoPorId?: string | null
-    createdAt?: Date | string
-    transcricao?: TranscricaoUncheckedCreateNestedOneWithoutReuniaoInput
-  }
-
-  export type ReuniaoCreateOrConnectWithoutParticipantesInput = {
-    where: ReuniaoWhereUniqueInput
-    create: XOR<ReuniaoCreateWithoutParticipantesInput, ReuniaoUncheckedCreateWithoutParticipantesInput>
-  }
-
-  export type ReuniaoUpsertWithoutParticipantesInput = {
-    update: XOR<ReuniaoUpdateWithoutParticipantesInput, ReuniaoUncheckedUpdateWithoutParticipantesInput>
-    create: XOR<ReuniaoCreateWithoutParticipantesInput, ReuniaoUncheckedCreateWithoutParticipantesInput>
-    where?: ReuniaoWhereInput
-  }
-
-  export type ReuniaoUpdateToOneWithWhereWithoutParticipantesInput = {
-    where?: ReuniaoWhereInput
-    data: XOR<ReuniaoUpdateWithoutParticipantesInput, ReuniaoUncheckedUpdateWithoutParticipantesInput>
-  }
-
-  export type ReuniaoUpdateWithoutParticipantesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    criador?: UsuarioUpdateOneWithoutReunioesCriadasNestedInput
-    transcricao?: TranscricaoUpdateOneWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoUncheckedUpdateWithoutParticipantesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    criadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transcricao?: TranscricaoUncheckedUpdateOneWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoCreateWithoutTranscricaoInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    createdAt?: Date | string
-    criador?: UsuarioCreateNestedOneWithoutReunioesCriadasInput
-    participantes?: ParticipanteCreateNestedManyWithoutReuniaoInput
-  }
-
-  export type ReuniaoUncheckedCreateWithoutTranscricaoInput = {
-    id?: string
-    titulo: string
-    tipo: $Enums.TipoReuniao
-    dataReuniao: Date | string
-    duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    criadoPorId?: string | null
-    createdAt?: Date | string
-    participantes?: ParticipanteUncheckedCreateNestedManyWithoutReuniaoInput
-  }
-
-  export type ReuniaoCreateOrConnectWithoutTranscricaoInput = {
-    where: ReuniaoWhereUniqueInput
-    create: XOR<ReuniaoCreateWithoutTranscricaoInput, ReuniaoUncheckedCreateWithoutTranscricaoInput>
-  }
-
-  export type AtaCreateWithoutTranscricaoInput = {
-    id?: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
-    decisoes?: NullableJsonNullValueInput | InputJsonValue
-    acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
-    status?: $Enums.StatusAta
-    dataAprovacao?: Date | string | null
-    comentarios?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    aprovadoPor?: UsuarioCreateNestedOneWithoutAtasAprovadasInput
-  }
-
-  export type AtaUncheckedCreateWithoutTranscricaoInput = {
-    id?: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
-    decisoes?: NullableJsonNullValueInput | InputJsonValue
-    acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
-    status?: $Enums.StatusAta
-    aprovadoPorId?: string | null
-    dataAprovacao?: Date | string | null
-    comentarios?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AtaCreateOrConnectWithoutTranscricaoInput = {
-    where: AtaWhereUniqueInput
-    create: XOR<AtaCreateWithoutTranscricaoInput, AtaUncheckedCreateWithoutTranscricaoInput>
-  }
-
-  export type ReuniaoUpsertWithoutTranscricaoInput = {
-    update: XOR<ReuniaoUpdateWithoutTranscricaoInput, ReuniaoUncheckedUpdateWithoutTranscricaoInput>
-    create: XOR<ReuniaoCreateWithoutTranscricaoInput, ReuniaoUncheckedCreateWithoutTranscricaoInput>
-    where?: ReuniaoWhereInput
-  }
-
-  export type ReuniaoUpdateToOneWithWhereWithoutTranscricaoInput = {
-    where?: ReuniaoWhereInput
-    data: XOR<ReuniaoUpdateWithoutTranscricaoInput, ReuniaoUncheckedUpdateWithoutTranscricaoInput>
-  }
-
-  export type ReuniaoUpdateWithoutTranscricaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    criador?: UsuarioUpdateOneWithoutReunioesCriadasNestedInput
-    participantes?: ParticipanteUpdateManyWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoUncheckedUpdateWithoutTranscricaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    criadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    participantes?: ParticipanteUncheckedUpdateManyWithoutReuniaoNestedInput
-  }
-
-  export type AtaUpsertWithoutTranscricaoInput = {
-    update: XOR<AtaUpdateWithoutTranscricaoInput, AtaUncheckedUpdateWithoutTranscricaoInput>
-    create: XOR<AtaCreateWithoutTranscricaoInput, AtaUncheckedCreateWithoutTranscricaoInput>
-    where?: AtaWhereInput
-  }
-
-  export type AtaUpdateToOneWithWhereWithoutTranscricaoInput = {
-    where?: AtaWhereInput
-    data: XOR<AtaUpdateWithoutTranscricaoInput, AtaUncheckedUpdateWithoutTranscricaoInput>
-  }
-
-  export type AtaUpdateWithoutTranscricaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
-    decisoes?: NullableJsonNullValueInput | InputJsonValue
-    acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
-    dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    comentarios?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    aprovadoPor?: UsuarioUpdateOneWithoutAtasAprovadasNestedInput
-  }
-
-  export type AtaUncheckedUpdateWithoutTranscricaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
-    decisoes?: NullableJsonNullValueInput | InputJsonValue
-    acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
-    aprovadoPorId?: NullableStringFieldUpdateOperationsInput | string | null
-    dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    comentarios?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TranscricaoCreateWithoutAtaInput = {
-    id?: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    reuniao: ReuniaoCreateNestedOneWithoutTranscricaoInput
-  }
-
-  export type TranscricaoUncheckedCreateWithoutAtaInput = {
-    id?: string
-    reuniaoId: string
-    conteudoTexto: string
-    status?: $Enums.StatusTranscricao
-    arquivoAudioBase64?: string | null
-    arquivoAudioNome?: string | null
-    arquivoAudioTipo?: string | null
-    arquivoAudioTamanho?: number | null
-    arquivoAudioPath?: string | null
-    servicoUsado?: string | null
-    erroMensagem?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TranscricaoCreateOrConnectWithoutAtaInput = {
-    where: TranscricaoWhereUniqueInput
-    create: XOR<TranscricaoCreateWithoutAtaInput, TranscricaoUncheckedCreateWithoutAtaInput>
   }
 
   export type UsuarioCreateWithoutAtasAprovadasInput = {
@@ -9936,7 +4982,6 @@ export namespace Prisma {
     senha: string
     ativo?: boolean
     createdAt?: Date | string
-    reunioesCriadas?: ReuniaoCreateNestedManyWithoutCriadorInput
   }
 
   export type UsuarioUncheckedCreateWithoutAtasAprovadasInput = {
@@ -9946,55 +4991,11 @@ export namespace Prisma {
     senha: string
     ativo?: boolean
     createdAt?: Date | string
-    reunioesCriadas?: ReuniaoUncheckedCreateNestedManyWithoutCriadorInput
   }
 
   export type UsuarioCreateOrConnectWithoutAtasAprovadasInput = {
     where: UsuarioWhereUniqueInput
     create: XOR<UsuarioCreateWithoutAtasAprovadasInput, UsuarioUncheckedCreateWithoutAtasAprovadasInput>
-  }
-
-  export type TranscricaoUpsertWithoutAtaInput = {
-    update: XOR<TranscricaoUpdateWithoutAtaInput, TranscricaoUncheckedUpdateWithoutAtaInput>
-    create: XOR<TranscricaoCreateWithoutAtaInput, TranscricaoUncheckedCreateWithoutAtaInput>
-    where?: TranscricaoWhereInput
-  }
-
-  export type TranscricaoUpdateToOneWithWhereWithoutAtaInput = {
-    where?: TranscricaoWhereInput
-    data: XOR<TranscricaoUpdateWithoutAtaInput, TranscricaoUncheckedUpdateWithoutAtaInput>
-  }
-
-  export type TranscricaoUpdateWithoutAtaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reuniao?: ReuniaoUpdateOneRequiredWithoutTranscricaoNestedInput
-  }
-
-  export type TranscricaoUncheckedUpdateWithoutAtaInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    reuniaoId?: StringFieldUpdateOperationsInput | string
-    conteudoTexto?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusTranscricaoFieldUpdateOperationsInput | $Enums.StatusTranscricao
-    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
-    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
-    arquivoAudioPath?: NullableStringFieldUpdateOperationsInput | string | null
-    servicoUsado?: NullableStringFieldUpdateOperationsInput | string | null
-    erroMensagem?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UsuarioUpsertWithoutAtasAprovadasInput = {
@@ -10015,7 +5016,6 @@ export namespace Prisma {
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reunioesCriadas?: ReuniaoUpdateManyWithoutCriadorNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutAtasAprovadasInput = {
@@ -10025,27 +5025,26 @@ export namespace Prisma {
     senha?: StringFieldUpdateOperationsInput | string
     ativo?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reunioesCriadas?: ReuniaoUncheckedUpdateManyWithoutCriadorNestedInput
   }
 
-  export type ReuniaoCreateManyCriadorInput = {
+  export type AtaCreateManyAprovadoPorInput = {
     id?: string
     titulo: string
     tipo: $Enums.TipoReuniao
     dataReuniao: Date | string
     duracaoMinutos?: number | null
-    linkMeeting?: string | null
-    createdAt?: Date | string
-  }
-
-  export type AtaCreateManyAprovadoPorInput = {
-    id?: string
-    transcricaoId: string
-    resumo?: string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    arquivoAudioBase64?: string | null
+    arquivoAudioNome?: string | null
+    arquivoAudioTipo?: string | null
+    arquivoAudioTamanho?: number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto: string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: $Enums.StatusAta
     dataAprovacao?: Date | string | null
     comentarios?: string | null
@@ -10053,63 +5052,49 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ReuniaoUpdateWithoutCriadorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    participantes?: ParticipanteUpdateManyWithoutReuniaoNestedInput
-    transcricao?: TranscricaoUpdateOneWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoUncheckedUpdateWithoutCriadorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    participantes?: ParticipanteUncheckedUpdateManyWithoutReuniaoNestedInput
-    transcricao?: TranscricaoUncheckedUpdateOneWithoutReuniaoNestedInput
-  }
-
-  export type ReuniaoUncheckedUpdateManyWithoutCriadorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    titulo?: StringFieldUpdateOperationsInput | string
-    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
-    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
-    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
-    linkMeeting?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type AtaUpdateWithoutAprovadoPorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comentarios?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transcricao?: TranscricaoUpdateOneRequiredWithoutAtaNestedInput
   }
 
   export type AtaUncheckedUpdateWithoutAprovadoPorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    transcricaoId?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comentarios?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10119,45 +5104,27 @@ export namespace Prisma {
 
   export type AtaUncheckedUpdateManyWithoutAprovadoPorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    transcricaoId?: StringFieldUpdateOperationsInput | string
-    resumo?: NullableStringFieldUpdateOperationsInput | string | null
-    topicos?: NullableJsonNullValueInput | InputJsonValue
+    titulo?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoReuniaoFieldUpdateOperationsInput | $Enums.TipoReuniao
+    dataReuniao?: DateTimeFieldUpdateOperationsInput | Date | string
+    duracaoMinutos?: NullableIntFieldUpdateOperationsInput | number | null
+    arquivoAudioBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioNome?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTipo?: NullableStringFieldUpdateOperationsInput | string | null
+    arquivoAudioTamanho?: NullableIntFieldUpdateOperationsInput | number | null
+    participantes?: NullableJsonNullValueInput | InputJsonValue
+    identificacao?: NullableJsonNullValueInput | InputJsonValue
+    objetivo?: NullableStringFieldUpdateOperationsInput | string | null
+    topicosDiscutidos?: NullableJsonNullValueInput | InputJsonValue
     decisoes?: NullableJsonNullValueInput | InputJsonValue
     acoes?: NullableJsonNullValueInput | InputJsonValue
-    conteudoCompleto?: StringFieldUpdateOperationsInput | string
+    pendencias?: NullableJsonNullValueInput | InputJsonValue
+    proximosPassos?: NullableJsonNullValueInput | InputJsonValue
     status?: EnumStatusAtaFieldUpdateOperationsInput | $Enums.StatusAta
     dataAprovacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     comentarios?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParticipanteCreateManyReuniaoInput = {
-    id?: string
-    nome: string
-    email?: string | null
-    createdAt?: Date | string
-  }
-
-  export type ParticipanteUpdateWithoutReuniaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParticipanteUncheckedUpdateWithoutReuniaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParticipanteUncheckedUpdateManyWithoutReuniaoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

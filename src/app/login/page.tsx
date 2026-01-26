@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/card";
 import { toast } from "sonner";
 import Link from "next/link";
+import { EmailInput } from "@/components/ui/email-input";
+import { Logo } from "@/components/logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -42,28 +44,23 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 p-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">
-            DIAna
-          </CardTitle>
+        <CardHeader className="space-y-3">
+          <div className="flex justify-center">
+            <Logo size="md" variant="full" />
+          </div>
           <CardDescription className="text-center">
             Documentação Inteligente de Áudios
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Corporativo</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="seu.nome@ogrupoegx.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
+            <EmailInput
+              id="email"
+              value={email}
+              onChange={setEmail}
+              disabled={isLoading}
+              required
+            />
             <div className="space-y-2">
               <Label htmlFor="password">Senha</Label>
               <Input

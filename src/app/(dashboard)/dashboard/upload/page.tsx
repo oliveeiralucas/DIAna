@@ -95,8 +95,8 @@ export default function UploadPage() {
         setParticipantes([]);
         reset();
 
-        // Redirecionar para reuniões
-        router.push("/dashboard/reunioes");
+        // Redirecionar para atas
+        router.push("/dashboard/atas");
       } else {
         toast.error("Erro ao enviar áudio", {
           description: result.message,

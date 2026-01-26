@@ -1,14 +1,13 @@
 interface N8NWebhookPayload {
-    transcricaoId: string;
-    reuniaoId: string;
-    tipoReuniao: 'PRESENCIAL' | 'VIRTUAL';  // NOVO
-    audioBase64: string;  // MUDANÇA: enviar base64
+    ataId: string;
+    tipo: 'PRESENCIAL' | 'VIRTUAL';
+    audioBase64: string;
     audioNome: string;
     audioTipo: string;
     audioTamanho: number;
     titulo: string;
     dataReuniao: string;
-    duracaoMinutos: number;  // NOVO
+    duracaoMinutos: number;
     participantes: Array<{
         nome: string;
         email?: string;
@@ -17,7 +16,6 @@ interface N8NWebhookPayload {
 
 export async function triggerN8NTranscricao(payload: N8NWebhookPayload): Promise<boolean> {
     const webhookUrl = process.env.N8N_WEBHOOK_URL;
-    const webhookSecret = process.env.N8N_WEBHOOK_SECRET;
 
     if (!webhookUrl) {
         console.error('N8N_WEBHOOK_URL not configured');
@@ -29,7 +27,6 @@ export async function triggerN8NTranscricao(payload: N8NWebhookPayload): Promise
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': webhookSecret ? `Bearer ${webhookSecret}` : '',
             },
             body: JSON.stringify(payload),
         });
@@ -39,7 +36,6 @@ export async function triggerN8NTranscricao(payload: N8NWebhookPayload): Promise
             return false;
         }
 
-        console.log('N8N webhook triggered successfully');
         return true;
     } catch (error) {
         console.error('Error triggering N8N webhook:', error);

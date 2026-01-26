@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { validateEmailDomain } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
+import { getPasswordErrorMessage } from '@/lib/password-validation';
 
 interface RegisterRequest {
     email: string;
@@ -36,12 +37,13 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Validar senha mínima
-        if (senha.length < 6) {
+        // Validar força da senha
+        const passwordError = getPasswordErrorMessage(senha);
+        if (passwordError) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: 'A senha deve ter no mínimo 6 caracteres',
+                    message: passwordError,
                 },
                 { status: 400 }
             );

@@ -6,9 +6,6 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = await params;
-
-        // Verificar autenticação
         const userId = request.headers.get('x-user-id');
         if (!userId) {
             return NextResponse.json(
@@ -17,9 +14,10 @@ export async function GET(
             );
         }
 
-        // Buscar transcrição com áudio em base64
-        const transcricao = await prisma.transcricao.findUnique({
-            where: { reuniaoId: id },
+        const { id } = await params;
+
+        const ata = await prisma.ata.findUnique({
+            where: { id },
             select: {
                 arquivoAudioBase64: true,
                 arquivoAudioNome: true,
@@ -27,28 +25,34 @@ export async function GET(
             },
         });
 
-        if (!transcricao || !transcricao.arquivoAudioBase64) {
+        if (!ata) {
             return NextResponse.json(
-                { success: false, message: 'Áudio não encontrado' },
+                { success: false, message: 'Ata não encontrada' },
                 { status: 404 }
             );
         }
 
-        // Converter base64 de volta para buffer
-        const audioBuffer = Buffer.from(transcricao.arquivoAudioBase64, 'base64');
-        const uint8Array = new Uint8Array(audioBuffer);
+        if (!ata.arquivoAudioBase64) {
+            return NextResponse.json(
+                { success: false, message: 'Ata não possui arquivo de áudio' },
+                { status: 404 }
+            );
+        }
 
-        // Retornar arquivo
-        return new NextResponse(uint8Array, {
+        // Decodificar base64 para buffer
+        const audioBuffer = Buffer.from(ata.arquivoAudioBase64, 'base64');
+
+        // Retornar como stream de áudio
+        return new NextResponse(audioBuffer, {
             status: 200,
             headers: {
-                'Content-Type': transcricao.arquivoAudioTipo || 'audio/mpeg',
-                'Content-Disposition': `attachment; filename="${transcricao.arquivoAudioNome || 'audio.mp3'}"`,
+                'Content-Type': ata.arquivoAudioTipo || 'audio/mpeg',
+                'Content-Disposition': `attachment; filename="${ata.arquivoAudioNome || 'audio.mp3'}"`,
                 'Content-Length': audioBuffer.length.toString(),
             },
         });
     } catch (error) {
-        console.error('Download error:', error);
+        console.error('Error downloading audio:', error);
         return NextResponse.json(
             { success: false, message: 'Erro ao baixar áudio' },
             { status: 500 }

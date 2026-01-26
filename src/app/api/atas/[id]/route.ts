@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-// GET - Detalhes da ata
+// GET - Detalhes da ata (mantém igual)
 export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
@@ -20,21 +20,6 @@ export async function GET(
         const ata = await prisma.ata.findUnique({
             where: { id },
             include: {
-                transcricao: {
-                    include: {
-                        reuniao: {
-                            include: {
-                                criador: {
-                                    select: {
-                                        nome: true,
-                                        email: true,
-                                    },
-                                },
-                                participantes: true,
-                            },
-                        },
-                    },
-                },
                 aprovadoPor: {
                     select: {
                         nome: true,
@@ -84,24 +69,142 @@ export async function PUT(
         }
 
         const body = await request.json();
-        const { status, comentarios } = body;
+        const {
+            status,
+            comentarios,
+            // Campos editáveis de conteúdo
+            titulo,
+            tipo,
+            dataReuniao,
+            duracaoMinutos,
+            participantes,
+            objetivo,
+            topicosDiscutidos,
+            decisoes,
+            acoes,
+            pendencias,
+            proximosPassos,
+        } = body;
 
-        if (!['APROVADA', 'REJEITADA'].includes(status)) {
+        // Buscar ata atual
+        const ataAtual = await prisma.ata.findUnique({
+            where: { id },
+            select: { status: true },
+        });
+
+        if (!ataAtual) {
             return NextResponse.json(
-                { success: false, message: 'Status inválido' },
+                { success: false, message: 'Ata não encontrada' },
+                { status: 404 }
+            );
+        }
+
+        // Preparar dados para atualização
+        const updateData: any = {};
+
+        // Se está mudando status (aprovação/rejeição)
+        if (status && ['APROVADA', 'REJEITADA'].includes(status)) {
+            if (status === 'REJEITADA') {
+                // NOVO: Deletar ata quando rejeitada
+                await prisma.ata.delete({
+                    where: { id },
+                });
+
+                // Opcional: Notificar N8N sobre a rejeição/deleção
+                const webhookUrl = process.env.N8N_WEBHOOK_REJECTION_URL;
+                if (webhookUrl) {
+                    try {
+                        await fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': process.env.N8N_WEBHOOK_SECRET
+                                    ? `Bearer ${process.env.N8N_WEBHOOK_SECRET}`
+                                    : '',
+                            },
+                            body: JSON.stringify({
+                                ataId: id,
+                                status: 'REJEITADA',
+                                rejeitadoPorId: userId,
+                                dataRejeicao: new Date().toISOString(),
+                                comentarios: comentarios || null,
+                            }),
+                        });
+                    } catch (webhookError) {
+                        console.error('Error triggering N8N rejection webhook:', webhookError);
+                        // Não falhar a requisição se o webhook falhar
+                    }
+                }
+
+                return NextResponse.json(
+                    {
+                        success: true,
+                        message: 'Ata rejeitada e removida com sucesso',
+                    },
+                    { status: 200 }
+                );
+            } else {
+                // Lógica de aprovação (mantém como está)
+                updateData.status = status;
+                updateData.aprovadoPorId = userId;
+                updateData.dataAprovacao = new Date();
+                updateData.comentarios = comentarios || null;
+            }
+        }
+        // Se está editando conteúdo (apenas PENDENTE)
+        else if (ataAtual.status === 'PENDENTE') {
+            if (titulo !== undefined) updateData.titulo = titulo;
+            if (tipo !== undefined) updateData.tipo = tipo;
+            if (dataReuniao !== undefined) updateData.dataReuniao = new Date(dataReuniao);
+            if (duracaoMinutos !== undefined) updateData.duracaoMinutos = duracaoMinutos;
+            if (participantes !== undefined) updateData.participantes = participantes;
+            if (objetivo !== undefined) updateData.objetivo = objetivo;
+            if (topicosDiscutidos !== undefined) updateData.topicosDiscutidos = topicosDiscutidos;
+            if (decisoes !== undefined) updateData.decisoes = decisoes;
+            if (acoes !== undefined) updateData.acoes = acoes;
+            if (pendencias !== undefined) updateData.pendencias = pendencias;
+            if (proximosPassos !== undefined) updateData.proximosPassos = proximosPassos;
+        } else {
+            return NextResponse.json(
+                { success: false, message: 'Apenas atas PENDENTE podem ser editadas' },
                 { status: 400 }
             );
         }
 
+        // Atualizar ata
         const ata = await prisma.ata.update({
             where: { id },
-            data: {
-                status,
-                aprovadoPorId: userId,
-                dataAprovacao: new Date(),
-                comentarios: comentarios || null,
-            },
+            data: updateData,
         });
+
+        // Se APROVADA, chamar webhook do N8N
+        if (status === 'APROVADA') {
+            const webhookUrl = process.env.N8N_WEBHOOK_APPROVAL_URL;
+
+            if (webhookUrl) {
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': process.env.N8N_WEBHOOK_SECRET
+                                ? `Bearer ${process.env.N8N_WEBHOOK_SECRET}`
+                                : '',
+                        },
+                        body: JSON.stringify({
+                            ataId: id,
+                            status: 'APROVADA',
+                            aprovadoPorId: userId,
+                            dataAprovacao: new Date().toISOString(),
+                            comentarios: comentarios || null,
+                        }),
+                    });
+                } catch (webhookError) {
+                    console.error('Error triggering N8N approval webhook:', webhookError);
+                    // Não falhar a requisição se o webhook falhar
+                }
+            }
+        }
 
         return NextResponse.json(
             {

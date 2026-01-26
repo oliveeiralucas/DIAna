@@ -3,7 +3,13 @@ import type { NextRequest } from 'next/server';
 import { verifyToken } from '@/lib/jwt';
 
 // Rotas que NÃO precisam de autenticação
-const publicRoutes = ['/login', '/cadastro', '/api/auth/login', '/api/auth/register'];
+const publicRoutes = [
+  '/login',
+  '/cadastro',
+  '/api/auth/login',
+  '/api/auth/register',
+  '/api/webhooks/n8n',  // N8N webhooks (têm sua própria autenticação via Bearer token)
+];
 
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;

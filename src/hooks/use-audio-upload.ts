@@ -64,7 +64,7 @@ export function useAudioUpload() {
                     reject(new Error('Upload cancelado'));
                 });
 
-                xhr.open('POST', '/api/reunioes/upload-audio');
+                xhr.open('POST', '/api/atas/upload-audio');
                 xhr.send(formData);
             });
 

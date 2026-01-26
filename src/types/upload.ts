@@ -1,5 +1,4 @@
 export interface UploadAudioRequest {
-    reuniaoId: string;
     titulo: string;
     dataReuniao: string;
     participantes?: Array<{
@@ -12,8 +11,7 @@ export interface UploadAudioResponse {
     success: boolean;
     message?: string;
     data?: {
-        transcricaoId: string;
-        reuniaoId: string;
+        ataId: string;
         webhookTriggered: boolean;
     };
 }

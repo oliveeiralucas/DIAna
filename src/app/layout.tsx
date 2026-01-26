@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "DIAna - Documentação Inteligente de Áudios",
   description:
     "Sistema interno de transcrição e documentação de reuniões da EGX",
+  icons: {
+    icon: "/logos/diana-icon.svg",
+  },
 };
 
 export default function RootLayout({
