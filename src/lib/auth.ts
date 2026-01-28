@@ -1,4 +1,4 @@
-import { prisma } from './prisma';
+import { supabase } from './supabase';
 import { User } from '@/types/auth';
 
 const VALID_DOMAIN = '@ogrupoegx.com';
@@ -8,29 +8,21 @@ export function validateEmailDomain(email: string): boolean {
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
-    const user = await prisma.usuario.findUnique({
-        where: { email: email.toLowerCase() },
-        select: {
-            id: true,
-            email: true,
-            nome: true,
-            ativo: true,
-        },
-    });
+    const { data: user } = await supabase
+        .from('usuario')
+        .select('id, email, nome, ativo')
+        .eq('email', email.toLowerCase())
+        .single();
 
     return user;
 }
 
 export async function getUserById(userId: string): Promise<User | null> {
-    const user = await prisma.usuario.findUnique({
-        where: { id: userId },
-        select: {
-            id: true,
-            email: true,
-            nome: true,
-            ativo: true,
-        },
-    });
+    const { data: user } = await supabase
+        .from('usuario')
+        .select('id, email, nome, ativo')
+        .eq('id', userId)
+        .single();
 
     return user;
 }

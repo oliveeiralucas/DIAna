@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { supabase } from "@/lib/supabase";
 
 /**
  * Webhook endpoint for N8N to create atas from online meetings (Tactiq + Google Drive)
@@ -49,13 +49,14 @@ export async function POST(request: NextRequest) {
     });
 
     // Criar ata
-    const ata = await prisma.ata.create({
-      data: {
+    const { data: ata, error } = await supabase
+      .from('ata')
+      .insert({
         // Informações básicas
         titulo: titulo,
         tipo: 'VIRTUAL', // Sempre VIRTUAL para reuniões online
-        dataReuniao: new Date(dataReuniao),
-        duracaoMinutos: body.duracaoMinutos || null,
+        data_reuniao: new Date(dataReuniao).toISOString(),
+        duracao_minutos: body.duracaoMinutos || null,
 
         // Participantes
         participantes: participantesNormalizados,
@@ -63,16 +64,21 @@ export async function POST(request: NextRequest) {
         // Dados da transcrição (já formatados pelo N8N)
         identificacao: transcricao?.identificacao || null,
         objetivo: transcricao?.objetivo || null,
-        topicosDiscutidos: transcricao?.topicos_discutidos || [],
+        topicos_discutidos: transcricao?.topicos_discutidos || [],
         decisoes: transcricao?.decisoes || [],
         acoes: transcricao?.acoes || [],
         pendencias: transcricao?.pendencias || [],
-        proximosPassos: transcricao?.proximos_passos || null,
+        proximos_passos: transcricao?.proximos_passos || null,
 
         // Status inicial
         status: 'PENDENTE',
-      },
-    });
+      })
+      .select()
+      .single();
+
+    if (error || !ata) {
+      throw new Error(error?.message || 'Failed to create ata');
+    }
 
     return NextResponse.json({
       success: true,

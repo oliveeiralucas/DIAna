@@ -133,7 +133,7 @@ export default function NovaAtaPage() {
         <div>
           <h1 className="text-3xl font-bold">Nova Ata</h1>
           <p className="text-muted-foreground">
-            Crie uma ata de reunião manualmente
+            Crie uma ata manualmente para reuniões não transcritas automaticamente
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateEmailDomain } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 import bcrypt from 'bcryptjs';
 import { getPasswordErrorMessage } from '@/lib/password-validation';
 
@@ -50,9 +50,11 @@ export async function POST(request: NextRequest) {
         }
 
         // Verificar se usuário já existe
-        const existingUser = await prisma.usuario.findUnique({
-            where: { email: email.toLowerCase() },
-        });
+        const { data: existingUser } = await supabase
+            .from('usuario')
+            .select('id')
+            .eq('email', email.toLowerCase())
+            .single();
 
         if (existingUser) {
             return NextResponse.json(
@@ -68,20 +70,20 @@ export async function POST(request: NextRequest) {
         const senhaHash = await bcrypt.hash(senha, 10);
 
         // Criar usuário
-        const user = await prisma.usuario.create({
-            data: {
+        const { data: user, error: createError } = await supabase
+            .from('usuario')
+            .insert({
                 email: email.toLowerCase(),
                 nome,
                 senha: senhaHash,
                 ativo: true,
-            },
-            select: {
-                id: true,
-                email: true,
-                nome: true,
-                ativo: true,
-            },
-        });
+            })
+            .select('id, email, nome, ativo')
+            .single();
+
+        if (createError || !user) {
+            throw new Error(createError?.message || 'Erro ao criar usuário');
+        }
 
         return NextResponse.json(
             {

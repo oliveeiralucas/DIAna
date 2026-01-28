@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Home,
-  Upload,
   FileText,
   CheckSquare,
   Settings,
@@ -23,11 +22,6 @@ const menuItems = [
     title: "Dashboard",
     href: "/dashboard",
     icon: Home,
-  },
-  {
-    title: "Upload de Áudio",
-    href: "/dashboard/upload",
-    icon: Upload,
   },
   {
     title: "Atas",

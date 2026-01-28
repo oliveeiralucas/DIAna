@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { validateEmailDomain, isUserActive } from '@/lib/auth';
 import { signToken } from '@/lib/jwt';
 import { LoginRequest, LoginResponse } from '@/types/auth';
-import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
@@ -33,11 +33,13 @@ export async function POST(request: NextRequest) {
         }
 
         // Buscar usuário com senha
-        const userWithPassword = await prisma.usuario.findUnique({
-            where: { email: email.toLowerCase() },
-        });
+        const { data: userWithPassword, error } = await supabase
+            .from('usuario')
+            .select('*')
+            .eq('email', email.toLowerCase())
+            .single();
 
-        if (!userWithPassword) {
+        if (error || !userWithPassword) {
             return NextResponse.json<LoginResponse>(
                 {
                     success: false,

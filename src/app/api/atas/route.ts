@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
     try {
@@ -33,22 +33,28 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const ata = await prisma.ata.create({
-            data: {
+        const { data: ata, error } = await supabase
+            .from('ata')
+            .insert({
                 titulo,
                 tipo,
-                dataReuniao: new Date(dataReuniao),
-                duracaoMinutos,
+                data_reuniao: new Date(dataReuniao).toISOString(),
+                duracao_minutos: duracaoMinutos,
                 participantes: participantes || [],
                 objetivo,
-                topicosDiscutidos,
+                topicos_discutidos: topicosDiscutidos,
                 decisoes,
                 acoes,
                 pendencias,
-                proximosPassos,
+                proximos_passos: proximosPassos,
                 status: 'PENDENTE',
-            },
-        });
+            })
+            .select()
+            .single();
+
+        if (error || !ata) {
+            throw new Error(error?.message || 'Erro ao criar ata');
+        }
 
         return NextResponse.json(
             {
@@ -106,28 +112,72 @@ export async function GET(request: NextRequest) {
             };
         }
 
-        // Buscar atas com contagem total
-        const [atas, total] = await Promise.all([
-            prisma.ata.findMany({
-                where,
-                include: {
-                    aprovadoPor: {
-                        select: {
-                            nome: true,
-                            email: true,
-                        },
-                    },
-                },
-                orderBy: {
-                    createdAt: 'desc',
-                },
-                skip,
-                take: limit,
-            }),
-            prisma.ata.count({ where }),
-        ]);
+        // Construir query para atas
+        let query = supabase
+            .from('ata')
+            .select('*, aprovado_por:usuario!aprovado_por_id(nome, email)');
 
-        const totalPages = Math.ceil(total / limit);
+        // Aplicar filtros
+        if (status) {
+            query = query.eq('status', status);
+        }
+
+        if (search) {
+            query = query.ilike('titulo', `%${search}%`);
+        }
+
+        // Aplicar ordenação e paginação
+        query = query
+            .order('created_at', { ascending: false })
+            .range(skip, skip + limit - 1);
+
+        const { data: atasRaw, error: atasError } = await query;
+
+        if (atasError) {
+            throw new Error(atasError.message);
+        }
+
+        // Transformar dados para camelCase
+        const atas = atasRaw?.map(ata => ({
+            id: ata.id,
+            titulo: ata.titulo,
+            tipo: ata.tipo,
+            dataReuniao: ata.data_reuniao,
+            duracaoMinutos: ata.duracao_minutos,
+            participantes: ata.participantes,
+            objetivo: ata.objetivo,
+            topicosDiscutidos: ata.topicos_discutidos,
+            decisoes: ata.decisoes,
+            acoes: ata.acoes,
+            pendencias: ata.pendencias,
+            proximosPassos: ata.proximos_passos,
+            resumo: ata.resumo,
+            topicos: ata.topicos,
+            conteudoCompleto: ata.conteudo_completo,
+            status: ata.status,
+            comentarios: ata.comentarios,
+            dataAprovacao: ata.data_aprovacao,
+            createdAt: ata.created_at,
+            updatedAt: ata.updated_at,
+            aprovadoPor: ata.aprovado_por,
+        }));
+
+        // Buscar contagem total
+        let countQuery = supabase
+            .from('ata')
+            .select('*', { count: 'exact', head: true });
+
+        if (status) {
+            countQuery = countQuery.eq('status', status);
+        }
+
+        if (search) {
+            countQuery = countQuery.ilike('titulo', `%${search}%`);
+        }
+
+        const { count: total } = await countQuery;
+
+        const totalPages = Math.ceil((total || 0) / limit);
 
         return NextResponse.json(
             {

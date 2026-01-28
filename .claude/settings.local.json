@@ -20,7 +20,8 @@
       "Bash(npx tsx:*)",
       "Bash(dir:*)",
       "Bash(npx shadcn@latest add:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }

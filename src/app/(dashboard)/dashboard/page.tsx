@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,6 +10,7 @@ import {
   XCircle,
   Loader2,
   Eye,
+  RefreshCw,
 } from "lucide-react";
 import {
   LineChart,
@@ -25,11 +25,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import useSWR from "swr";
 
 interface DashboardStats {
   metricas: {
@@ -65,30 +67,51 @@ const COLORS = {
   VIRTUAL: "#3b82f6", // blue
 };
 
+// Fetcher function para SWR
+const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (!data.success) {
+    throw new Error(data.message || "Erro ao carregar dados");
+  }
+
+  return data.data;
+};
+
 export default function DashboardPage() {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
+  // SWR com cache e auto-refresh a cada 1 minuto
+  const {
+    data: stats,
+    error,
+    isLoading,
+    isValidating,
+    mutate,
+  } = useSWR<DashboardStats>("/api/dashboard", fetcher, {
+    refreshInterval: 60000, // Auto-refresh a cada 1 minuto
+    revalidateOnFocus: true, // Revalida quando a aba recebe foco
+    dedupingInterval: 10000, // Evita requisições duplicadas em 10s
+    onSuccess: () => {
+      setLastUpdate(new Date());
+    },
+  });
+
+  // Mostrar erro via toast (apenas uma vez)
   useEffect(() => {
-    fetchDashboardStats();
-  }, []);
-
-  const fetchDashboardStats = async () => {
-    try {
-      const response = await fetch("/api/dashboard");
-      const data = await response.json();
-
-      if (data.success) {
-        setStats(data.data);
-      } else {
-        toast.error("Erro ao carregar estatísticas");
-      }
-    } catch (error) {
-      console.error("Error fetching stats:", error);
-      toast.error("Erro ao carregar estatísticas");
-    } finally {
-      setLoading(false);
+    if (error) {
+      toast.error(error.message || "Erro ao carregar estatísticas");
     }
+  }, [error]);
+
+  // Função para refresh manual
+  const handleRefresh = () => {
+    toast.promise(mutate(), {
+      loading: "Atualizando dados...",
+      success: "Dados atualizados!",
+      error: "Erro ao atualizar dados",
+    });
   };
 
   const getStatusBadge = (status: string) => {
@@ -104,7 +127,7 @@ export default function DashboardPage() {
     return <Badge>{status}</Badge>;
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -112,10 +135,14 @@ export default function DashboardPage() {
     );
   }
 
-  if (!stats) {
+  if (error || !stats) {
     return (
       <div className="text-center py-12 text-muted-foreground">
         <p>Erro ao carregar dados</p>
+        <Button onClick={handleRefresh} className="mt-4" variant="outline">
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Tentar novamente
+        </Button>
       </div>
     );
   }
@@ -123,11 +150,24 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Visão geral do sistema de atas
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <p className="text-muted-foreground">
+            Visão geral do sistema de atas
+          </p>
+        </div>
+        <Button
+          onClick={handleRefresh}
+          variant="outline"
+          size="sm"
+          disabled={isValidating}
+        >
+          <RefreshCw
+            className={`mr-2 h-4 w-4 ${isValidating ? "animate-spin" : ""}`}
+          />
+          {isValidating ? "Atualizando..." : "Atualizar"}
+        </Button>
       </div>
 
       {/* Cards de Estatísticas */}
@@ -321,9 +361,11 @@ export default function DashboardPage() {
                       <span>{ata.tipo}</span>
                       <span>•</span>
                       <span>
-                        {format(new Date(ata.dataReuniao), "dd/MM/yyyy", {
-                          locale: ptBR,
-                        })}
+                        {ata.dataReuniao
+                          ? format(new Date(ata.dataReuniao), "dd/MM/yyyy", {
+                              locale: ptBR,
+                            })
+                          : "N/A"}
                       </span>
                       {ata.criador && (
                         <>
@@ -349,12 +391,26 @@ export default function DashboardPage() {
               <FileText className="h-12 w-12 mx-auto mb-4 opacity-20" />
               <p>Nenhuma ata registrada ainda</p>
               <p className="text-sm mt-2">
-                Comece fazendo upload de um áudio ou criando uma ata manualmente
+                As atas são criadas automaticamente a partir de reuniões virtuais transcritas pelo Tactiq
               </p>
             </div>
           )}
         </CardContent>
       </Card>
+
+      {/* Footer com info de última atualização */}
+      <div className="text-center text-sm text-muted-foreground">
+        <p>
+          Última atualização:{" "}
+          {formatDistanceToNow(lastUpdate, {
+            addSuffix: true,
+            locale: ptBR,
+          })}
+        </p>
+        <p className="text-xs mt-1">
+          Os dados são atualizados automaticamente a cada 1 minuto
+        </p>
+      </div>
     </div>
   );
 }

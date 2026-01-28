@@ -273,19 +273,23 @@ export default function AtasPage() {
                           {ata.titulo}
                         </TableCell>
                         <TableCell>
-                          {format(
-                            new Date(ata.dataReuniao),
-                            "dd/MM/yyyy",
-                            {
-                              locale: ptBR,
-                            },
-                          )}
+                          {ata.dataReuniao
+                            ? format(
+                                new Date(ata.dataReuniao),
+                                "dd/MM/yyyy",
+                                {
+                                  locale: ptBR,
+                                }
+                              )
+                            : "N/A"}
                         </TableCell>
                         <TableCell>{getStatusBadge(ata.status)}</TableCell>
                         <TableCell>
-                          {format(new Date(ata.createdAt), "dd/MM/yyyy HH:mm", {
-                            locale: ptBR,
-                          })}
+                          {ata.createdAt
+                            ? format(new Date(ata.createdAt), "dd/MM/yyyy HH:mm", {
+                                locale: ptBR,
+                              })
+                            : "N/A"}
                         </TableCell>
                         <TableCell>{ata.aprovadoPor?.nome || "-"}</TableCell>
                         <TableCell className="text-right">
@@ -416,15 +420,19 @@ export default function AtasPage() {
                       Data
                     </Label>
                     <p className="font-semibold text-lg">
-                      {format(new Date(selectedAta.dataReuniao), "dd/MM/yyyy", {
-                        locale: ptBR,
-                      })}
+                      {selectedAta.dataReuniao
+                        ? format(new Date(selectedAta.dataReuniao), "dd/MM/yyyy", {
+                            locale: ptBR,
+                          })
+                        : "N/A"}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      {format(new Date(selectedAta.dataReuniao), "EEEE", {
-                        locale: ptBR,
-                      })}
-                    </p>
+                    {selectedAta.dataReuniao && (
+                      <p className="text-sm text-muted-foreground">
+                        {format(new Date(selectedAta.dataReuniao), "EEEE", {
+                          locale: ptBR,
+                        })}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <Label className="text-xs text-muted-foreground uppercase">
@@ -617,11 +625,11 @@ export default function AtasPage() {
                     <p className="text-sm">{selectedAta.comentarios}</p>
                     {selectedAta.aprovadoPor && (
                       <p className="text-xs text-muted-foreground mt-2">
-                        Por {selectedAta.aprovadoPor.nome} em{" "}
+                        Por {selectedAta.aprovadoPor.nome}
                         {selectedAta.dataAprovacao &&
-                          format(new Date(selectedAta.dataAprovacao), "PPp", {
+                          ` em ${format(new Date(selectedAta.dataAprovacao), "PPp", {
                             locale: ptBR,
-                          })}
+                          })}`}
                       </p>
                     )}
                   </div>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 
 // GET - Detalhes da ata (mantém igual)
 export async function GET(
@@ -17,24 +17,43 @@ export async function GET(
             );
         }
 
-        const ata = await prisma.ata.findUnique({
-            where: { id },
-            include: {
-                aprovadoPor: {
-                    select: {
-                        nome: true,
-                        email: true,
-                    },
-                },
-            },
-        });
+        const { data: ataRaw, error } = await supabase
+            .from('ata')
+            .select('*, aprovado_por:usuario!aprovado_por_id(nome, email)')
+            .eq('id', id)
+            .single();
 
-        if (!ata) {
+        if (error || !ataRaw) {
             return NextResponse.json(
                 { success: false, message: 'Ata não encontrada' },
                 { status: 404 }
             );
         }
+
+        // Transformar dados para camelCase
+        const ata = {
+            id: ataRaw.id,
+            titulo: ataRaw.titulo,
+            tipo: ataRaw.tipo,
+            dataReuniao: ataRaw.data_reuniao,
+            duracaoMinutos: ataRaw.duracao_minutos,
+            participantes: ataRaw.participantes,
+            objetivo: ataRaw.objetivo,
+            topicosDiscutidos: ataRaw.topicos_discutidos,
+            decisoes: ataRaw.decisoes,
+            acoes: ataRaw.acoes,
+            pendencias: ataRaw.pendencias,
+            proximosPassos: ataRaw.proximos_passos,
+            resumo: ataRaw.resumo,
+            topicos: ataRaw.topicos,
+            conteudoCompleto: ataRaw.conteudo_completo,
+            status: ataRaw.status,
+            comentarios: ataRaw.comentarios,
+            dataAprovacao: ataRaw.data_aprovacao,
+            createdAt: ataRaw.created_at,
+            updatedAt: ataRaw.updated_at,
+            aprovadoPor: ataRaw.aprovado_por,
+        };
 
         return NextResponse.json(
             {
@@ -87,12 +106,13 @@ export async function PUT(
         } = body;
 
         // Buscar ata atual
-        const ataAtual = await prisma.ata.findUnique({
-            where: { id },
-            select: { status: true },
-        });
+        const { data: ataAtual, error: ataAtualError } = await supabase
+            .from('ata')
+            .select('status')
+            .eq('id', id)
+            .single();
 
-        if (!ataAtual) {
+        if (ataAtualError || !ataAtual) {
             return NextResponse.json(
                 { success: false, message: 'Ata não encontrada' },
                 { status: 404 }
@@ -106,9 +126,14 @@ export async function PUT(
         if (status && ['APROVADA', 'REJEITADA'].includes(status)) {
             if (status === 'REJEITADA') {
                 // NOVO: Deletar ata quando rejeitada
-                await prisma.ata.delete({
-                    where: { id },
-                });
+                const { error: deleteError } = await supabase
+                    .from('ata')
+                    .delete()
+                    .eq('id', id);
+
+                if (deleteError) {
+                    throw new Error(deleteError.message);
+                }
 
                 // Opcional: Notificar N8N sobre a rejeição/deleção
                 const webhookUrl = process.env.N8N_WEBHOOK_REJECTION_URL;
@@ -146,8 +171,8 @@ export async function PUT(
             } else {
                 // Lógica de aprovação (mantém como está)
                 updateData.status = status;
-                updateData.aprovadoPorId = userId;
-                updateData.dataAprovacao = new Date();
+                updateData.aprovado_por_id = userId;
+                updateData.data_aprovacao = new Date().toISOString();
                 updateData.comentarios = comentarios || null;
             }
         }
@@ -155,15 +180,15 @@ export async function PUT(
         else if (ataAtual.status === 'PENDENTE') {
             if (titulo !== undefined) updateData.titulo = titulo;
             if (tipo !== undefined) updateData.tipo = tipo;
-            if (dataReuniao !== undefined) updateData.dataReuniao = new Date(dataReuniao);
-            if (duracaoMinutos !== undefined) updateData.duracaoMinutos = duracaoMinutos;
+            if (dataReuniao !== undefined) updateData.data_reuniao = new Date(dataReuniao).toISOString();
+            if (duracaoMinutos !== undefined) updateData.duracao_minutos = duracaoMinutos;
             if (participantes !== undefined) updateData.participantes = participantes;
             if (objetivo !== undefined) updateData.objetivo = objetivo;
-            if (topicosDiscutidos !== undefined) updateData.topicosDiscutidos = topicosDiscutidos;
+            if (topicosDiscutidos !== undefined) updateData.topicos_discutidos = topicosDiscutidos;
             if (decisoes !== undefined) updateData.decisoes = decisoes;
             if (acoes !== undefined) updateData.acoes = acoes;
             if (pendencias !== undefined) updateData.pendencias = pendencias;
-            if (proximosPassos !== undefined) updateData.proximosPassos = proximosPassos;
+            if (proximosPassos !== undefined) updateData.proximos_passos = proximosPassos;
         } else {
             return NextResponse.json(
                 { success: false, message: 'Apenas atas PENDENTE podem ser editadas' },
@@ -172,10 +197,41 @@ export async function PUT(
         }
 
         // Atualizar ata
-        const ata = await prisma.ata.update({
-            where: { id },
-            data: updateData,
-        });
+        const { data: ataRaw, error: updateError } = await supabase
+            .from('ata')
+            .update(updateData)
+            .eq('id', id)
+            .select()
+            .single();
+
+        if (updateError || !ataRaw) {
+            throw new Error(updateError?.message || 'Erro ao atualizar ata');
+        }
+
+        // Transformar dados para camelCase
+        const ata = {
+            id: ataRaw.id,
+            titulo: ataRaw.titulo,
+            tipo: ataRaw.tipo,
+            dataReuniao: ataRaw.data_reuniao,
+            duracaoMinutos: ataRaw.duracao_minutos,
+            participantes: ataRaw.participantes,
+            objetivo: ataRaw.objetivo,
+            topicosDiscutidos: ataRaw.topicos_discutidos,
+            decisoes: ataRaw.decisoes,
+            acoes: ataRaw.acoes,
+            pendencias: ataRaw.pendencias,
+            proximosPassos: ataRaw.proximos_passos,
+            resumo: ataRaw.resumo,
+            topicos: ataRaw.topicos,
+            conteudoCompleto: ataRaw.conteudo_completo,
+            status: ataRaw.status,
+            comentarios: ataRaw.comentarios,
+            dataAprovacao: ataRaw.data_aprovacao,
+            createdAt: ataRaw.created_at,
+            updatedAt: ataRaw.updated_at,
+            aprovadoPorId: ataRaw.aprovado_por_id,
+        };
 
         // Se APROVADA, chamar webhook do N8N
         if (status === 'APROVADA') {
